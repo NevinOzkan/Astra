@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
+        <collectionViewCell contentMode="scaleToFill" id="compatibility-cell" customClass="CompatibilityCell" customModule="Astra" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="343" height="140"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="343" height="140"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="card-container">
+                        <rect key="frame" x="0.0" y="0.0" width="343" height="140"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blur-container">
+                                <rect key="frame" x="0.0" y="0.0" width="343" height="140"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-icon-view">
+                                        <rect key="frame" x="24" y="24" width="40" height="40"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♈" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-symbol-label">
+                                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="zodiac-icon-width"/>
+                                            <constraint firstAttribute="height" constant="40" id="zodiac-icon-height"/>
+                                            <constraint firstItem="zodiac-symbol-label" firstAttribute="leading" secondItem="zodiac-icon-view" secondAttribute="leading" id="zodiac-symbol-leading"/>
+                                            <constraint firstItem="zodiac-symbol-label" firstAttribute="top" secondItem="zodiac-icon-view" secondAttribute="top" id="zodiac-symbol-top"/>
+                                            <constraint firstItem="zodiac-icon-view" firstAttribute="trailing" secondItem="zodiac-symbol-label" secondAttribute="trailing" id="zodiac-symbol-trailing"/>
+                                            <constraint firstItem="zodiac-icon-view" firstAttribute="bottom" secondItem="zodiac-symbol-label" secondAttribute="bottom" id="zodiac-symbol-bottom"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Koç" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-name-label">
+                                        <rect key="frame" x="76" y="30" width="251" height="19.5"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="love-progress-view">
+                                        <rect key="frame" x="76" y="65" width="251" height="20"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="❤️ Aşk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="love-label">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="clearColor"/>
+                                        <constraints>
+                                            <constraint firstItem="love-label" firstAttribute="leading" secondItem="love-progress-view" secondAttribute="leading" id="love-label-leading"/>
+                                            <constraint firstItem="love-label" firstAttribute="top" secondItem="love-progress-view" secondAttribute="top" id="love-label-top"/>
+                                            <constraint firstItem="love-progress-view" firstAttribute="bottom" secondItem="love-label" secondAttribute="bottom" id="love-label-bottom"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="friendship-progress-view">
+                                        <rect key="frame" x="76" y="93" width="251" height="20"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🤝 Arkadaşlık" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="friendship-label">
+                                                <rect key="frame" x="0.0" y="0.0" width="90" height="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="clearColor"/>
+                                        <constraints>
+                                            <constraint firstItem="friendship-label" firstAttribute="leading" secondItem="friendship-progress-view" secondAttribute="leading" id="friendship-label-leading"/>
+                                            <constraint firstItem="friendship-label" firstAttribute="top" secondItem="friendship-progress-view" secondAttribute="top" id="friendship-label-top"/>
+                                            <constraint firstItem="friendship-progress-view" firstAttribute="bottom" secondItem="friendship-label" secondAttribute="bottom" id="friendship-label-bottom"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="work-progress-view">
+                                        <rect key="frame" x="76" y="121" width="251" height="20"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="💼 İş" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="work-label">
+                                                <rect key="frame" x="0.0" y="0.0" width="35" height="20"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="clearColor"/>
+                                        <constraints>
+                                            <constraint firstItem="work-label" firstAttribute="leading" secondItem="work-progress-view" secondAttribute="leading" id="work-label-leading"/>
+                                            <constraint firstItem="work-label" firstAttribute="top" secondItem="work-progress-view" secondAttribute="top" id="work-label-top"/>
+                                            <constraint firstItem="work-progress-view" firstAttribute="bottom" secondItem="work-label" secondAttribute="bottom" id="work-label-bottom"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="zodiac-icon-view" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" constant="24" id="zodiac-icon-leading"/>
+                                    <constraint firstItem="zodiac-icon-view" firstAttribute="top" secondItem="blur-container" secondAttribute="top" constant="24" id="zodiac-icon-top"/>
+                                    <constraint firstItem="zodiac-name-label" firstAttribute="leading" secondItem="zodiac-icon-view" secondAttribute="trailing" constant="12" id="zodiac-name-leading"/>
+                                    <constraint firstItem="zodiac-name-label" firstAttribute="centerY" secondItem="zodiac-icon-view" secondAttribute="centerY" id="zodiac-name-centerY"/>
+                                    <constraint firstItem="love-progress-view" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" constant="76" id="love-progress-leading"/>
+                                    <constraint firstItem="love-progress-view" firstAttribute="top" secondItem="zodiac-icon-view" secondAttribute="bottom" constant="1" id="love-progress-top"/>
+                                    <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="love-progress-view" secondAttribute="trailing" constant="24" id="love-progress-trailing"/>
+                                    <constraint firstItem="love-progress-view" firstAttribute="height" constant="20" id="love-progress-height"/>
+                                    <constraint firstItem="friendship-progress-view" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" constant="76" id="friendship-progress-leading"/>
+                                    <constraint firstItem="friendship-progress-view" firstAttribute="top" secondItem="love-progress-view" secondAttribute="bottom" constant="8" id="friendship-progress-top"/>
+                                    <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="friendship-progress-view" secondAttribute="trailing" constant="24" id="friendship-progress-trailing"/>
+                                    <constraint firstItem="friendship-progress-view" firstAttribute="height" constant="20" id="friendship-progress-height"/>
+                                    <constraint firstItem="work-progress-view" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" constant="76" id="work-progress-leading"/>
+                                    <constraint firstItem="work-progress-view" firstAttribute="top" secondItem="friendship-progress-view" secondAttribute="bottom" constant="8" id="work-progress-top"/>
+                                    <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="work-progress-view" secondAttribute="trailing" constant="24" id="work-progress-trailing"/>
+                                    <constraint firstItem="work-progress-view" firstAttribute="height" constant="20" id="work-progress-height"/>
+                                    <constraint firstItem="blur-container" firstAttribute="bottom" secondItem="work-progress-view" secondAttribute="bottom" constant="15" id="blur-bottom"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="blur-container" firstAttribute="leading" secondItem="card-container" secondAttribute="leading" id="blur-container-leading"/>
+                            <constraint firstItem="blur-container" firstAttribute="top" secondItem="card-container" secondAttribute="top" id="blur-container-top"/>
+                            <constraint firstItem="card-container" firstAttribute="trailing" secondItem="blur-container" secondAttribute="trailing" id="blur-container-trailing"/>
+                            <constraint firstItem="card-container" firstAttribute="bottom" secondItem="blur-container" secondAttribute="bottom" id="blur-container-bottom"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <size key="customSize" width="343" height="160"/>
+            <connections>
+                <outlet property="zodiacIconView" destination="zodiac-icon-view" id="zodiac-icon-view-outlet"/>
+                <outlet property="zodiacSymbolLabel" destination="zodiac-symbol-label" id="zodiac-symbol-label-outlet"/>
+                <outlet property="zodiacNameLabel" destination="zodiac-name-label" id="zodiac-name-label-outlet"/>
+                <outlet property="loveProgressContainerView" destination="love-progress-view" id="love-progress-view-outlet"/>
+                <outlet property="friendshipProgressContainerView" destination="friendship-progress-view" id="friendship-progress-view-outlet"/>
+                <outlet property="workProgressContainerView" destination="work-progress-view" id="work-progress-view-outlet"/>
+                <outlet property="blurContainerView" destination="blur-container" id="blur-container-outlet"/>
+                <outlet property="cardContainerView" destination="card-container" id="card-container-outlet"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="4"/>
+        </collectionViewCell>
+    </objects>
+</document>
+

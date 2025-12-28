@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AstroScoreView" customModule="Astra" customModuleProvider="target">
+            <connections>
+                <outlet property="emojiLabel" destination="emoji-label" id="emoji-label-outlet"/>
+                <outlet property="titleLabel" destination="title-label" id="title-label-outlet"/>
+                <outlet property="scoreLabel" destination="score-label" id="score-label-outlet"/>
+                <outlet property="progressContainerView" destination="progress-container" id="progress-container-outlet"/>
+                <outlet property="blurContainerView" destination="blur-container" id="blur-container-outlet"/>
+                <outlet property="cardContainerView" destination="card-container" id="card-container-outlet"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
+        <view contentMode="scaleToFill" id="score-main-view">
+            <rect key="frame" x="0.0" y="0.0" width="343" height="80"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="card-container">
+                    <rect key="frame" x="0.0" y="0.0" width="343" height="80"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blur-container">
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="80"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="❤️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emoji-label">
+                                    <rect key="frame" x="20" y="16" width="24" height="24"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aşk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="title-label">
+                                    <rect key="frame" x="52" y="18" width="200" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7.8" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="score-label">
+                                    <rect key="frame" x="260" y="18" width="63" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" weight="bold" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="progress-container">
+                                    <rect key="frame" x="20" y="48" width="303" height="6"/>
+                                    <color key="backgroundColor" systemColor="clearColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="6" id="progress-height"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="emoji-label" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" constant="20" id="emoji-leading"/>
+                                <constraint firstItem="emoji-label" firstAttribute="top" secondItem="blur-container" secondAttribute="top" constant="16" id="emoji-top"/>
+                                <constraint firstItem="title-label" firstAttribute="leading" secondItem="emoji-label" secondAttribute="trailing" constant="8" id="title-leading"/>
+                                <constraint firstItem="title-label" firstAttribute="centerY" secondItem="emoji-label" secondAttribute="centerY" id="title-centerY"/>
+                                <constraint firstItem="score-label" firstAttribute="leading" secondItem="title-label" secondAttribute="trailing" constant="8" id="score-leading"/>
+                                <constraint firstItem="score-label" firstAttribute="centerY" secondItem="title-label" secondAttribute="centerY" id="score-centerY"/>
+                                <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="score-label" secondAttribute="trailing" constant="20" id="score-trailing"/>
+                                <constraint firstItem="progress-container" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" constant="20" id="progress-leading"/>
+                                <constraint firstItem="progress-container" firstAttribute="top" secondItem="emoji-label" secondAttribute="bottom" constant="8" id="progress-top"/>
+                                <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="progress-container" secondAttribute="trailing" constant="20" id="progress-trailing"/>
+                                <constraint firstItem="blur-container" firstAttribute="bottom" secondItem="progress-container" secondAttribute="bottom" constant="16" id="blur-bottom"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="blur-container" firstAttribute="leading" secondItem="card-container" secondAttribute="leading" id="blur-container-leading"/>
+                        <constraint firstItem="blur-container" firstAttribute="top" secondItem="card-container" secondAttribute="top" id="blur-container-top"/>
+                        <constraint firstItem="card-container" firstAttribute="trailing" secondItem="blur-container" secondAttribute="trailing" id="blur-container-trailing"/>
+                        <constraint firstItem="card-container" firstAttribute="bottom" secondItem="blur-container" secondAttribute="bottom" id="blur-container-bottom"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="card-container" firstAttribute="leading" secondItem="score-main-view" secondAttribute="leading" id="card-leading"/>
+                <constraint firstItem="card-container" firstAttribute="top" secondItem="score-main-view" secondAttribute="top" id="card-top"/>
+                <constraint firstItem="score-main-view" firstAttribute="trailing" secondItem="card-container" secondAttribute="trailing" id="card-trailing"/>
+                <constraint firstItem="score-main-view" firstAttribute="bottom" secondItem="card-container" secondAttribute="bottom" id="card-bottom"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="4"/>
+        </view>
+    </objects>
+</document>
+

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AstroModuleStackCardView" customModule="Astra" customModuleProvider="target">
+            <connections>
+                <outlet property="iconLabel" destination="icon-label" id="icon-label-outlet"/>
+                <outlet property="titleLabel" destination="title-label" id="title-label-outlet"/>
+                <outlet property="valueLabel" destination="value-label" id="value-label-outlet"/>
+                <outlet property="blurContainerView" destination="blur-container" id="blur-container-outlet"/>
+                <outlet property="cardContainerView" destination="card-container" id="card-container-outlet"/>
+                <outlet property="contentStackView" destination="content-stack" id="content-stack-outlet"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
+        <view contentMode="scaleToFill" clipsSubviews="YES" id="stack-card-main-view">
+            <rect key="frame" x="0.0" y="0.0" width="88" height="88"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <color key="backgroundColor" systemColor="clearColor"/>
+            <subviews>
+                <view contentMode="scaleToFill" clipsSubviews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="card-container">
+                    <rect key="frame" x="0.0" y="0.0" width="88" height="88"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blur-container">
+                            <rect key="frame" x="0.0" y="0.0" width="88" height="88"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="content-stack">
+                                    <rect key="frame" x="12" y="16" width="64" height="56"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🌙" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icon-label">
+                                            <rect key="frame" x="0.0" y="0.0" width="64" height="28"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ayın durumu" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="title-label">
+                                            <rect key="frame" x="0.0" y="36" width="64" height="13"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
+                                            <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dolunay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="value-label">
+                                            <rect key="frame" x="0.0" y="57" width="64" height="15.5"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="clearColor"/>
+                            <constraints>
+                                <constraint firstItem="content-stack" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" constant="12" id="stack-leading"/>
+                                <constraint firstItem="content-stack" firstAttribute="top" secondItem="blur-container" secondAttribute="top" constant="16" id="stack-top"/>
+                                <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="content-stack" secondAttribute="trailing" constant="12" id="stack-trailing"/>
+                                <constraint firstItem="blur-container" firstAttribute="bottom" secondItem="content-stack" secondAttribute="bottom" constant="16" id="stack-bottom"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="clearColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="88" id="card-width"/>
+                        <constraint firstAttribute="height" constant="88" id="card-height"/>
+                        <constraint firstItem="blur-container" firstAttribute="leading" secondItem="card-container" secondAttribute="leading" id="blur-container-leading"/>
+                        <constraint firstItem="blur-container" firstAttribute="top" secondItem="card-container" secondAttribute="top" id="blur-container-top"/>
+                        <constraint firstItem="card-container" firstAttribute="trailing" secondItem="blur-container" secondAttribute="trailing" id="blur-container-trailing"/>
+                        <constraint firstItem="card-container" firstAttribute="bottom" secondItem="blur-container" secondAttribute="bottom" id="blur-container-bottom"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="clearColor"/>
+            <constraints>
+                <constraint firstItem="card-container" firstAttribute="leading" secondItem="stack-card-main-view" secondAttribute="leading" id="card-leading"/>
+                <constraint firstItem="card-container" firstAttribute="top" secondItem="stack-card-main-view" secondAttribute="top" id="card-top"/>
+                <constraint firstItem="stack-card-main-view" firstAttribute="trailing" secondItem="card-container" secondAttribute="trailing" id="card-trailing"/>
+                <constraint firstItem="stack-card-main-view" firstAttribute="bottom" secondItem="card-container" secondAttribute="bottom" id="card-bottom"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="4"/>
+        </view>
+    </objects>
+</document>
+

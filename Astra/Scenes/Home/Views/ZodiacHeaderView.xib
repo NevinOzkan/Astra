@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZodiacHeaderView" customModule="Astra" customModuleProvider="target">
+            <connections>
+                <outlet property="zodiacIconView" destination="zodiac-icon-view" id="zodiac-icon-outlet"/>
+                <outlet property="zodiacSymbolLabel" destination="zodiac-symbol-label" id="zodiac-symbol-outlet"/>
+                <outlet property="zodiacNameLabel" destination="zodiac-name-label" id="zodiac-name-outlet"/>
+                <outlet property="zodiacSubtitleLabel" destination="zodiac-subtitle-label" id="zodiac-subtitle-outlet"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
+        <view contentMode="scaleToFill" id="header-main-view">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-icon-view">
+                    <rect key="frame" x="20" y="18" width="64" height="64"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-symbol-label">
+                            <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="64" id="icon-width"/>
+                        <constraint firstAttribute="height" constant="64" id="icon-height"/>
+                        <constraint firstItem="zodiac-symbol-label" firstAttribute="leading" secondItem="zodiac-icon-view" secondAttribute="leading" id="symbol-leading"/>
+                        <constraint firstItem="zodiac-symbol-label" firstAttribute="top" secondItem="zodiac-icon-view" secondAttribute="top" id="symbol-top"/>
+                        <constraint firstItem="zodiac-icon-view" firstAttribute="trailing" secondItem="zodiac-symbol-label" secondAttribute="trailing" id="symbol-trailing"/>
+                        <constraint firstItem="zodiac-icon-view" firstAttribute="bottom" secondItem="zodiac-symbol-label" secondAttribute="bottom" id="symbol-bottom"/>
+                    </constraints>
+                </view>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="header-text-stack">
+                    <rect key="frame" x="100" y="28" width="255" height="44"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balık" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-name-label">
+                            <rect key="frame" x="0.0" y="0.0" width="255" height="32"/>
+                            <fontDescription key="fontDescription" type="system" weight="bold" pointSize="28"/>
+                            <color key="textColor" systemColor="labelColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bugün senin için" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-subtitle-label">
+                            <rect key="frame" x="0.0" y="40" width="255" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" systemColor="clearColor"/>
+            <constraints>
+                <constraint firstItem="zodiac-icon-view" firstAttribute="leading" secondItem="header-main-view" secondAttribute="leading" constant="20" id="icon-leading"/>
+                <constraint firstItem="zodiac-icon-view" firstAttribute="top" secondItem="header-main-view" secondAttribute="top" constant="18" id="icon-top"/>
+                <constraint firstItem="header-text-stack" firstAttribute="leading" secondItem="zodiac-icon-view" secondAttribute="trailing" constant="16" id="stack-leading"/>
+                <constraint firstItem="header-text-stack" firstAttribute="centerY" secondItem="zodiac-icon-view" secondAttribute="centerY" id="stack-centerY"/>
+                <constraint firstItem="header-main-view" firstAttribute="trailing" secondItem="header-text-stack" secondAttribute="trailing" constant="20" id="stack-trailing"/>
+                <constraint firstItem="header-main-view" firstAttribute="bottom" secondItem="zodiac-icon-view" secondAttribute="bottom" constant="18" id="header-bottom"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="4"/>
+        </view>
+    </objects>
+</document>
+

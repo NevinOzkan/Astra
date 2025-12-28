@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
+        <collectionViewCell contentMode="scaleToFill" id="zodiac-selection-cell" customClass="ZodiacSelectionCell" customModule="Astra" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="80" height="100"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="80" height="100"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="card-container">
+                        <rect key="frame" x="0.0" y="0.0" width="80" height="100"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icon-view">
+                                <rect key="frame" x="16" y="8" width="48" height="48"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♈" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="symbol-label">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="48" id="icon-width"/>
+                                    <constraint firstAttribute="height" constant="48" id="icon-height"/>
+                                    <constraint firstItem="symbol-label" firstAttribute="leading" secondItem="icon-view" secondAttribute="leading" id="symbol-leading"/>
+                                    <constraint firstItem="symbol-label" firstAttribute="top" secondItem="icon-view" secondAttribute="top" id="symbol-top"/>
+                                    <constraint firstItem="icon-view" firstAttribute="trailing" secondItem="symbol-label" secondAttribute="trailing" id="symbol-trailing"/>
+                                    <constraint firstItem="icon-view" firstAttribute="bottom" secondItem="symbol-label" secondAttribute="bottom" id="symbol-bottom"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Koç" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="name-label">
+                                <rect key="frame" x="0.0" y="64" width="80" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="icon-view" firstAttribute="leading" secondItem="card-container" secondAttribute="leading" constant="16" id="icon-leading"/>
+                            <constraint firstItem="icon-view" firstAttribute="top" secondItem="card-container" secondAttribute="top" constant="8" id="icon-top"/>
+                            <constraint firstItem="card-container" firstAttribute="trailing" secondItem="icon-view" secondAttribute="trailing" constant="16" id="icon-trailing"/>
+                            <constraint firstItem="name-label" firstAttribute="leading" secondItem="card-container" secondAttribute="leading" id="name-leading"/>
+                            <constraint firstItem="name-label" firstAttribute="top" secondItem="icon-view" secondAttribute="bottom" constant="8" id="name-top"/>
+                            <constraint firstItem="card-container" firstAttribute="trailing" secondItem="name-label" secondAttribute="trailing" id="name-trailing"/>
+                            <constraint firstItem="card-container" firstAttribute="bottom" secondItem="name-label" secondAttribute="bottom" constant="17.5" id="card-bottom"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <size key="customSize" width="80" height="100"/>
+            <connections>
+                <outlet property="iconView" destination="icon-view" id="icon-view-outlet"/>
+                <outlet property="nameLabel" destination="name-label" id="name-label-outlet"/>
+                <outlet property="symbolLabel" destination="symbol-label" id="symbol-label-outlet"/>
+                <outlet property="cardContainerView" destination="card-container" id="card-container-outlet"/>
+            </connections>
+            <point key="canvasLocation" x="132" y="4"/>
+        </collectionViewCell>
+    </objects>
+</document>
+
