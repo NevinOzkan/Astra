@@ -9,84 +9,149 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CompatibilityViewController" customModule="Astra" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="root-view" id="root-view-outlet"/>
-                <outlet property="zodiacSelectionCollectionView" destination="zodiac-selection-collection" id="zodiac-selection-outlet"/>
-                <outlet property="selectedSignTitleLabel" destination="selected-sign-title" id="selected-sign-title-outlet"/>
-                <outlet property="selectedSignSubtitleLabel" destination="selected-sign-subtitle" id="selected-sign-subtitle-outlet"/>
-                <outlet property="compatibilityCollectionView" destination="compatibility-collection" id="compatibility-collection-outlet"/>
+                <outlet property="titleLabel" destination="title-label" id="title-label-outlet"/>
+                <outlet property="userZodiacCollectionView" destination="user-zodiac-collection" id="user-zodiac-collection-outlet"/>
+                <outlet property="partnerZodiacCollectionView" destination="partner-zodiac-collection" id="partner-zodiac-collection-outlet"/>
+                <outlet property="comparisonViewContainer" destination="comparison-view-container" id="comparison-view-container-outlet"/>
+                <outlet property="detailsCardContainer" destination="details-card-container" id="details-card-container-outlet"/>
+                <outlet property="commentTitleLabel" destination="comment-title-label" id="comment-title-label-outlet"/>
+                <outlet property="commentTextLabel" destination="comment-text-label" id="comment-text-label-outlet"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
         <view contentMode="scaleToFill" id="root-view">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" red="0.08" green="0.05" blue="0.18" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="safe-area-guide"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-selection-collection">
-                    <rect key="frame" x="0.0" y="44" width="375" height="100"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="main-scroll-view">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="content-view">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="750"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burç Uyumu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="title-label">
+                    <rect key="frame" x="20" y="44" width="335" height="29"/>
+                    <fontDescription key="fontDescription" type="system" weight="bold" pointSize="24"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Senin Burcun" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="user-label">
+                    <rect key="frame" x="0.0" y="89" width="187.5" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Karşı Burç" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="partner-label">
+                    <rect key="frame" x="187.5" y="89" width="187.5" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="user-zodiac-collection">
+                    <rect key="frame" x="10" y="122" width="177.5" height="90"/>
                     <color key="backgroundColor" systemColor="clearColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="100" id="zodiac-selection-height"/>
+                        <constraint firstAttribute="height" constant="90" id="user-collection-height"/>
                     </constraints>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="12" minimumInteritemSpacing="12" id="zodiac-flow-layout">
-                        <size key="itemSize" width="80" height="100"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="12" minimumInteritemSpacing="12" id="user-flow-layout">
+                        <size key="itemSize" width="70" height="90"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
                         <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="content-container">
-                    <rect key="frame" x="0.0" y="144" width="375" height="523"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Koç Burcu Uyumları" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="selected-sign-title">
-                            <rect key="frame" x="20" y="0.0" width="335" height="29"/>
-                            <fontDescription key="fontDescription" type="system" weight="bold" pointSize="24"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diğer burçlarla enerjisel uyum" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="selected-sign-subtitle">
-                            <rect key="frame" x="20" y="37" width="335" height="17"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="compatibility-collection">
-                            <rect key="frame" x="16" y="80" width="343" height="443"/>
-                            <color key="backgroundColor" systemColor="clearColor"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="vertical" minimumLineSpacing="24" minimumInteritemSpacing="0" id="compatibility-flow-layout">
-                                <size key="itemSize" width="343" height="160"/>
-                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                <inset key="sectionInset" minX="0.0" minY="20" maxX="0.0" maxY="40"/>
-                            </collectionViewFlowLayout>
-                        </collectionView>
-                    </subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="partner-zodiac-collection">
+                    <rect key="frame" x="187.5" y="122" width="177.5" height="90"/>
                     <color key="backgroundColor" systemColor="clearColor"/>
                     <constraints>
-                        <constraint firstItem="selected-sign-title" firstAttribute="leading" secondItem="content-container" secondAttribute="leading" constant="20" id="title-leading"/>
-                        <constraint firstItem="selected-sign-title" firstAttribute="top" secondItem="content-container" secondAttribute="top" id="title-top"/>
-                        <constraint firstItem="content-container" firstAttribute="trailing" secondItem="selected-sign-title" secondAttribute="trailing" constant="20" id="title-trailing"/>
-                        <constraint firstItem="selected-sign-subtitle" firstAttribute="leading" secondItem="content-container" secondAttribute="leading" constant="20" id="subtitle-leading"/>
-                        <constraint firstItem="selected-sign-subtitle" firstAttribute="top" secondItem="selected-sign-title" secondAttribute="bottom" constant="8" id="subtitle-top"/>
-                        <constraint firstItem="content-container" firstAttribute="trailing" secondItem="selected-sign-subtitle" secondAttribute="trailing" constant="20" id="subtitle-trailing"/>
-                        <constraint firstItem="compatibility-collection" firstAttribute="leading" secondItem="content-container" secondAttribute="leading" constant="16" id="compatibility-leading"/>
-                        <constraint firstItem="compatibility-collection" firstAttribute="top" secondItem="selected-sign-subtitle" secondAttribute="bottom" constant="26" id="compatibility-top"/>
-                        <constraint firstItem="content-container" firstAttribute="trailing" secondItem="compatibility-collection" secondAttribute="trailing" constant="16" id="compatibility-trailing"/>
-                        <constraint firstItem="content-container" firstAttribute="bottom" secondItem="compatibility-collection" secondAttribute="bottom" id="content-container-bottom"/>
+                        <constraint firstAttribute="height" constant="90" id="partner-collection-height"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="12" minimumInteritemSpacing="12" id="partner-flow-layout">
+                        <size key="itemSize" width="70" height="90"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="comparison-view-container">
+                    <rect key="frame" x="0.0" y="228" width="375" height="180"/>
+                    <color key="backgroundColor" systemColor="clearColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="180" id="comparison-view-height"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="details-card-container">
+                    <rect key="frame" x="16" y="428" width="343" height="280"/>
+                    <color key="backgroundColor" systemColor="clearColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="280" id="details-card-height"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Genel Yorum" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="comment-title-label">
+                    <rect key="frame" x="20" y="668" width="335" height="21.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bu iki burç arasında güçlü bir iletişim ve duygusal bağ bulunmaktadır. Birlikte çalıştıklarında harika sonuçlar elde edebilirler ve birbirlerini destekleyerek büyüyebilirler." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="comment-text-label">
+                    <rect key="frame" x="20" y="697.5" width="335" height="36"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="clearColor"/>
+                            <constraints>
+                                <constraint firstItem="title-label" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" constant="20" id="title-label-leading"/>
+                                <constraint firstItem="title-label" firstAttribute="top" secondItem="content-view" secondAttribute="top" constant="20" id="title-label-top"/>
+                                <constraint firstItem="content-view" firstAttribute="trailing" secondItem="title-label" secondAttribute="trailing" constant="20" id="title-label-trailing"/>
+                                <constraint firstItem="user-label" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" constant="10" id="user-label-leading"/>
+                                <constraint firstItem="user-label" firstAttribute="top" secondItem="title-label" secondAttribute="bottom" constant="16" id="user-label-top"/>
+                                <constraint firstItem="user-label" firstAttribute="centerX" secondItem="user-zodiac-collection" secondAttribute="centerX" id="user-label-centerX"/>
+                                <constraint firstItem="partner-label" firstAttribute="top" secondItem="title-label" secondAttribute="bottom" constant="16" id="partner-label-top"/>
+                                <constraint firstItem="partner-label" firstAttribute="centerX" secondItem="partner-zodiac-collection" secondAttribute="centerX" id="partner-label-centerX"/>
+                                <constraint firstItem="user-zodiac-collection" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" constant="10" id="user-collection-leading"/>
+                                <constraint firstItem="user-zodiac-collection" firstAttribute="top" secondItem="user-label" secondAttribute="bottom" constant="16" id="user-collection-top"/>
+                                <constraint firstItem="user-zodiac-collection" firstAttribute="width" secondItem="content-view" secondAttribute="width" multiplier="0.5" constant="-15" id="user-collection-width"/>
+                                <constraint firstItem="partner-zodiac-collection" firstAttribute="leading" secondItem="user-zodiac-collection" secondAttribute="trailing" constant="10" id="partner-collection-leading"/>
+                                <constraint firstItem="partner-zodiac-collection" firstAttribute="top" secondItem="partner-label" secondAttribute="bottom" constant="16" id="partner-collection-top"/>
+                                <constraint firstItem="partner-zodiac-collection" firstAttribute="width" secondItem="user-zodiac-collection" secondAttribute="width" id="partner-collection-width"/>
+                                <constraint firstItem="content-view" firstAttribute="trailing" secondItem="partner-zodiac-collection" secondAttribute="trailing" constant="10" id="partner-collection-trailing"/>
+                                <constraint firstItem="comparison-view-container" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" id="comparison-view-leading"/>
+                                <constraint firstItem="comparison-view-container" firstAttribute="top" secondItem="user-zodiac-collection" secondAttribute="bottom" constant="16" id="comparison-view-top"/>
+                                <constraint firstItem="content-view" firstAttribute="trailing" secondItem="comparison-view-container" secondAttribute="trailing" id="comparison-view-trailing"/>
+                                <constraint firstItem="details-card-container" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" constant="16" id="details-card-leading"/>
+                                <constraint firstItem="details-card-container" firstAttribute="top" secondItem="comparison-view-container" secondAttribute="bottom" constant="20" id="details-card-top"/>
+                                <constraint firstItem="content-view" firstAttribute="trailing" secondItem="details-card-container" secondAttribute="trailing" constant="16" id="details-card-trailing"/>
+                                <constraint firstItem="comment-title-label" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" constant="20" id="comment-title-leading"/>
+                                <constraint firstItem="comment-title-label" firstAttribute="top" secondItem="details-card-container" secondAttribute="bottom" constant="20" id="comment-title-top"/>
+                                <constraint firstItem="content-view" firstAttribute="trailing" secondItem="comment-title-label" secondAttribute="trailing" constant="20" id="comment-title-trailing"/>
+                                <constraint firstItem="comment-text-label" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" constant="20" id="comment-text-leading"/>
+                                <constraint firstItem="comment-text-label" firstAttribute="top" secondItem="comment-title-label" secondAttribute="bottom" constant="8" id="comment-text-top"/>
+                                <constraint firstItem="content-view" firstAttribute="trailing" secondItem="comment-text-label" secondAttribute="trailing" constant="20" id="comment-text-trailing"/>
+                                <constraint firstItem="content-view" firstAttribute="bottom" secondItem="comment-text-label" secondAttribute="bottom" constant="20" id="content-view-bottom"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="content-view" firstAttribute="leading" secondItem="main-scroll-view" secondAttribute="leading" id="scroll-content-view-leading"/>
+                        <constraint firstItem="content-view" firstAttribute="top" secondItem="main-scroll-view" secondAttribute="top" id="scroll-content-view-top"/>
+                        <constraint firstItem="content-view" firstAttribute="trailing" secondItem="main-scroll-view" secondAttribute="trailing" id="scroll-content-view-trailing"/>
+                        <constraint firstItem="content-view" firstAttribute="bottom" secondItem="main-scroll-view" secondAttribute="bottom" id="scroll-content-view-bottom"/>
+                        <constraint firstItem="content-view" firstAttribute="width" secondItem="main-scroll-view" secondAttribute="width" id="scroll-content-view-width"/>
+                    </constraints>
+                </scrollView>
             </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="zodiac-selection-collection" firstAttribute="leading" secondItem="safe-area-guide" secondAttribute="leading" id="zodiac-selection-leading"/>
-                <constraint firstItem="zodiac-selection-collection" firstAttribute="top" secondItem="safe-area-guide" secondAttribute="top" id="zodiac-selection-top"/>
-                <constraint firstItem="safe-area-guide" firstAttribute="trailing" secondItem="zodiac-selection-collection" secondAttribute="trailing" id="zodiac-selection-trailing"/>
-                <constraint firstItem="content-container" firstAttribute="leading" secondItem="safe-area-guide" secondAttribute="leading" id="content-leading"/>
-                <constraint firstItem="content-container" firstAttribute="top" secondItem="zodiac-selection-collection" secondAttribute="bottom" id="content-top"/>
-                <constraint firstItem="safe-area-guide" firstAttribute="trailing" secondItem="content-container" secondAttribute="trailing" id="content-trailing"/>
-                <constraint firstItem="safe-area-guide" firstAttribute="bottom" secondItem="content-container" secondAttribute="bottom" id="content-bottom"/>
+                <constraint firstItem="main-scroll-view" firstAttribute="leading" secondItem="safe-area-guide" secondAttribute="leading" id="scroll-view-leading"/>
+                <constraint firstItem="main-scroll-view" firstAttribute="top" secondItem="safe-area-guide" secondAttribute="top" id="scroll-view-top"/>
+                <constraint firstItem="safe-area-guide" firstAttribute="trailing" secondItem="main-scroll-view" secondAttribute="trailing" id="scroll-view-trailing"/>
+                <constraint firstItem="safe-area-guide" firstAttribute="bottom" secondItem="main-scroll-view" secondAttribute="bottom" id="scroll-view-bottom"/>
             </constraints>
             <point key="canvasLocation" x="132" y="4"/>
         </view>
     </objects>
 </document>
-

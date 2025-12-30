@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ZodiacComparisonView" customModule="Astra" customModuleProvider="target">
+            <connections>
+                <outlet property="leftZodiacIconView" destination="left-zodiac-icon" id="left-zodiac-icon-outlet"/>
+                <outlet property="leftZodiacNameLabel" destination="left-zodiac-name" id="left-zodiac-name-outlet"/>
+                <outlet property="leftZodiacSymbolLabel" destination="left-zodiac-symbol" id="left-zodiac-symbol-outlet"/>
+                <outlet property="percentageCircleView" destination="percentage-circle" id="percentage-circle-outlet"/>
+                <outlet property="percentageLabel" destination="percentage-label" id="percentage-label-outlet"/>
+                <outlet property="percentageSubtitleLabel" destination="percentage-subtitle" id="percentage-subtitle-outlet"/>
+                <outlet property="rightZodiacIconView" destination="right-zodiac-icon" id="right-zodiac-icon-outlet"/>
+                <outlet property="rightZodiacNameLabel" destination="right-zodiac-name" id="right-zodiac-name-outlet"/>
+                <outlet property="rightZodiacSymbolLabel" destination="right-zodiac-symbol" id="right-zodiac-symbol-outlet"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
+        <view contentMode="scaleToFill" id="comparison-main-view">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="left-zodiac-icon">
+                    <rect key="frame" x="40" y="20" width="64" height="64"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♈" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="left-zodiac-symbol">
+                            <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="clearColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="64" id="left-icon-width"/>
+                        <constraint firstAttribute="height" constant="64" id="left-icon-height"/>
+                        <constraint firstItem="left-zodiac-symbol" firstAttribute="leading" secondItem="left-zodiac-icon" secondAttribute="leading" id="left-symbol-leading"/>
+                        <constraint firstItem="left-zodiac-symbol" firstAttribute="top" secondItem="left-zodiac-icon" secondAttribute="top" id="left-symbol-top"/>
+                        <constraint firstItem="left-zodiac-icon" firstAttribute="trailing" secondItem="left-zodiac-symbol" secondAttribute="trailing" id="left-symbol-trailing"/>
+                        <constraint firstItem="left-zodiac-icon" firstAttribute="bottom" secondItem="left-zodiac-symbol" secondAttribute="bottom" id="left-symbol-bottom"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Koç" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="left-zodiac-name">
+                    <rect key="frame" x="40" y="92" width="64" height="17"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="percentage-circle">
+                    <rect key="frame" x="155.5" y="30" width="80" height="80"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="72%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="YES" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="percentage-label">
+                            <rect key="frame" x="8" y="26" width="64" height="24"/>
+                            <fontDescription key="fontDescription" type="system" weight="bold" pointSize="24"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uyum" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="percentage-subtitle">
+                            <rect key="frame" x="8" y="50" width="64" height="14.5"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
+                            <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="clearColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="percentage-circle-width"/>
+                        <constraint firstAttribute="height" constant="80" id="percentage-circle-height"/>
+                        <constraint firstItem="percentage-label" firstAttribute="centerX" secondItem="percentage-circle" secondAttribute="centerX" id="percentage-label-centerX"/>
+                        <constraint firstItem="percentage-label" firstAttribute="centerY" secondItem="percentage-circle" secondAttribute="centerY" constant="-4" id="percentage-label-centerY"/>
+                        <constraint firstItem="percentage-label" firstAttribute="leading" secondItem="percentage-circle" secondAttribute="leading" constant="8" id="percentage-label-leading"/>
+                        <constraint firstItem="percentage-circle" firstAttribute="trailing" secondItem="percentage-label" secondAttribute="trailing" constant="8" id="percentage-label-trailing"/>
+                        <constraint firstItem="percentage-subtitle" firstAttribute="centerX" secondItem="percentage-circle" secondAttribute="centerX" id="percentage-subtitle-centerX"/>
+                        <constraint firstItem="percentage-subtitle" firstAttribute="top" secondItem="percentage-label" secondAttribute="bottom" constant="0" id="percentage-subtitle-top"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="right-zodiac-icon">
+                    <rect key="frame" x="271" y="20" width="64" height="64"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♉" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="right-zodiac-symbol">
+                            <rect key="frame" x="0.0" y="0.0" width="64" height="64"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="clearColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="64" id="right-icon-width"/>
+                        <constraint firstAttribute="height" constant="64" id="right-icon-height"/>
+                        <constraint firstItem="right-zodiac-symbol" firstAttribute="leading" secondItem="right-zodiac-icon" secondAttribute="leading" id="right-symbol-leading"/>
+                        <constraint firstItem="right-zodiac-symbol" firstAttribute="top" secondItem="right-zodiac-icon" secondAttribute="top" id="right-symbol-top"/>
+                        <constraint firstItem="right-zodiac-icon" firstAttribute="trailing" secondItem="right-zodiac-symbol" secondAttribute="trailing" id="right-symbol-trailing"/>
+                        <constraint firstItem="right-zodiac-icon" firstAttribute="bottom" secondItem="right-zodiac-symbol" secondAttribute="bottom" id="right-symbol-bottom"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Boğa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="right-zodiac-name">
+                    <rect key="frame" x="271" y="92" width="64" height="17"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" systemColor="clearColor"/>
+            <constraints>
+                <constraint firstItem="left-zodiac-icon" firstAttribute="centerX" secondItem="comparison-main-view" secondAttribute="centerX" constant="-120" id="left-icon-centerX"/>
+                <constraint firstItem="left-zodiac-icon" firstAttribute="top" secondItem="comparison-main-view" secondAttribute="top" constant="24" id="left-icon-top"/>
+                <constraint firstItem="left-zodiac-name" firstAttribute="centerX" secondItem="left-zodiac-icon" secondAttribute="centerX" id="left-name-centerX"/>
+                <constraint firstItem="left-zodiac-name" firstAttribute="top" secondItem="left-zodiac-icon" secondAttribute="bottom" constant="8" id="left-name-top"/>
+                <constraint firstItem="percentage-circle" firstAttribute="centerX" secondItem="comparison-main-view" secondAttribute="centerX" id="percentage-circle-centerX"/>
+                <constraint firstItem="percentage-circle" firstAttribute="centerY" secondItem="left-zodiac-icon" secondAttribute="centerY" id="percentage-circle-centerY"/>
+                <constraint firstItem="right-zodiac-icon" firstAttribute="centerX" secondItem="comparison-main-view" secondAttribute="centerX" constant="120" id="right-icon-centerX"/>
+                <constraint firstItem="right-zodiac-icon" firstAttribute="top" secondItem="comparison-main-view" secondAttribute="top" constant="24" id="right-icon-top"/>
+                <constraint firstItem="right-zodiac-name" firstAttribute="centerX" secondItem="right-zodiac-icon" secondAttribute="centerX" id="right-name-centerX"/>
+                <constraint firstItem="right-zodiac-name" firstAttribute="top" secondItem="right-zodiac-icon" secondAttribute="bottom" constant="8" id="right-name-top"/>
+                <constraint firstItem="comparison-main-view" firstAttribute="bottom" secondItem="left-zodiac-name" secondAttribute="bottom" constant="24" id="comparison-bottom"/>
+                <constraint firstAttribute="height" constant="180" id="comparison-height"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="4"/>
+        </view>
+    </objects>
+</document>
+

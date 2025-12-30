@@ -15,16 +15,14 @@ class SettingsViewController: UIViewController {
     private let sections: [String] = [
         "Profil",
         "Bildirimler",
-        "Görünüm",
         "Dil",
         "Hakkında"
     ]
     
     // Settings rows for each section
     private let settingsData: [String: [String]] = [
-        "Profil": ["Burç Seçimi"],
+        "Profil": ["Burcumu Değiştir", "Doğum Tarihi / Saati", "Yükselen Bilgisi"],
         "Bildirimler": ["Günlük Bildirim"],
-        "Görünüm": ["Tema"],
         "Dil": ["Dil Seçimi"],
         "Hakkında": ["Uygulama Versiyonu"]
     ]
@@ -33,11 +31,6 @@ class SettingsViewController: UIViewController {
     private var isNotificationEnabled: Bool {
         get { UserDefaults.standard.bool(forKey: "isNotificationEnabled") }
         set { UserDefaults.standard.set(newValue, forKey: "isNotificationEnabled") }
-    }
-    
-    private var isDarkThemeEnabled: Bool {
-        get { UserDefaults.standard.bool(forKey: "isDarkThemeEnabled") }
-        set { UserDefaults.standard.set(newValue, forKey: "isDarkThemeEnabled") }
     }
     
     // Seçili burç
@@ -157,19 +150,6 @@ class SettingsViewController: UIViewController {
         // Bildirim ayarlarını güncelle
         print("Bildirimler: \(sender.isOn ? "Açık" : "Kapalı")")
     }
-    
-    @objc private func themeSwitchChanged(_ sender: UISwitch) {
-        isDarkThemeEnabled = sender.isOn
-        // Tema ayarlarını güncelle
-        if #available(iOS 13.0, *) {
-            if let windowScene = view.window?.windowScene {
-                windowScene.windows.forEach { window in
-                    window.overrideUserInterfaceStyle = sender.isOn ? .dark : .light
-                }
-            }
-        }
-        print("Tema: \(sender.isOn ? "Koyu" : "Açık")")
-    }
 }
 
 // MARK: - UIPickerViewDataSource & UIPickerViewDelegate
@@ -192,7 +172,7 @@ extension SettingsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         // Önceki timer'ı iptal et
         pickerCloseTimer?.invalidate()
         
-        // "Burç Seçimi" satırını hemen güncelle
+        // "Burcumu Değiştir" satırını hemen güncelle
         updateZodiacSelectionCell()
         
         // Picker'ı otomatik kapat (kullanıcının seçimini görmesi için kısa bir gecikme)
@@ -220,7 +200,7 @@ extension SettingsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
     }
     
     private func updateZodiacSelectionCell() {
-        // "Burç Seçimi" satırını güncelle
+        // "Burcumu Değiştir" satırını güncelle
         let indexPath = IndexPath(row: 0, section: 0)
         if let cell = tableView.cellForRow(at: indexPath) {
             let selectedZodiac = zodiacSigns[selectedZodiacIndex]
@@ -252,7 +232,7 @@ extension SettingsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         tableView.deleteRows(at: [IndexPath(row: 1, section: 0)], with: .fade)
         tableView.endUpdates()
         
-        // "Burç Seçimi" satırını güncelle
+        // "Burcumu Değiştir" satırını güncelle
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.updateZodiacSelectionCell()
             print("✅ Picker kapatıldı ve cell güncellendi")
@@ -273,6 +253,7 @@ extension SettingsViewController: UITableViewDataSource {
         
         // Profil section'ında picker açıksa bir satır daha ekle
         if sectionTitle == "Profil" && isZodiacPickerExpanded {
+            // Picker satırı "Burcumu Değiştir" satırından sonra eklenir
             return baseCount + 1
         }
         
@@ -283,6 +264,7 @@ extension SettingsViewController: UITableViewDataSource {
         let sectionTitle = sections[indexPath.section]
         
         // Profil section'ında picker satırı kontrolü
+        // Picker "Burcumu Değiştir" satırından sonra (row 1) eklenir
         if sectionTitle == "Profil" && isZodiacPickerExpanded && indexPath.row == 1 {
             // Picker cell'i
             let cell = tableView.dequeueReusableCell(withIdentifier: "PickerCell", for: indexPath)
@@ -319,11 +301,17 @@ extension SettingsViewController: UITableViewDataSource {
             return cell
         }
         
-        // Profil section'ında picker açıksa, "Burç Seçimi" satırı index 0'da
-        let rowIndex = (sectionTitle == "Profil" && isZodiacPickerExpanded) ? 0 : indexPath.row
+        // Profil section'ında picker açıksa, satır index'lerini ayarla
+        let rowIndex: Int
+        if sectionTitle == "Profil" && isZodiacPickerExpanded {
+            // Picker açıksa: row 0 = "Burcumu Değiştir", row 1 = picker, row 2+ = diğer satırlar
+            rowIndex = indexPath.row == 0 ? 0 : indexPath.row - 1
+        } else {
+            rowIndex = indexPath.row
+        }
         
-        // Burç Seçimi için value1 style kullan (iOS Settings benzeri)
-        let isZodiacRow = sectionTitle == "Profil" && settingsData[sectionTitle]?[rowIndex] == "Burç Seçimi"
+        // Burcumu Değiştir için value1 style kullan (iOS Settings benzeri)
+        let isZodiacRow = sectionTitle == "Profil" && settingsData[sectionTitle]?[rowIndex] == "Burcumu Değiştir"
         
         // Normal settings cell'i
         let cell: UITableViewCell
@@ -344,7 +332,7 @@ extension SettingsViewController: UITableViewDataSource {
             cell.textLabel?.font = .systemFont(ofSize: 17)
             cell.textLabel?.textColor = .white  // Dark background için beyaz text
             
-            // Bildirimler ve Tema için switch ekle
+            // Bildirimler için switch ekle
             if rowTitle == "Günlük Bildirim" {
                 cell.textLabel?.text = rowTitle
                 let switchControl = UISwitch()
@@ -352,14 +340,7 @@ extension SettingsViewController: UITableViewDataSource {
                 switchControl.addTarget(self, action: #selector(notificationSwitchChanged(_:)), for: .valueChanged)
                 cell.accessoryView = switchControl
                 cell.selectionStyle = .none
-            } else if rowTitle == "Tema" {
-                cell.textLabel?.text = rowTitle
-                let switchControl = UISwitch()
-                switchControl.isOn = isDarkThemeEnabled
-                switchControl.addTarget(self, action: #selector(themeSwitchChanged(_:)), for: .valueChanged)
-                cell.accessoryView = switchControl
-                cell.selectionStyle = .none
-            } else if rowTitle == "Burç Seçimi" {
+            } else if rowTitle == "Burcumu Değiştir" {
                 // Burç seçimi için seçili burcu detailTextLabel'da göster (işaret + isim)
                 cell.textLabel?.text = rowTitle
                 let selectedZodiac = zodiacSigns[selectedZodiacIndex]
@@ -367,6 +348,20 @@ extension SettingsViewController: UITableViewDataSource {
                 cell.detailTextLabel?.text = "\(selectedSymbol) \(selectedZodiac)"
                 cell.detailTextLabel?.font = .systemFont(ofSize: 17)
                 cell.detailTextLabel?.textColor = UIColor.white.withAlphaComponent(0.7)  // Beyaz ama biraz soluk
+                cell.selectionStyle = .default
+            } else if rowTitle == "Doğum Tarihi / Saati" {
+                cell.textLabel?.text = rowTitle
+                cell.detailTextLabel?.text = "Ayarla"
+                cell.detailTextLabel?.font = .systemFont(ofSize: 17)
+                cell.detailTextLabel?.textColor = UIColor.white.withAlphaComponent(0.7)
+                cell.accessoryType = .disclosureIndicator
+                cell.selectionStyle = .default
+            } else if rowTitle == "Yükselen Bilgisi" {
+                cell.textLabel?.text = rowTitle
+                cell.detailTextLabel?.text = "Ayarla"
+                cell.detailTextLabel?.font = .systemFont(ofSize: 17)
+                cell.detailTextLabel?.textColor = UIColor.white.withAlphaComponent(0.7)
+                cell.accessoryType = .disclosureIndicator
                 cell.selectionStyle = .default
             } else {
                 // Diğer hücreler için disclosure indicator
@@ -424,17 +419,23 @@ extension SettingsViewController: UITableViewDelegate {
             return
         }
         
-        // Profil section'ında picker açıksa, "Burç Seçimi" satırı index 0'da
-        let rowIndex = (sectionTitle == "Profil" && isZodiacPickerExpanded) ? 0 : indexPath.row
+        // Profil section'ında picker açıksa, satır index'lerini ayarla
+        let rowIndex: Int
+        if sectionTitle == "Profil" && isZodiacPickerExpanded {
+            // Picker açıksa: row 0 = "Burcumu Değiştir", row 1 = picker, row 2+ = diğer satırlar
+            rowIndex = indexPath.row == 0 ? 0 : indexPath.row - 1
+        } else {
+            rowIndex = indexPath.row
+        }
         
         if let rowTitle = settingsData[sectionTitle]?[rowIndex] {
             // Switch olan hücreler için seçim yapma
-            if rowTitle == "Günlük Bildirim" || rowTitle == "Tema" {
+            if rowTitle == "Günlük Bildirim" {
                 return
             }
             
             // Burç seçimi için picker'ı toggle et
-            if rowTitle == "Burç Seçimi" {
+            if rowTitle == "Burcumu Değiştir" {
                 // Picker açılıyorsa timer'ı temizle
                 if !isZodiacPickerExpanded {
                     pickerCloseTimer?.invalidate()
@@ -452,13 +453,22 @@ extension SettingsViewController: UITableViewDelegate {
                 }
                 tableView.endUpdates()
                 
-                // "Burç Seçimi" satırını güncelle
+                // "Burcumu Değiştir" satırını güncelle
                 tableView.reloadRows(at: [IndexPath(row: 0, section: indexPath.section)], with: .none)
                 return
             }
             
-            // Diğer hücreler için placeholder
-            print("Seçildi: \(rowTitle)")
+            // Doğum Tarihi / Saati ve Yükselen Bilgisi için placeholder
+            if rowTitle == "Doğum Tarihi / Saati" {
+                print("Doğum Tarihi / Saati seçildi - Gelecekte implement edilecek")
+                // TODO: Date picker veya navigation push eklenebilir
+            } else if rowTitle == "Yükselen Bilgisi" {
+                print("Yükselen Bilgisi seçildi - Gelecekte implement edilecek")
+                // TODO: Yükselen burç seçimi eklenebilir
+            } else {
+                // Diğer hücreler için placeholder
+                print("Seçildi: \(rowTitle)")
+            }
         }
     }
     

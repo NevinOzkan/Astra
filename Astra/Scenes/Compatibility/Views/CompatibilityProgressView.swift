@@ -17,7 +17,17 @@ class CompatibilityProgressView: UIView {
     var progress: Float = 0.0 {
         didSet {
             updateProgress()
+            // Animasyonlu progress update
+            animateProgress(from: oldValue, to: progress)
         }
+    }
+    
+    private func animateProgress(from: Float, to: Float) {
+        let animation = CABasicAnimation(keyPath: "path")
+        animation.duration = 0.6
+        animation.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        progressLayer?.add(animation, forKey: "progressAnimation")
+        gradientLayer?.add(animation, forKey: "gradientAnimation")
     }
     
     var gradientColors: [UIColor] = [.systemPink, .systemPurple] {
@@ -29,6 +39,7 @@ class CompatibilityProgressView: UIView {
     var valueText: String = "" {
         didSet {
             valueLabel?.text = valueText
+            valueLabel?.isHidden = valueText.isEmpty
         }
     }
     
@@ -47,7 +58,7 @@ class CompatibilityProgressView: UIView {
         
         // Track layer (arka plan)
         let track = CAShapeLayer()
-        track.fillColor = UIColor.white.withAlphaComponent(0.2).cgColor
+        track.fillColor = UIColor.white.withAlphaComponent(0.15).cgColor
         trackLayer = track
         layer.addSublayer(track)
         
@@ -83,16 +94,17 @@ class CompatibilityProgressView: UIView {
     }
     
     private func updatePaths() {
-        let height: CGFloat = 8
-        let cornerRadius: CGFloat = 4
+        let height: CGFloat = 4
+        let cornerRadius: CGFloat = 2
         
-        // Track path
-        let trackRect = CGRect(x: 0, y: (bounds.height - height) / 2, width: bounds.width - 45, height: height)
+        // Track path - value label yoksa tam genişlik
+        let trackWidth = valueText.isEmpty ? bounds.width : bounds.width - 45
+        let trackRect = CGRect(x: 0, y: (bounds.height - height) / 2, width: trackWidth, height: height)
         let trackPath = UIBezierPath(roundedRect: trackRect, cornerRadius: cornerRadius)
         trackLayer?.path = trackPath.cgPath
         
         // Progress path
-        let progressWidth = (bounds.width - 45) * CGFloat(progress)
+        let progressWidth = trackWidth * CGFloat(progress)
         let progressRect = CGRect(x: 0, y: (bounds.height - height) / 2, width: progressWidth, height: height)
         let progressPath = UIBezierPath(roundedRect: progressRect, cornerRadius: cornerRadius)
         progressLayer?.path = progressPath.cgPath

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CompatibilityRowView" customModule="Astra" customModuleProvider="target">
+            <connections>
+                <outlet property="zodiacIconView" destination="zodiac-icon-view" id="zodiac-icon-view-outlet"/>
+                <outlet property="zodiacSymbolLabel" destination="zodiac-symbol-label" id="zodiac-symbol-label-outlet"/>
+                <outlet property="zodiacNameLabel" destination="zodiac-name-label" id="zodiac-name-label-outlet"/>
+                <outlet property="progressContainerView" destination="progress-container" id="progress-container-outlet"/>
+                <outlet property="percentageLabel" destination="percentage-label" id="percentage-label-outlet"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
+        <view contentMode="scaleToFill" id="row-main-view">
+            <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-icon-view">
+                    <rect key="frame" x="20" y="6" width="32" height="32"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♈" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-symbol-label">
+                            <rect key="frame" x="0.0" y="0.0" width="32" height="32"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="32" id="zodiac-icon-width"/>
+                        <constraint firstAttribute="height" constant="32" id="zodiac-icon-height"/>
+                        <constraint firstItem="zodiac-symbol-label" firstAttribute="leading" secondItem="zodiac-icon-view" secondAttribute="leading" id="zodiac-symbol-leading"/>
+                        <constraint firstItem="zodiac-symbol-label" firstAttribute="top" secondItem="zodiac-icon-view" secondAttribute="top" id="zodiac-symbol-top"/>
+                        <constraint firstItem="zodiac-icon-view" firstAttribute="trailing" secondItem="zodiac-symbol-label" secondAttribute="trailing" id="zodiac-symbol-trailing"/>
+                        <constraint firstItem="zodiac-icon-view" firstAttribute="bottom" secondItem="zodiac-symbol-label" secondAttribute="bottom" id="zodiac-symbol-bottom"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Koç" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-name-label">
+                    <rect key="frame" x="60" y="13" width="150" height="17"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="progress-container">
+                    <rect key="frame" x="60" y="32" width="200" height="8"/>
+                    <color key="backgroundColor" systemColor="clearColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="8" id="progress-container-height"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="72%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="percentage-label">
+                    <rect key="frame" x="268" y="13" width="55" height="16"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" systemColor="clearColor"/>
+            <constraints>
+                <constraint firstItem="zodiac-icon-view" firstAttribute="leading" secondItem="row-main-view" secondAttribute="leading" constant="20" id="zodiac-icon-leading"/>
+                <constraint firstItem="zodiac-icon-view" firstAttribute="centerY" secondItem="row-main-view" secondAttribute="centerY" id="zodiac-icon-centerY"/>
+                <constraint firstItem="zodiac-name-label" firstAttribute="leading" secondItem="zodiac-icon-view" secondAttribute="trailing" constant="8" id="zodiac-name-leading"/>
+                <constraint firstItem="zodiac-name-label" firstAttribute="centerY" secondItem="row-main-view" secondAttribute="centerY" constant="-2" id="zodiac-name-centerY"/>
+                <constraint firstItem="progress-container" firstAttribute="leading" secondItem="row-main-view" secondAttribute="leading" constant="60" id="progress-container-leading"/>
+                <constraint firstItem="progress-container" firstAttribute="top" secondItem="zodiac-name-label" secondAttribute="bottom" constant="2" id="progress-container-top"/>
+                <constraint firstItem="percentage-label" firstAttribute="leading" secondItem="zodiac-name-label" secondAttribute="trailing" constant="8" id="percentage-label-leading"/>
+                <constraint firstItem="percentage-label" firstAttribute="centerY" secondItem="row-main-view" secondAttribute="centerY" constant="-2" id="percentage-label-centerY"/>
+                <constraint firstItem="row-main-view" firstAttribute="trailing" secondItem="percentage-label" secondAttribute="trailing" constant="20" id="percentage-label-trailing"/>
+                                <constraint firstItem="percentage-label" firstAttribute="leading" secondItem="progress-container" secondAttribute="trailing" constant="8" id="progress-container-trailing"/>
+                <constraint firstItem="row-main-view" firstAttribute="bottom" secondItem="progress-container" secondAttribute="bottom" constant="4" id="row-bottom"/>
+                <constraint firstAttribute="height" constant="44" id="row-height"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="4"/>
+        </view>
+    </objects>
+</document>
+

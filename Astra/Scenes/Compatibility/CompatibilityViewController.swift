@@ -4,6 +4,7 @@
 //
 //  Created by Nevin Özkan on 27.12.2025.
 //
+
 import UIKit
 
 class CompatibilityViewController: UIViewController {
@@ -12,10 +13,16 @@ class CompatibilityViewController: UIViewController {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var zodiacSelectionCollectionView: UICollectionView!
-    @IBOutlet weak var selectedSignTitleLabel: UILabel!
-    @IBOutlet weak var selectedSignSubtitleLabel: UILabel!
-    @IBOutlet weak var compatibilityCollectionView: UICollectionView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var userZodiacCollectionView: UICollectionView!
+    @IBOutlet weak var partnerZodiacCollectionView: UICollectionView!
+    @IBOutlet weak var comparisonViewContainer: UIView!
+    @IBOutlet weak var detailsCardContainer: UIView!
+    @IBOutlet weak var commentTitleLabel: UILabel!
+    @IBOutlet weak var commentTextLabel: UILabel!
+    
+    private var comparisonView: ZodiacComparisonView?
+    private var detailsCardView: CompatibilityDetailsCardView?
     
     init(viewModel: CompatibilityViewModel, nibName nibNameOrNil: String? = nil, bundle nibBundleOrNil: Bundle? = nil) {
         self.viewModel = viewModel
@@ -30,63 +37,105 @@ class CompatibilityViewController: UIViewController {
         super.viewDidLoad()
         
         setupBackground()
-        setupCollectionViews()
+        setupZodiacSelections()
+        setupComparisonView()
+        setupDetailsCard()
+        setupCommentSection()
         setupViewModel()
         updateUI()
     }
     
     private func setupBackground() {
-        // Uzay temalı gradient arka plan (Home ile aynı)
+        // Koyu mor / lacivert arka plan, yıldızlı veya soft gradient efekt
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
         
         gradientLayer.colors = [
-            UIColor(red: 0.05, green: 0.05, blue: 0.15, alpha: 1).cgColor,
-            UIColor(red: 0.1, green: 0.05, blue: 0.2, alpha: 1).cgColor,
-            UIColor(red: 0.05, green: 0.1, blue: 0.25, alpha: 1).cgColor
+            UIColor(red: 0.08, green: 0.05, blue: 0.18, alpha: 1).cgColor, // Koyu mor
+            UIColor(red: 0.12, green: 0.08, blue: 0.25, alpha: 1).cgColor, // Mor-lacivert
+            UIColor(red: 0.06, green: 0.1, blue: 0.22, alpha: 1).cgColor  // Lacivert
         ]
         
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1)
         
         view.layer.insertSublayer(gradientLayer, at: 0)
+        
+        // Yıldız efekti için (opsiyonel - gelecekte eklenebilir)
+        // addStarEffect()
     }
     
-    private func setupCollectionViews() {
-        // Zodiac Selection Collection View (Horizontal)
-        zodiacSelectionCollectionView.delegate = self
-        zodiacSelectionCollectionView.dataSource = self
-        zodiacSelectionCollectionView.backgroundColor = .clear
-        zodiacSelectionCollectionView.showsHorizontalScrollIndicator = false
+    private func setupZodiacSelections() {
+        // User Zodiac Selection (Left)
+        userZodiacCollectionView.delegate = self
+        userZodiacCollectionView.dataSource = self
+        userZodiacCollectionView.tag = 0 // Tag 0 = User sign
+        userZodiacCollectionView.backgroundColor = .clear
+        userZodiacCollectionView.showsHorizontalScrollIndicator = false
         
         let zodiacNib = UINib(nibName: "ZodiacSelectionCell", bundle: nil)
-        zodiacSelectionCollectionView.register(zodiacNib, forCellWithReuseIdentifier: "ZodiacSelectionCell")
+        userZodiacCollectionView.register(zodiacNib, forCellWithReuseIdentifier: "ZodiacSelectionCell")
         
-        if let flowLayout = zodiacSelectionCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+        if let flowLayout = userZodiacCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             flowLayout.scrollDirection = .horizontal
             flowLayout.minimumLineSpacing = 12
             flowLayout.minimumInteritemSpacing = 12
-            flowLayout.itemSize = CGSize(width: 80, height: 100)
+            flowLayout.itemSize = CGSize(width: 70, height: 90)
             flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         }
         
-        // Compatibility Collection View (Vertical)
-        compatibilityCollectionView.delegate = self
-        compatibilityCollectionView.dataSource = self
-        compatibilityCollectionView.backgroundColor = .clear
-        compatibilityCollectionView.showsVerticalScrollIndicator = true  // Scroll indicator göster
+        // Partner Zodiac Selection (Right)
+        partnerZodiacCollectionView.delegate = self
+        partnerZodiacCollectionView.dataSource = self
+        partnerZodiacCollectionView.tag = 1 // Tag 1 = Partner sign
+        partnerZodiacCollectionView.backgroundColor = .clear
+        partnerZodiacCollectionView.showsHorizontalScrollIndicator = false
         
-        let compatibilityNib = UINib(nibName: "CompatibilityCell", bundle: nil)
-        compatibilityCollectionView.register(compatibilityNib, forCellWithReuseIdentifier: "CompatibilityCell")
+        partnerZodiacCollectionView.register(zodiacNib, forCellWithReuseIdentifier: "ZodiacSelectionCell")
         
-        if let flowLayout = compatibilityCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.scrollDirection = .vertical
-            flowLayout.minimumLineSpacing = 24  // Kartlar arası spacing artırıldı
-            flowLayout.minimumInteritemSpacing = 0
-            flowLayout.itemSize = CGSize(width: 343, height: 160)  // Kart yüksekliği artırıldı
-            flowLayout.sectionInset = UIEdgeInsets(top: 20, left: 16, bottom: 40, right: 16)  // Üst-alt boşluk eklendi
-            flowLayout.estimatedItemSize = CGSize(width: 343, height: 160)
+        if let flowLayout = partnerZodiacCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumLineSpacing = 12
+            flowLayout.minimumInteritemSpacing = 12
+            flowLayout.itemSize = CGSize(width: 70, height: 90)
+            flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
         }
+    }
+    
+    private func setupComparisonView() {
+        comparisonView = ZodiacComparisonView()
+        guard let comparison = comparisonView else { return }
+        comparison.translatesAutoresizingMaskIntoConstraints = false
+        comparisonViewContainer.addSubview(comparison)
+        NSLayoutConstraint.activate([
+            comparison.leadingAnchor.constraint(equalTo: comparisonViewContainer.leadingAnchor),
+            comparison.trailingAnchor.constraint(equalTo: comparisonViewContainer.trailingAnchor),
+            comparison.topAnchor.constraint(equalTo: comparisonViewContainer.topAnchor),
+            comparison.bottomAnchor.constraint(equalTo: comparisonViewContainer.bottomAnchor)
+        ])
+    }
+    
+    private func setupDetailsCard() {
+        detailsCardView = CompatibilityDetailsCardView()
+        guard let detailsCard = detailsCardView else { return }
+        detailsCard.translatesAutoresizingMaskIntoConstraints = false
+        detailsCardContainer.addSubview(detailsCard)
+        NSLayoutConstraint.activate([
+            detailsCard.leadingAnchor.constraint(equalTo: detailsCardContainer.leadingAnchor),
+            detailsCard.trailingAnchor.constraint(equalTo: detailsCardContainer.trailingAnchor),
+            detailsCard.topAnchor.constraint(equalTo: detailsCardContainer.topAnchor),
+            detailsCard.bottomAnchor.constraint(equalTo: detailsCardContainer.bottomAnchor)
+        ])
+    }
+    
+    private func setupCommentSection() {
+        commentTitleLabel?.text = "Genel Yorum"
+        commentTitleLabel?.textColor = .white
+        commentTitleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
+        
+        commentTextLabel?.textColor = UIColor.white.withAlphaComponent(0.8)
+        commentTextLabel?.font = .systemFont(ofSize: 15, weight: .regular)
+        commentTextLabel?.numberOfLines = 0
     }
     
     private func setupViewModel() {
@@ -107,17 +156,49 @@ class CompatibilityViewController: UIViewController {
     }
     
     private func updateUI() {
-        let selectedSign = viewModel.currentSelectedSign
-        selectedSignTitleLabel.text = "\(selectedSign.name) Burcu Uyumları"
-        selectedSignSubtitleLabel.text = "Diğer burçlarla enerjisel uyum"
+        guard let compatibilityData = viewModel.compatibilityData else { return }
         
-        zodiacSelectionCollectionView.reloadData()
-        compatibilityCollectionView.reloadData()
+        let userSign = viewModel.currentUserSign
+        let partnerSign = viewModel.currentPartnerSign
+        let overallPercentage = viewModel.overallPercentage
         
-        // Seçili burcu collection view'da göster
-        if let index = viewModel.allSigns.firstIndex(where: { $0.name == selectedSign.name }) {
-            let indexPath = IndexPath(item: index, section: 0)
-            zodiacSelectionCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        // Comparison view'ı güncelle
+        comparisonView?.configure(
+            leftSign: userSign,
+            rightSign: partnerSign,
+            overallPercentage: overallPercentage
+        )
+        
+        // Details card'ı güncelle
+        detailsCardView?.configure(
+            love: compatibilityData.love,
+            friendship: compatibilityData.friendship,
+            work: compatibilityData.work
+        )
+        
+        // Comment text'i güncelle
+        commentTextLabel?.text = viewModel.generalComment
+        
+        // Collection view'ları güncelle
+        userZodiacCollectionView.reloadData()
+        partnerZodiacCollectionView.reloadData()
+        
+        // Seçili burçları scroll et
+        scrollToSelectedSigns()
+    }
+    
+    private func scrollToSelectedSigns() {
+        let userSign = viewModel.currentUserSign
+        let partnerSign = viewModel.currentPartnerSign
+        
+        if let userIndex = viewModel.allSigns.firstIndex(where: { $0.name == userSign.name }) {
+            let indexPath = IndexPath(item: userIndex, section: 0)
+            userZodiacCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        }
+        
+        if let partnerIndex = viewModel.allSigns.firstIndex(where: { $0.name == partnerSign.name }) {
+            let indexPath = IndexPath(item: partnerIndex, section: 0)
+            partnerZodiacCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
     }
     
@@ -142,45 +223,44 @@ class CompatibilityViewController: UIViewController {
 
 extension CompatibilityViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
-    // MARK: - Zodiac Selection Collection View
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == zodiacSelectionCollectionView {
-            return viewModel.allSigns.count
-        } else {
-            return viewModel.compatibilities.count
-        }
+        return viewModel.allSigns.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == zodiacSelectionCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ZodiacSelectionCell", for: indexPath) as! ZodiacSelectionCell
-            
-            let sign = viewModel.allSigns[indexPath.item]
-            let isSelected = sign.name == viewModel.currentSelectedSign.name
-            cell.configure(sign: sign, isSelected: isSelected)
-            
-            return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ZodiacSelectionCell", for: indexPath) as! ZodiacSelectionCell
+        
+        let sign = viewModel.allSigns[indexPath.item]
+        let isSelected: Bool
+        
+        if collectionView.tag == 0 {
+            // User sign collection
+            isSelected = sign.name == viewModel.currentUserSign.name
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CompatibilityCell", for: indexPath) as! CompatibilityCell
-            
-            let compatibility = viewModel.compatibilities[indexPath.item]
-            cell.configure(compatibility: compatibility)
-            
-            return cell
+            // Partner sign collection
+            isSelected = sign.name == viewModel.currentPartnerSign.name
         }
+        
+        cell.configure(sign: sign, isSelected: isSelected)
+        
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == zodiacSelectionCollectionView {
-            let selectedSign = viewModel.allSigns[indexPath.item]
-            viewModel.selectSign(selectedSign)
-            
-            // Animasyon
-            UIView.animate(withDuration: 0.2) {
-                collectionView.reloadData()
-            }
+        let selectedSign = viewModel.allSigns[indexPath.item]
+        
+        if collectionView.tag == 0 {
+            // User sign seçildi
+            viewModel.selectUserSign(selectedSign)
+        } else {
+            // Partner sign seçildi
+            viewModel.selectPartnerSign(selectedSign)
         }
+        
+        // Collection view'ları güncelle
+        userZodiacCollectionView.reloadData()
+        partnerZodiacCollectionView.reloadData()
     }
 }
+
 

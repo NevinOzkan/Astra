@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CompatibilityDetailsCardView" customModule="Astra" customModuleProvider="target">
+            <connections>
+                <outlet property="titleLabel" destination="title-label" id="title-label-outlet"/>
+                <outlet property="loveItemView" destination="love-item-view" id="love-item-view-outlet"/>
+                <outlet property="friendshipItemView" destination="friendship-item-view" id="friendship-item-view-outlet"/>
+                <outlet property="workItemView" destination="work-item-view" id="work-item-view-outlet"/>
+                <outlet property="blurContainerView" destination="blur-container" id="blur-container-outlet"/>
+                <outlet property="cardContainerView" destination="card-container" id="card-container-outlet"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
+        <view contentMode="scaleToFill" id="details-card-main-view">
+            <rect key="frame" x="0.0" y="0.0" width="343" height="280"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="card-container">
+                    <rect key="frame" x="0.0" y="0.0" width="343" height="280"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blur-container">
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="280"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Uyum Detayları" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="title-label">
+                                    <rect key="frame" x="24" y="24" width="295" height="24"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="love-item-view" customClass="CompatibilityTypeItemView" customModule="Astra" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="64" width="343" height="72"/>
+                                    <color key="backgroundColor" systemColor="clearColor"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="friendship-item-view" customClass="CompatibilityTypeItemView" customModule="Astra" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="148" width="343" height="72"/>
+                                    <color key="backgroundColor" systemColor="clearColor"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="work-item-view" customClass="CompatibilityTypeItemView" customModule="Astra" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="232" width="343" height="72"/>
+                                    <color key="backgroundColor" systemColor="clearColor"/>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="clearColor"/>
+                            <constraints>
+                                <constraint firstItem="title-label" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" constant="24" id="title-label-leading"/>
+                                <constraint firstItem="title-label" firstAttribute="top" secondItem="blur-container" secondAttribute="top" constant="24" id="title-label-top"/>
+                                <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="title-label" secondAttribute="trailing" constant="24" id="title-label-trailing"/>
+                                <constraint firstItem="love-item-view" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" id="love-item-leading"/>
+                                <constraint firstItem="love-item-view" firstAttribute="top" secondItem="title-label" secondAttribute="bottom" constant="16" id="love-item-top"/>
+                                <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="love-item-view" secondAttribute="trailing" id="love-item-trailing"/>
+                                <constraint firstItem="love-item-view" firstAttribute="height" constant="72" id="love-item-height"/>
+                                <constraint firstItem="friendship-item-view" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" id="friendship-item-leading"/>
+                                <constraint firstItem="friendship-item-view" firstAttribute="top" secondItem="love-item-view" secondAttribute="bottom" constant="12" id="friendship-item-top"/>
+                                <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="friendship-item-view" secondAttribute="trailing" id="friendship-item-trailing"/>
+                                <constraint firstItem="friendship-item-view" firstAttribute="height" constant="72" id="friendship-item-height"/>
+                                <constraint firstItem="work-item-view" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" id="work-item-leading"/>
+                                <constraint firstItem="work-item-view" firstAttribute="top" secondItem="friendship-item-view" secondAttribute="bottom" constant="12" id="work-item-top"/>
+                                <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="work-item-view" secondAttribute="trailing" id="work-item-trailing"/>
+                                <constraint firstItem="work-item-view" firstAttribute="height" constant="72" id="work-item-height"/>
+                                <constraint firstItem="blur-container" firstAttribute="bottom" secondItem="work-item-view" secondAttribute="bottom" constant="24" id="blur-container-bottom"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="clearColor"/>
+                    <constraints>
+                        <constraint firstItem="blur-container" firstAttribute="leading" secondItem="card-container" secondAttribute="leading" id="blur-container-leading"/>
+                        <constraint firstItem="blur-container" firstAttribute="top" secondItem="card-container" secondAttribute="top" id="blur-container-top"/>
+                        <constraint firstItem="card-container" firstAttribute="trailing" secondItem="blur-container" secondAttribute="trailing" id="blur-container-trailing"/>
+                        <constraint firstItem="card-container" firstAttribute="bottom" secondItem="blur-container" secondAttribute="bottom" id="card-container-bottom"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="clearColor"/>
+            <constraints>
+                <constraint firstItem="card-container" firstAttribute="leading" secondItem="details-card-main-view" secondAttribute="leading" id="card-container-leading"/>
+                <constraint firstItem="card-container" firstAttribute="top" secondItem="details-card-main-view" secondAttribute="top" id="card-container-top"/>
+                <constraint firstItem="details-card-main-view" firstAttribute="trailing" secondItem="card-container" secondAttribute="trailing" id="card-container-trailing"/>
+                <constraint firstItem="details-card-main-view" firstAttribute="bottom" secondItem="card-container" secondAttribute="bottom" id="details-card-main-view-bottom"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="4"/>
+        </view>
+    </objects>
+</document>
+

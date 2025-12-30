@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CompatibilityDetailCardView" customModule="Astra" customModuleProvider="target">
+            <connections>
+                <outlet property="blurContainerView" destination="blur-container" id="blur-container-outlet"/>
+                <outlet property="cardContainerView" destination="card-container" id="card-container-outlet"/>
+                <outlet property="friendshipPercentageLabel" destination="friendship-percentage-label" id="friendship-percentage-label-outlet"/>
+                <outlet property="friendshipProgressContainerView" destination="friendship-progress-container" id="friendship-progress-container-outlet"/>
+                <outlet property="lovePercentageLabel" destination="love-percentage-label" id="love-percentage-label-outlet"/>
+                <outlet property="loveProgressContainerView" destination="love-progress-container" id="love-progress-container-outlet"/>
+                <outlet property="workPercentageLabel" destination="work-percentage-label" id="work-percentage-label-outlet"/>
+                <outlet property="workProgressContainerView" destination="work-progress-container" id="work-progress-container-outlet"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
+        <view contentMode="scaleToFill" id="detail-card-main-view">
+            <rect key="frame" x="0.0" y="0.0" width="343" height="200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="card-container">
+                    <rect key="frame" x="0.0" y="0.0" width="343" height="200"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blur-container">
+                            <rect key="frame" x="0.0" y="0.0" width="343" height="200"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="❤️ Aşk Uyumu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="love-title-label">
+                                    <rect key="frame" x="24" y="24" width="120" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="70%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="love-percentage-label">
+                                    <rect key="frame" x="199" y="24" width="120" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="love-progress-container">
+                                    <rect key="frame" x="24" y="48" width="295" height="12"/>
+                                    <color key="backgroundColor" systemColor="clearColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="12" id="love-progress-height"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🤝 Arkadaşlık Uyumu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="friendship-title-label">
+                                    <rect key="frame" x="24" y="80" width="150" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="65%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="friendship-percentage-label">
+                                    <rect key="frame" x="199" y="80" width="120" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="friendship-progress-container">
+                                    <rect key="frame" x="24" y="104" width="295" height="12"/>
+                                    <color key="backgroundColor" systemColor="clearColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="12" id="friendship-progress-height"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="💼 İş Uyumu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="work-title-label">
+                                    <rect key="frame" x="24" y="136" width="100" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="80%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="work-percentage-label">
+                                    <rect key="frame" x="199" y="136" width="120" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="work-progress-container">
+                                    <rect key="frame" x="24" y="160" width="295" height="12"/>
+                                    <color key="backgroundColor" systemColor="clearColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="12" id="work-progress-height"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="love-title-label" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" constant="24" id="love-title-leading"/>
+                                <constraint firstItem="love-title-label" firstAttribute="top" secondItem="blur-container" secondAttribute="top" constant="24" id="love-title-top"/>
+                                <constraint firstItem="love-percentage-label" firstAttribute="leading" secondItem="love-title-label" secondAttribute="trailing" constant="8" id="love-percentage-leading"/>
+                                <constraint firstItem="love-percentage-label" firstAttribute="top" secondItem="blur-container" secondAttribute="top" constant="24" id="love-percentage-top"/>
+                                <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="love-percentage-label" secondAttribute="trailing" constant="24" id="love-percentage-trailing"/>
+                                <constraint firstItem="love-progress-container" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" constant="24" id="love-progress-leading"/>
+                                <constraint firstItem="love-progress-container" firstAttribute="top" secondItem="love-title-label" secondAttribute="bottom" constant="4" id="love-progress-top"/>
+                                <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="love-progress-container" secondAttribute="trailing" constant="24" id="love-progress-trailing"/>
+                                <constraint firstItem="friendship-title-label" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" constant="24" id="friendship-title-leading"/>
+                                <constraint firstItem="friendship-title-label" firstAttribute="top" secondItem="love-progress-container" secondAttribute="bottom" constant="20" id="friendship-title-top"/>
+                                <constraint firstItem="friendship-percentage-label" firstAttribute="leading" secondItem="friendship-title-label" secondAttribute="trailing" constant="8" id="friendship-percentage-leading"/>
+                                <constraint firstItem="friendship-percentage-label" firstAttribute="top" secondItem="love-progress-container" secondAttribute="bottom" constant="20" id="friendship-percentage-top"/>
+                                <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="friendship-percentage-label" secondAttribute="trailing" constant="24" id="friendship-percentage-trailing"/>
+                                <constraint firstItem="friendship-progress-container" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" constant="24" id="friendship-progress-leading"/>
+                                <constraint firstItem="friendship-progress-container" firstAttribute="top" secondItem="friendship-title-label" secondAttribute="bottom" constant="4" id="friendship-progress-top"/>
+                                <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="friendship-progress-container" secondAttribute="trailing" constant="24" id="friendship-progress-trailing"/>
+                                <constraint firstItem="work-title-label" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" constant="24" id="work-title-leading"/>
+                                <constraint firstItem="work-title-label" firstAttribute="top" secondItem="friendship-progress-container" secondAttribute="bottom" constant="20" id="work-title-top"/>
+                                <constraint firstItem="work-percentage-label" firstAttribute="leading" secondItem="work-title-label" secondAttribute="trailing" constant="8" id="work-percentage-leading"/>
+                                <constraint firstItem="work-percentage-label" firstAttribute="top" secondItem="friendship-progress-container" secondAttribute="bottom" constant="20" id="work-percentage-top"/>
+                                <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="work-percentage-label" secondAttribute="trailing" constant="24" id="work-percentage-trailing"/>
+                                <constraint firstItem="work-progress-container" firstAttribute="leading" secondItem="blur-container" secondAttribute="leading" constant="24" id="work-progress-leading"/>
+                                <constraint firstItem="work-progress-container" firstAttribute="top" secondItem="work-title-label" secondAttribute="bottom" constant="4" id="work-progress-top"/>
+                                <constraint firstItem="blur-container" firstAttribute="trailing" secondItem="work-progress-container" secondAttribute="trailing" constant="24" id="work-progress-trailing"/>
+                                <constraint firstItem="blur-container" firstAttribute="bottom" secondItem="work-progress-container" secondAttribute="bottom" constant="28" id="blur-container-bottom"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="blur-container" firstAttribute="leading" secondItem="card-container" secondAttribute="leading" id="blur-container-leading"/>
+                        <constraint firstItem="blur-container" firstAttribute="top" secondItem="card-container" secondAttribute="top" id="blur-container-top"/>
+                        <constraint firstItem="card-container" firstAttribute="trailing" secondItem="blur-container" secondAttribute="trailing" id="blur-container-trailing"/>
+                        <constraint firstItem="card-container" firstAttribute="bottom" secondItem="blur-container" secondAttribute="bottom" id="card-container-bottom"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="card-container" firstAttribute="leading" secondItem="detail-card-main-view" secondAttribute="leading" id="card-container-leading"/>
+                <constraint firstItem="card-container" firstAttribute="top" secondItem="detail-card-main-view" secondAttribute="top" id="card-container-top"/>
+                <constraint firstItem="detail-card-main-view" firstAttribute="trailing" secondItem="card-container" secondAttribute="trailing" id="card-container-trailing"/>
+                <constraint firstItem="detail-card-main-view" firstAttribute="bottom" secondItem="card-container" secondAttribute="bottom" id="detail-card-main-view-bottom"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="4"/>
+        </view>
+    </objects>
+</document>
+

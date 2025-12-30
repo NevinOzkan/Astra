@@ -19,7 +19,8 @@ struct Compatibility: Codable {
     let work: Int
 }
 
-struct ZodiacSign {
+struct ZodiacSign: Identifiable, Hashable {
+    let id = UUID()
     let name: String
     let symbol: String
     let emoji: String
