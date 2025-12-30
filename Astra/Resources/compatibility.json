@@ -1,0 +1,207 @@
+[
+  {
+    "sourceSign": "Koç",
+    "compatibilities": [
+      {"sign": "Koç", "love": 85, "friendship": 80, "work": 90},
+      {"sign": "Boğa", "love": 60, "friendship": 65, "work": 70},
+      {"sign": "İkizler", "love": 90, "friendship": 95, "work": 85},
+      {"sign": "Yengeç", "love": 65, "friendship": 70, "work": 60},
+      {"sign": "Aslan", "love": 95, "friendship": 90, "work": 95},
+      {"sign": "Başak", "love": 70, "friendship": 75, "work": 85},
+      {"sign": "Terazi", "love": 80, "friendship": 85, "work": 75},
+      {"sign": "Akrep", "love": 75, "friendship": 70, "work": 80},
+      {"sign": "Yay", "love": 95, "friendship": 95, "work": 90},
+      {"sign": "Oğlak", "love": 65, "friendship": 70, "work": 80},
+      {"sign": "Kova", "love": 85, "friendship": 90, "work": 85},
+      {"sign": "Balık", "love": 70, "friendship": 75, "work": 65}
+    ]
+  },
+  {
+    "sourceSign": "Boğa",
+    "compatibilities": [
+      {"sign": "Koç", "love": 60, "friendship": 65, "work": 70},
+      {"sign": "Boğa", "love": 80, "friendship": 85, "work": 90},
+      {"sign": "İkizler", "love": 70, "friendship": 75, "work": 80},
+      {"sign": "Yengeç", "love": 85, "friendship": 80, "work": 75},
+      {"sign": "Aslan", "love": 75, "friendship": 70, "work": 80},
+      {"sign": "Başak", "love": 90, "friendship": 85, "work": 95},
+      {"sign": "Terazi", "love": 85, "friendship": 90, "work": 85},
+      {"sign": "Akrep", "love": 80, "friendship": 75, "work": 70},
+      {"sign": "Yay", "love": 70, "friendship": 75, "work": 80},
+      {"sign": "Oğlak", "love": 90, "friendship": 85, "work": 95},
+      {"sign": "Kova", "love": 75, "friendship": 80, "work": 75},
+      {"sign": "Balık", "love": 85, "friendship": 80, "work": 70}
+    ]
+  },
+  {
+    "sourceSign": "İkizler",
+    "compatibilities": [
+      {"sign": "Koç", "love": 90, "friendship": 95, "work": 85},
+      {"sign": "Boğa", "love": 70, "friendship": 75, "work": 80},
+      {"sign": "İkizler", "love": 85, "friendship": 90, "work": 90},
+      {"sign": "Yengeç", "love": 75, "friendship": 80, "work": 70},
+      {"sign": "Aslan", "love": 85, "friendship": 90, "work": 85},
+      {"sign": "Başak", "love": 80, "friendship": 85, "work": 90},
+      {"sign": "Terazi", "love": 90, "friendship": 95, "work": 85},
+      {"sign": "Akrep", "love": 70, "friendship": 75, "work": 80},
+      {"sign": "Yay", "love": 90, "friendship": 95, "work": 90},
+      {"sign": "Oğlak", "love": 70, "friendship": 75, "work": 85},
+      {"sign": "Kova", "love": 95, "friendship": 95, "work": 90},
+      {"sign": "Balık", "love": 80, "friendship": 85, "work": 75}
+    ]
+  },
+  {
+    "sourceSign": "Yengeç",
+    "compatibilities": [
+      {"sign": "Koç", "love": 65, "friendship": 70, "work": 60},
+      {"sign": "Boğa", "love": 85, "friendship": 80, "work": 75},
+      {"sign": "İkizler", "love": 75, "friendship": 80, "work": 70},
+      {"sign": "Yengeç", "love": 85, "friendship": 90, "work": 80},
+      {"sign": "Aslan", "love": 70, "friendship": 75, "work": 65},
+      {"sign": "Başak", "love": 80, "friendship": 85, "work": 80},
+      {"sign": "Terazi", "love": 75, "friendship": 80, "work": 70},
+      {"sign": "Akrep", "love": 90, "friendship": 85, "work": 80},
+      {"sign": "Yay", "love": 70, "friendship": 75, "work": 70},
+      {"sign": "Oğlak", "love": 80, "friendship": 75, "work": 85},
+      {"sign": "Kova", "love": 75, "friendship": 80, "work": 75},
+      {"sign": "Balık", "love": 95, "friendship": 90, "work": 85}
+    ]
+  },
+  {
+    "sourceSign": "Aslan",
+    "compatibilities": [
+      {"sign": "Koç", "love": 95, "friendship": 90, "work": 95},
+      {"sign": "Boğa", "love": 75, "friendship": 70, "work": 80},
+      {"sign": "İkizler", "love": 85, "friendship": 90, "work": 85},
+      {"sign": "Yengeç", "love": 70, "friendship": 75, "work": 65},
+      {"sign": "Aslan", "love": 90, "friendship": 85, "work": 95},
+      {"sign": "Başak", "love": 75, "friendship": 80, "work": 85},
+      {"sign": "Terazi", "love": 90, "friendship": 95, "work": 90},
+      {"sign": "Akrep", "love": 80, "friendship": 75, "work": 85},
+      {"sign": "Yay", "love": 95, "friendship": 95, "work": 90},
+      {"sign": "Oğlak", "love": 70, "friendship": 75, "work": 80},
+      {"sign": "Kova", "love": 85, "friendship": 90, "work": 85},
+      {"sign": "Balık", "love": 75, "friendship": 80, "work": 70}
+    ]
+  },
+  {
+    "sourceSign": "Başak",
+    "compatibilities": [
+      {"sign": "Koç", "love": 70, "friendship": 75, "work": 85},
+      {"sign": "Boğa", "love": 90, "friendship": 85, "work": 95},
+      {"sign": "İkizler", "love": 80, "friendship": 85, "work": 90},
+      {"sign": "Yengeç", "love": 80, "friendship": 85, "work": 80},
+      {"sign": "Aslan", "love": 75, "friendship": 80, "work": 85},
+      {"sign": "Başak", "love": 85, "friendship": 90, "work": 95},
+      {"sign": "Terazi", "love": 85, "friendship": 90, "work": 90},
+      {"sign": "Akrep", "love": 80, "friendship": 75, "work": 85},
+      {"sign": "Yay", "love": 75, "friendship": 80, "work": 85},
+      {"sign": "Oğlak", "love": 90, "friendship": 85, "work": 95},
+      {"sign": "Kova", "love": 80, "friendship": 85, "work": 90},
+      {"sign": "Balık", "love": 85, "friendship": 90, "work": 85}
+    ]
+  },
+  {
+    "sourceSign": "Terazi",
+    "compatibilities": [
+      {"sign": "Koç", "love": 80, "friendship": 85, "work": 75},
+      {"sign": "Boğa", "love": 85, "friendship": 90, "work": 85},
+      {"sign": "İkizler", "love": 90, "friendship": 95, "work": 85},
+      {"sign": "Yengeç", "love": 75, "friendship": 80, "work": 70},
+      {"sign": "Aslan", "love": 90, "friendship": 95, "work": 90},
+      {"sign": "Başak", "love": 85, "friendship": 90, "work": 90},
+      {"sign": "Terazi", "love": 85, "friendship": 90, "work": 85},
+      {"sign": "Akrep", "love": 75, "friendship": 80, "work": 75},
+      {"sign": "Yay", "love": 90, "friendship": 95, "work": 85},
+      {"sign": "Oğlak", "love": 80, "friendship": 85, "work": 85},
+      {"sign": "Kova", "love": 90, "friendship": 95, "work": 90},
+      {"sign": "Balık", "love": 80, "friendship": 85, "work": 75}
+    ]
+  },
+  {
+    "sourceSign": "Akrep",
+    "compatibilities": [
+      {"sign": "Koç", "love": 75, "friendship": 70, "work": 80},
+      {"sign": "Boğa", "love": 80, "friendship": 75, "work": 70},
+      {"sign": "İkizler", "love": 70, "friendship": 75, "work": 80},
+      {"sign": "Yengeç", "love": 90, "friendship": 85, "work": 80},
+      {"sign": "Aslan", "love": 80, "friendship": 75, "work": 85},
+      {"sign": "Başak", "love": 80, "friendship": 75, "work": 85},
+      {"sign": "Terazi", "love": 75, "friendship": 80, "work": 75},
+      {"sign": "Akrep", "love": 85, "friendship": 80, "work": 85},
+      {"sign": "Yay", "love": 75, "friendship": 70, "work": 80},
+      {"sign": "Oğlak", "love": 85, "friendship": 80, "work": 85},
+      {"sign": "Kova", "love": 70, "friendship": 75, "work": 80},
+      {"sign": "Balık", "love": 90, "friendship": 85, "work": 85}
+    ]
+  },
+  {
+    "sourceSign": "Yay",
+    "compatibilities": [
+      {"sign": "Koç", "love": 95, "friendship": 95, "work": 90},
+      {"sign": "Boğa", "love": 70, "friendship": 75, "work": 80},
+      {"sign": "İkizler", "love": 90, "friendship": 95, "work": 90},
+      {"sign": "Yengeç", "love": 70, "friendship": 75, "work": 70},
+      {"sign": "Aslan", "love": 95, "friendship": 95, "work": 90},
+      {"sign": "Başak", "love": 75, "friendship": 80, "work": 85},
+      {"sign": "Terazi", "love": 90, "friendship": 95, "work": 85},
+      {"sign": "Akrep", "love": 75, "friendship": 70, "work": 80},
+      {"sign": "Yay", "love": 90, "friendship": 95, "work": 95},
+      {"sign": "Oğlak", "love": 70, "friendship": 75, "work": 80},
+      {"sign": "Kova", "love": 95, "friendship": 95, "work": 90},
+      {"sign": "Balık", "love": 75, "friendship": 80, "work": 75}
+    ]
+  },
+  {
+    "sourceSign": "Oğlak",
+    "compatibilities": [
+      {"sign": "Koç", "love": 65, "friendship": 70, "work": 80},
+      {"sign": "Boğa", "love": 90, "friendship": 85, "work": 95},
+      {"sign": "İkizler", "love": 70, "friendship": 75, "work": 85},
+      {"sign": "Yengeç", "love": 80, "friendship": 75, "work": 85},
+      {"sign": "Aslan", "love": 70, "friendship": 75, "work": 80},
+      {"sign": "Başak", "love": 90, "friendship": 85, "work": 95},
+      {"sign": "Terazi", "love": 80, "friendship": 85, "work": 85},
+      {"sign": "Akrep", "love": 85, "friendship": 80, "work": 85},
+      {"sign": "Yay", "love": 70, "friendship": 75, "work": 80},
+      {"sign": "Oğlak", "love": 85, "friendship": 90, "work": 95},
+      {"sign": "Kova", "love": 75, "friendship": 80, "work": 85},
+      {"sign": "Balık", "love": 80, "friendship": 75, "work": 80}
+    ]
+  },
+  {
+    "sourceSign": "Kova",
+    "compatibilities": [
+      {"sign": "Koç", "love": 85, "friendship": 90, "work": 85},
+      {"sign": "Boğa", "love": 75, "friendship": 80, "work": 75},
+      {"sign": "İkizler", "love": 95, "friendship": 95, "work": 90},
+      {"sign": "Yengeç", "love": 75, "friendship": 80, "work": 75},
+      {"sign": "Aslan", "love": 85, "friendship": 90, "work": 85},
+      {"sign": "Başak", "love": 80, "friendship": 85, "work": 90},
+      {"sign": "Terazi", "love": 90, "friendship": 95, "work": 90},
+      {"sign": "Akrep", "love": 70, "friendship": 75, "work": 80},
+      {"sign": "Yay", "love": 95, "friendship": 95, "work": 90},
+      {"sign": "Oğlak", "love": 75, "friendship": 80, "work": 85},
+      {"sign": "Kova", "love": 90, "friendship": 95, "work": 90},
+      {"sign": "Balık", "love": 80, "friendship": 85, "work": 80}
+    ]
+  },
+  {
+    "sourceSign": "Balık",
+    "compatibilities": [
+      {"sign": "Koç", "love": 70, "friendship": 75, "work": 65},
+      {"sign": "Boğa", "love": 85, "friendship": 80, "work": 70},
+      {"sign": "İkizler", "love": 80, "friendship": 85, "work": 75},
+      {"sign": "Yengeç", "love": 95, "friendship": 90, "work": 85},
+      {"sign": "Aslan", "love": 75, "friendship": 80, "work": 70},
+      {"sign": "Başak", "love": 85, "friendship": 90, "work": 85},
+      {"sign": "Terazi", "love": 80, "friendship": 85, "work": 75},
+      {"sign": "Akrep", "love": 90, "friendship": 85, "work": 85},
+      {"sign": "Yay", "love": 75, "friendship": 80, "work": 75},
+      {"sign": "Oğlak", "love": 80, "friendship": 75, "work": 80},
+      {"sign": "Kova", "love": 80, "friendship": 85, "work": 80},
+      {"sign": "Balık", "love": 90, "friendship": 85, "work": 80}
+    ]
+  }
+]
+

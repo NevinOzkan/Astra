@@ -16,9 +16,18 @@ class CompatibilityProgressView: UIView {
     
     var progress: Float = 0.0 {
         didSet {
-            updateProgress()
-            // Animasyonlu progress update
-            animateProgress(from: oldValue, to: progress)
+            // Progress değerini clamp et (0.0 - 1.0 arası)
+            let clampedProgress = max(0.0, min(1.0, progress))
+            
+            // Layout güncellenmiş olmalı
+            if bounds.width > 0 {
+                updateProgress()
+                // Animasyonlu progress update
+                animateProgress(from: oldValue, to: clampedProgress)
+            } else {
+                // Bounds henüz hazır değilse, layoutSubviews'da güncellenecek
+                setNeedsLayout()
+            }
         }
     }
     
@@ -55,6 +64,7 @@ class CompatibilityProgressView: UIView {
     
     private func setupLayers() {
         backgroundColor = .clear
+        clipsToBounds = true
         
         // Track layer (arka plan)
         let track = CAShapeLayer()
@@ -62,38 +72,45 @@ class CompatibilityProgressView: UIView {
         trackLayer = track
         layer.addSublayer(track)
         
-        // Progress layer
-        let progress = CAShapeLayer()
-        progress.fillColor = UIColor.clear.cgColor
-        progressLayer = progress
-        
-        // Gradient layer
+        // Gradient layer - önce gradient'i ekle
         let gradient = CAGradientLayer()
         gradient.startPoint = CGPoint(x: 0, y: 0.5)
         gradient.endPoint = CGPoint(x: 1, y: 0.5)
         gradient.colors = gradientColors.map { $0.cgColor }
-        gradient.mask = progress
         gradientLayer = gradient
         layer.addSublayer(gradient)
         
-        // Value label
+        // Progress layer - mask olarak kullanılacak
+        let progress = CAShapeLayer()
+        progress.fillColor = UIColor.white.cgColor // Mask için beyaz
+        progressLayer = progress
+        gradient.mask = progress
+        
+        // Value label (artık kullanılmıyor ama tutuyoruz)
         let label = UILabel()
         label.textColor = .white
         label.font = .systemFont(ofSize: 12, weight: .semibold)
         label.textAlignment = .right
+        label.isHidden = true
         addSubview(label)
         valueLabel = label
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        updatePaths()
+        
+        // Bounds hazır olduğunda path'leri güncelle
+        if bounds.width > 0 {
+            updatePaths()
+        }
         
         // Value label'ı sağa hizala
         valueLabel?.frame = CGRect(x: bounds.width - 40, y: 0, width: 35, height: bounds.height)
     }
     
     private func updatePaths() {
+        guard bounds.width > 0 && bounds.height > 0 else { return }
+        
         let height: CGFloat = 4
         let cornerRadius: CGFloat = 2
         
@@ -103,15 +120,22 @@ class CompatibilityProgressView: UIView {
         let trackPath = UIBezierPath(roundedRect: trackRect, cornerRadius: cornerRadius)
         trackLayer?.path = trackPath.cgPath
         
-        // Progress path
-        let progressWidth = trackWidth * CGFloat(progress)
+        // Progress genişliği
+        let progressWidth = max(0, min(trackWidth, trackWidth * CGFloat(progress)))
+        
+        // Progress path - progress genişliğine göre
         let progressRect = CGRect(x: 0, y: (bounds.height - height) / 2, width: progressWidth, height: height)
         let progressPath = UIBezierPath(roundedRect: progressRect, cornerRadius: cornerRadius)
         progressLayer?.path = progressPath.cgPath
+        progressLayer?.fillColor = UIColor.white.cgColor // Mask için beyaz
         
-        // Gradient frame
-        gradientLayer?.frame = CGRect(x: 0, y: (bounds.height - height) / 2, width: progressWidth, height: height)
+        // Gradient layer frame - progress genişliğine göre (clipsToBounds ile kesilecek)
+        let gradientFrame = CGRect(x: 0, y: (bounds.height - height) / 2, width: progressWidth, height: height)
+        gradientLayer?.frame = gradientFrame
         gradientLayer?.cornerRadius = cornerRadius
+        
+        // Gradient layer'ın mask'ını progress layer olarak ayarla
+        gradientLayer?.mask = progressLayer
     }
     
     private func updateProgress() {
