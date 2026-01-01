@@ -47,6 +47,16 @@ class AppCoordinator {
             selectedImage: UIImage(systemName: "sparkles")
         )
         
+        // Yes/No Tab
+        let yesNoViewModel = YesNoViewModel()
+        let yesNoViewController = YesNoViewController(viewModel: yesNoViewModel)
+        let yesNoNavigationController = UINavigationController(rootViewController: yesNoViewController)
+        yesNoNavigationController.tabBarItem = UITabBarItem(
+            title: "Evet / Hayır",
+            image: UIImage(systemName: "wand.and.stars"),
+            selectedImage: UIImage(systemName: "wand.and.stars")
+        )
+        
         // Settings Tab
         let settingsViewController = SettingsViewController()
         let settingsNavigationController = UINavigationController(rootViewController: settingsViewController)
@@ -60,6 +70,7 @@ class AppCoordinator {
         tabBarController.viewControllers = [
             homeNavigationController,
             compatibilityNavigationController,
+            yesNoNavigationController,
             settingsNavigationController
         ]
     }
