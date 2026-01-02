@@ -13,6 +13,8 @@
                 <outlet property="dailyCardContainerView" destination="daily-card-container" id="daily-card-container-outlet"/>
                 <outlet property="astroScoresStackView" destination="astro-scores-stack" id="astro-scores-stack-outlet"/>
                 <outlet property="astroModulesStackView" destination="astro-modules-stack" id="astro-modules-stack-outlet"/>
+                <outlet property="meditationButton" destination="meditation-button" id="meditation-button-outlet"/>
+                <outlet property="meditationLabel" destination="meditation-label" id="meditation-label-outlet"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
@@ -31,9 +33,44 @@
                 </view>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="horizontal" alignment="center" distribution="equalSpacing" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="astro-modules-stack">
                     <rect key="frame" x="0.0" y="144" width="375" height="88"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="meditation-container">
+                            <rect key="frame" x="0.0" y="0.0" width="88" height="110"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meditation-button">
+                                    <rect key="frame" x="0.0" y="0.0" width="88" height="88"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="88" id="meditation-button-width"/>
+                                        <constraint firstAttribute="height" constant="88" id="meditation-button-height"/>
+                                    </constraints>
+                                    <state key="normal" title="🧘"/>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meditasyon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="meditation-label">
+                                    <rect key="frame" x="0.0" y="88" width="88" height="13.5"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="14" id="meditation-label-height"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
+                                    <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="clearColor"/>
+                            <constraints>
+                                <constraint firstItem="meditation-button" firstAttribute="leading" secondItem="meditation-container" secondAttribute="leading" id="meditation-button-leading"/>
+                                <constraint firstItem="meditation-button" firstAttribute="top" secondItem="meditation-container" secondAttribute="top" id="meditation-button-top"/>
+                                <constraint firstItem="meditation-container" firstAttribute="trailing" secondItem="meditation-button" secondAttribute="trailing" id="meditation-button-trailing"/>
+                                <constraint firstItem="meditation-label" firstAttribute="leading" secondItem="meditation-container" secondAttribute="leading" id="meditation-label-leading"/>
+                                <constraint firstItem="meditation-label" firstAttribute="top" secondItem="meditation-button" secondAttribute="bottom" constant="4" id="meditation-label-top"/>
+                                <constraint firstItem="meditation-container" firstAttribute="trailing" secondItem="meditation-label" secondAttribute="trailing" id="meditation-label-trailing"/>
+                                <constraint firstItem="meditation-container" firstAttribute="bottom" secondItem="meditation-label" secondAttribute="bottom" id="meditation-container-bottom"/>
+                                <constraint firstAttribute="width" constant="88" id="meditation-container-width"/>
+                            </constraints>
+                        </view>
+                    </subviews>
                     <color key="backgroundColor" systemColor="clearColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="88" id="stack-height"/>
+                        <constraint firstAttribute="height" constant="110" id="stack-height"/>
                     </constraints>
                 </stackView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="main-scroll-view">

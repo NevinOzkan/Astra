@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NumerologyViewController" customModule="Astra" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="numerology-main-view" id="root-view-outlet"/>
+                <outlet property="scrollView" destination="scroll-view" id="scroll-view-outlet"/>
+                <outlet property="contentStackView" destination="content-stack-view" id="content-stack-view-outlet"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
+        <view contentMode="scaleToFill" id="numerology-main-view">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <color key="backgroundColor" systemColor="clearColor"/>
+            <viewLayoutGuide key="safeArea" id="numerology-safe-area"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scroll-view">
+                    <rect key="frame" x="0.0" y="100" width="375" height="612"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="horizontal" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="content-stack-view">
+                            <rect key="frame" x="20" y="20" width="335" height="320"/>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="content-stack-view" firstAttribute="leading" secondItem="scroll-view" secondAttribute="leading" constant="20" id="stack-leading"/>
+                        <constraint firstItem="content-stack-view" firstAttribute="top" secondItem="scroll-view" secondAttribute="top" constant="20" id="stack-top"/>
+                        <constraint firstItem="scroll-view" firstAttribute="trailing" secondItem="content-stack-view" secondAttribute="trailing" constant="20" id="stack-trailing"/>
+                        <constraint firstItem="scroll-view" firstAttribute="bottom" secondItem="content-stack-view" secondAttribute="bottom" constant="20" id="stack-bottom"/>
+                        <constraint firstItem="content-stack-view" firstAttribute="width" relation="greaterThanOrEqual" secondItem="scroll-view" secondAttribute="width" id="stack-width"/>
+                        <constraint firstItem="content-stack-view" firstAttribute="height" secondItem="scroll-view" secondAttribute="height" constant="-40" id="stack-height"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" systemColor="clearColor"/>
+            <constraints>
+                <constraint firstItem="scroll-view" firstAttribute="leading" secondItem="numerology-safe-area" secondAttribute="leading" id="scroll-leading"/>
+                <constraint firstItem="scroll-view" firstAttribute="top" secondItem="numerology-safe-area" secondAttribute="top" constant="20" id="scroll-top"/>
+                <constraint firstItem="numerology-safe-area" firstAttribute="trailing" secondItem="scroll-view" secondAttribute="trailing" id="scroll-trailing"/>
+                <constraint firstItem="numerology-safe-area" firstAttribute="bottom" secondItem="scroll-view" secondAttribute="bottom" id="scroll-bottom"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="4"/>
+        </view>
+    </objects>
+</document>
+

@@ -17,6 +17,8 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var dailyCardContainerView: UIView!
     @IBOutlet weak var astroScoresStackView: UIStackView!
     @IBOutlet weak var astroModulesStackView: UIStackView!
+    @IBOutlet weak var meditationButton: UIButton!
+    @IBOutlet weak var meditationLabel: UILabel!
     
     // Custom Views
     private var zodiacHeaderView: ZodiacHeaderView?
@@ -50,6 +52,108 @@ class HomeViewController: UIViewController {
         
         setupBackground()
         setupCustomViews()
+        setupMeditationButton()
+    }
+    
+    private func setupMeditationButton() {
+        guard let button = meditationButton else {
+            print("⚠️ Meditasyon butonu outlet bağlantısı eksik!")
+            return
+        }
+        
+        // Meditasyon butonu stil - diğer kartlarla aynı boyutta (88x88)
+        button.layer.cornerRadius = 44 // Yuvarlak buton için (88/2 = 44)
+        button.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        button.layer.borderWidth = 1.0
+        button.layer.borderColor = UIColor.white.withAlphaComponent(0.3).cgColor
+        button.setTitle("🧘", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 32)
+        button.clipsToBounds = true
+        button.isUserInteractionEnabled = true
+        button.addTarget(self, action: #selector(meditationButtonTapped), for: .touchUpInside)
+        
+        // Meditasyon label
+        meditationLabel?.text = "Meditasyon"
+        meditationLabel?.textColor = UIColor.white.withAlphaComponent(0.8)
+        meditationLabel?.font = .systemFont(ofSize: 11, weight: .medium)
+        meditationLabel?.textAlignment = .center
+        
+        print("✅ Meditasyon butonu hazırlandı")
+    }
+    
+    @objc private func meditationButtonTapped() {
+        print("🧘 Meditasyon butonuna tıklandı")
+        let viewModel = MeditationViewModel()
+        let meditationVC = MeditationViewController(viewModel: viewModel)
+        
+        if let navController = navigationController {
+            navController.pushViewController(meditationVC, animated: true)
+        } else {
+            print("⚠️ Navigation controller bulunamadı!")
+            // Fallback: Modal olarak göster
+            let navController = UINavigationController(rootViewController: meditationVC)
+            present(navController, animated: true)
+        }
+    }
+    
+    private func setupNumerologyButton() {
+        // Numeroloji butonu oluştur
+        let numerologyButton = UIButton(type: .system)
+        numerologyButton.translatesAutoresizingMaskIntoConstraints = false
+        numerologyButton.layer.cornerRadius = 44
+        numerologyButton.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        numerologyButton.layer.borderWidth = 1.0
+        numerologyButton.layer.borderColor = UIColor.white.withAlphaComponent(0.3).cgColor
+        numerologyButton.setTitle("🔮", for: .normal)
+        numerologyButton.titleLabel?.font = .systemFont(ofSize: 32)
+        numerologyButton.clipsToBounds = true
+        numerologyButton.isUserInteractionEnabled = true
+        numerologyButton.addTarget(self, action: #selector(numerologyButtonTapped), for: .touchUpInside)
+        
+        // Numeroloji label
+        let numerologyLabel = UILabel()
+        numerologyLabel.text = "Numeroloji"
+        numerologyLabel.textColor = UIColor.white.withAlphaComponent(0.8)
+        numerologyLabel.font = .systemFont(ofSize: 11, weight: .medium)
+        numerologyLabel.textAlignment = .center
+        numerologyLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Container view
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(numerologyButton)
+        containerView.addSubview(numerologyLabel)
+        
+        NSLayoutConstraint.activate([
+            numerologyButton.widthAnchor.constraint(equalToConstant: 88),
+            numerologyButton.heightAnchor.constraint(equalToConstant: 88),
+            numerologyButton.topAnchor.constraint(equalTo: containerView.topAnchor),
+            numerologyButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            
+            numerologyLabel.topAnchor.constraint(equalTo: numerologyButton.bottomAnchor, constant: 4),
+            numerologyLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            numerologyLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            numerologyLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            
+            containerView.widthAnchor.constraint(equalToConstant: 88),
+            containerView.heightAnchor.constraint(equalToConstant: 110)
+        ])
+        
+        astroModulesStackView.addArrangedSubview(containerView)
+    }
+    
+    @objc private func numerologyButtonTapped() {
+        print("🔮 Numeroloji butonuna tıklandı")
+        let viewModel = NumerologyViewModel()
+        let numerologyVC = NumerologyViewController(viewModel: viewModel)
+        
+        if let navController = navigationController {
+            navController.pushViewController(numerologyVC, animated: true)
+        } else {
+            print("⚠️ Navigation controller bulunamadı!")
+            let navController = UINavigationController(rootViewController: numerologyVC)
+            present(navController, animated: true)
+        }
     }
     
     private func setupCustomViews() {
@@ -75,6 +179,13 @@ class HomeViewController: UIViewController {
               let energyCard = energyCardView,
               let luckyCard = luckyHourCardView else { return }
         
+        // Meditasyon butonunu en başa ekle (zaten XIB'de stack içinde)
+        // Buton zaten XIB'de stack içinde olduğu için burada eklemeye gerek yok
+        
+        // Numeroloji butonunu ekle
+        setupNumerologyButton()
+        
+        // Diğer kartları ekle
         [moonCard, energyCard, luckyCard].forEach { cardView in
             cardView.translatesAutoresizingMaskIntoConstraints = false
             astroModulesStackView.addArrangedSubview(cardView)

@@ -15,6 +15,7 @@ class SettingsViewController: UIViewController {
     private let sections: [String] = [
         "Profil",
         "Bildirimler",
+        "Premium",
         "Dil",
         "Hakkında"
     ]
@@ -23,6 +24,7 @@ class SettingsViewController: UIViewController {
     private let settingsData: [String: [String]] = [
         "Profil": ["Burcumu Değiştir", "Doğum Tarihi / Saati", "Yükselen Bilgisi"],
         "Bildirimler": ["Günlük Bildirim"],
+        "Premium": ["Premium Üyelik"],
         "Dil": ["Dil Seçimi"],
         "Hakkında": ["Uygulama Versiyonu"]
     ]
@@ -31,6 +33,10 @@ class SettingsViewController: UIViewController {
     private var isNotificationEnabled: Bool {
         get { UserDefaults.standard.bool(forKey: "isNotificationEnabled") }
         set { UserDefaults.standard.set(newValue, forKey: "isNotificationEnabled") }
+    }
+    
+    private var premiumManager: PremiumManager {
+        return PremiumManager.shared
     }
     
     // Seçili burç
@@ -149,6 +155,15 @@ class SettingsViewController: UIViewController {
         isNotificationEnabled = sender.isOn
         // Bildirim ayarlarını güncelle
         print("Bildirimler: \(sender.isOn ? "Açık" : "Kapalı")")
+    }
+    
+    @objc private func premiumSwitchChanged(_ sender: UISwitch) {
+        premiumManager.setPremium(sender.isOn)
+        // Premium durumunu güncelle
+        print("Premium: \(sender.isOn ? "Aktif" : "Pasif")")
+        
+        // Premium durumu değiştiğinde diğer ekranları bilgilendir
+        NotificationCenter.default.post(name: NSNotification.Name("PremiumStatusChanged"), object: nil)
     }
 }
 
@@ -340,6 +355,13 @@ extension SettingsViewController: UITableViewDataSource {
                 switchControl.addTarget(self, action: #selector(notificationSwitchChanged(_:)), for: .valueChanged)
                 cell.accessoryView = switchControl
                 cell.selectionStyle = .none
+            } else if rowTitle == "Premium Üyelik" {
+                cell.textLabel?.text = rowTitle
+                let switchControl = UISwitch()
+                switchControl.isOn = premiumManager.isPremiumUser
+                switchControl.addTarget(self, action: #selector(premiumSwitchChanged(_:)), for: .valueChanged)
+                cell.accessoryView = switchControl
+                cell.selectionStyle = .none
             } else if rowTitle == "Burcumu Değiştir" {
                 // Burç seçimi için seçili burcu detailTextLabel'da göster (işaret + isim)
                 cell.textLabel?.text = rowTitle
@@ -430,7 +452,7 @@ extension SettingsViewController: UITableViewDelegate {
         
         if let rowTitle = settingsData[sectionTitle]?[rowIndex] {
             // Switch olan hücreler için seçim yapma
-            if rowTitle == "Günlük Bildirim" {
+            if rowTitle == "Günlük Bildirim" || rowTitle == "Premium Üyelik" {
                 return
             }
             

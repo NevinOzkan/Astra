@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MeditationViewController" customModule="Astra" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="meditation-main-view" id="root-view-outlet"/>
+                <outlet property="zodiacCardContainerView" destination="zodiac-card-container" id="zodiac-card-container-outlet"/>
+                <outlet property="zodiacCardBlurView" destination="zodiac-card-blur" id="zodiac-card-blur-outlet"/>
+                <outlet property="zodiacCardIconView" destination="zodiac-card-icon" id="zodiac-card-icon-outlet"/>
+                <outlet property="zodiacCardIconLabel" destination="zodiac-card-icon-label" id="zodiac-card-icon-label-outlet"/>
+                <outlet property="zodiacCardTitleLabel" destination="zodiac-card-title" id="zodiac-card-title-outlet"/>
+                <outlet property="zodiacCardSubtitleLabel" destination="zodiac-card-subtitle" id="zodiac-card-subtitle-outlet"/>
+                <outlet property="zodiacCardDescriptionLabel" destination="zodiac-card-description" id="zodiac-card-description-outlet"/>
+                <outlet property="zodiacCardPremiumBadge" destination="zodiac-card-premium-badge" id="zodiac-card-premium-badge-outlet"/>
+                <outlet property="zodiacCardPremiumLabel" destination="zodiac-card-premium-label" id="zodiac-card-premium-label-outlet"/>
+                <outlet property="dailyCardContainerView" destination="daily-card-container" id="daily-card-container-outlet"/>
+                <outlet property="dailyCardBlurView" destination="daily-card-blur" id="daily-card-blur-outlet"/>
+                <outlet property="dailyCardIconView" destination="daily-card-icon" id="daily-card-icon-outlet"/>
+                <outlet property="dailyCardIconLabel" destination="daily-card-icon-label" id="daily-card-icon-label-outlet"/>
+                <outlet property="dailyCardTitleLabel" destination="daily-card-title" id="daily-card-title-outlet"/>
+                <outlet property="dailyCardSubtitleLabel" destination="daily-card-subtitle" id="daily-card-subtitle-outlet"/>
+                <outlet property="dailyCardDescriptionLabel" destination="daily-card-description" id="daily-card-description-outlet"/>
+                <outlet property="dailyCardPremiumBadge" destination="daily-card-premium-badge" id="daily-card-premium-badge-outlet"/>
+                <outlet property="dailyCardPremiumLabel" destination="daily-card-premium-label" id="daily-card-premium-label-outlet"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
+        <view contentMode="scaleToFill" id="meditation-main-view">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <color key="backgroundColor" systemColor="clearColor"/>
+            <viewLayoutGuide key="safeArea" id="meditation-safe-area"/>
+            <subviews>
+                <!-- Burca Göre Meditasyon Kartı -->
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-card-container">
+                    <rect key="frame" x="20" y="100" width="335" height="220"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-card-blur">
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="220"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-card-icon">
+                                    <rect key="frame" x="24" y="24" width="60" height="60"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="♓" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-card-icon-label">
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="clearColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="60" id="zodiac-icon-width"/>
+                                        <constraint firstAttribute="height" constant="60" id="zodiac-icon-height"/>
+                                        <constraint firstItem="zodiac-card-icon-label" firstAttribute="leading" secondItem="zodiac-card-icon" secondAttribute="leading" id="zodiac-icon-label-leading"/>
+                                        <constraint firstItem="zodiac-card-icon-label" firstAttribute="top" secondItem="zodiac-card-icon" secondAttribute="top" id="zodiac-icon-label-top"/>
+                                        <constraint firstItem="zodiac-card-icon" firstAttribute="trailing" secondItem="zodiac-card-icon-label" secondAttribute="trailing" id="zodiac-icon-label-trailing"/>
+                                        <constraint firstItem="zodiac-card-icon" firstAttribute="bottom" secondItem="zodiac-card-icon-label" secondAttribute="bottom" id="zodiac-icon-label-bottom"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burca Göre Meditasyon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-card-title">
+                                    <rect key="frame" x="100" y="28" width="211" height="29"/>
+                                    <fontDescription key="fontDescription" type="system" weight="bold" pointSize="24"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ücretsiz kullanım: 1/3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-card-subtitle">
+                                    <rect key="frame" x="100" y="65" width="211" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                    <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Burcunun enerjisine uygun özel meditasyon deneyimi" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-card-description">
+                                    <rect key="frame" x="24" y="100" width="287" height="36"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-card-premium-badge">
+                                    <rect key="frame" x="24" y="152" width="80" height="24"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Premium" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zodiac-card-premium-label">
+                                            <rect key="frame" x="8" y="4" width="64" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                            <color key="textColor" systemColor="systemYellowColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24" id="zodiac-premium-badge-height"/>
+                                        <constraint firstItem="zodiac-card-premium-label" firstAttribute="leading" secondItem="zodiac-card-premium-badge" secondAttribute="leading" constant="8" id="zodiac-premium-label-leading"/>
+                                        <constraint firstItem="zodiac-card-premium-label" firstAttribute="top" secondItem="zodiac-card-premium-badge" secondAttribute="top" constant="4" id="zodiac-premium-label-top"/>
+                                        <constraint firstItem="zodiac-card-premium-badge" firstAttribute="trailing" secondItem="zodiac-card-premium-label" secondAttribute="trailing" constant="8" id="zodiac-premium-label-trailing"/>
+                                        <constraint firstItem="zodiac-card-premium-badge" firstAttribute="bottom" secondItem="zodiac-card-premium-label" secondAttribute="bottom" constant="4" id="zodiac-premium-label-bottom"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="clearColor"/>
+                            <constraints>
+                                <constraint firstItem="zodiac-card-icon" firstAttribute="leading" secondItem="zodiac-card-blur" secondAttribute="leading" constant="24" id="zodiac-icon-leading"/>
+                                <constraint firstItem="zodiac-card-icon" firstAttribute="top" secondItem="zodiac-card-blur" secondAttribute="top" constant="24" id="zodiac-icon-top"/>
+                                <constraint firstItem="zodiac-card-title" firstAttribute="leading" secondItem="zodiac-card-icon" secondAttribute="trailing" constant="16" id="zodiac-title-leading"/>
+                                <constraint firstItem="zodiac-card-title" firstAttribute="top" secondItem="zodiac-card-blur" secondAttribute="top" constant="28" id="zodiac-title-top"/>
+                                <constraint firstItem="zodiac-card-blur" firstAttribute="trailing" secondItem="zodiac-card-title" secondAttribute="trailing" constant="24" id="zodiac-title-trailing"/>
+                                <constraint firstItem="zodiac-card-subtitle" firstAttribute="leading" secondItem="zodiac-card-icon" secondAttribute="trailing" constant="16" id="zodiac-subtitle-leading"/>
+                                <constraint firstItem="zodiac-card-subtitle" firstAttribute="top" secondItem="zodiac-card-title" secondAttribute="bottom" constant="8" id="zodiac-subtitle-top"/>
+                                <constraint firstItem="zodiac-card-blur" firstAttribute="trailing" secondItem="zodiac-card-subtitle" secondAttribute="trailing" constant="24" id="zodiac-subtitle-trailing"/>
+                                <constraint firstItem="zodiac-card-description" firstAttribute="leading" secondItem="zodiac-card-blur" secondAttribute="leading" constant="24" id="zodiac-description-leading"/>
+                                <constraint firstItem="zodiac-card-description" firstAttribute="top" secondItem="zodiac-card-icon" secondAttribute="bottom" constant="16" id="zodiac-description-top"/>
+                                <constraint firstItem="zodiac-card-blur" firstAttribute="trailing" secondItem="zodiac-card-description" secondAttribute="trailing" constant="24" id="zodiac-description-trailing"/>
+                                <constraint firstItem="zodiac-card-premium-badge" firstAttribute="leading" secondItem="zodiac-card-blur" secondAttribute="leading" constant="24" id="zodiac-premium-badge-leading"/>
+                                <constraint firstItem="zodiac-card-premium-badge" firstAttribute="top" secondItem="zodiac-card-description" secondAttribute="bottom" constant="16" id="zodiac-premium-badge-top"/>
+                                <constraint firstItem="zodiac-card-blur" firstAttribute="bottom" secondItem="zodiac-card-premium-badge" secondAttribute="bottom" constant="20" id="zodiac-card-blur-bottom"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="clearColor"/>
+                    <constraints>
+                        <constraint firstItem="zodiac-card-blur" firstAttribute="leading" secondItem="zodiac-card-container" secondAttribute="leading" id="zodiac-blur-leading"/>
+                        <constraint firstItem="zodiac-card-blur" firstAttribute="top" secondItem="zodiac-card-container" secondAttribute="top" id="zodiac-blur-top"/>
+                        <constraint firstItem="zodiac-card-container" firstAttribute="trailing" secondItem="zodiac-card-blur" secondAttribute="trailing" id="zodiac-blur-trailing"/>
+                        <constraint firstItem="zodiac-card-container" firstAttribute="bottom" secondItem="zodiac-card-blur" secondAttribute="bottom" id="zodiac-blur-bottom"/>
+                    </constraints>
+                </view>
+                
+                <!-- Günün Enerjisi Meditasyonu Kartı -->
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daily-card-container">
+                    <rect key="frame" x="20" y="340" width="335" height="220"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daily-card-blur">
+                            <rect key="frame" x="0.0" y="0.0" width="335" height="220"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daily-card-icon">
+                                    <rect key="frame" x="24" y="24" width="60" height="60"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚡" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daily-card-icon-label">
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="clearColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="60" id="daily-icon-width"/>
+                                        <constraint firstAttribute="height" constant="60" id="daily-icon-height"/>
+                                        <constraint firstItem="daily-card-icon-label" firstAttribute="leading" secondItem="daily-card-icon" secondAttribute="leading" id="daily-icon-label-leading"/>
+                                        <constraint firstItem="daily-card-icon-label" firstAttribute="top" secondItem="daily-card-icon" secondAttribute="top" id="daily-icon-label-top"/>
+                                        <constraint firstItem="daily-card-icon" firstAttribute="trailing" secondItem="daily-card-icon-label" secondAttribute="trailing" id="daily-icon-label-trailing"/>
+                                        <constraint firstItem="daily-card-icon" firstAttribute="bottom" secondItem="daily-card-icon-label" secondAttribute="bottom" id="daily-icon-label-bottom"/>
+                                    </constraints>
+                                </view>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Günün Enerjisi Meditasyonu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daily-card-title">
+                                    <rect key="frame" x="100" y="28" width="211" height="29"/>
+                                    <fontDescription key="fontDescription" type="system" weight="bold" pointSize="24"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Premium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daily-card-subtitle">
+                                    <rect key="frame" x="100" y="65" width="211" height="17"/>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                    <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bugünün astrolojik enerjisine göre özel hazırlanmış meditasyon" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daily-card-description">
+                                    <rect key="frame" x="24" y="100" width="287" height="36"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" white="1" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daily-card-premium-badge">
+                                    <rect key="frame" x="24" y="152" width="80" height="24"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Premium" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="daily-card-premium-label">
+                                            <rect key="frame" x="8" y="4" width="64" height="16"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="12"/>
+                                            <color key="textColor" systemColor="systemYellowColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24" id="daily-premium-badge-height"/>
+                                        <constraint firstItem="daily-card-premium-label" firstAttribute="leading" secondItem="daily-card-premium-badge" secondAttribute="leading" constant="8" id="daily-premium-label-leading"/>
+                                        <constraint firstItem="daily-card-premium-label" firstAttribute="top" secondItem="daily-card-premium-badge" secondAttribute="top" constant="4" id="daily-premium-label-top"/>
+                                        <constraint firstItem="daily-card-premium-badge" firstAttribute="trailing" secondItem="daily-card-premium-label" secondAttribute="trailing" constant="8" id="daily-premium-label-trailing"/>
+                                        <constraint firstItem="daily-card-premium-badge" firstAttribute="bottom" secondItem="daily-card-premium-label" secondAttribute="bottom" constant="4" id="daily-premium-label-bottom"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="clearColor"/>
+                            <constraints>
+                                <constraint firstItem="daily-card-icon" firstAttribute="leading" secondItem="daily-card-blur" secondAttribute="leading" constant="24" id="daily-icon-leading"/>
+                                <constraint firstItem="daily-card-icon" firstAttribute="top" secondItem="daily-card-blur" secondAttribute="top" constant="24" id="daily-icon-top"/>
+                                <constraint firstItem="daily-card-title" firstAttribute="leading" secondItem="daily-card-icon" secondAttribute="trailing" constant="16" id="daily-title-leading"/>
+                                <constraint firstItem="daily-card-title" firstAttribute="top" secondItem="daily-card-blur" secondAttribute="top" constant="28" id="daily-title-top"/>
+                                <constraint firstItem="daily-card-blur" firstAttribute="trailing" secondItem="daily-card-title" secondAttribute="trailing" constant="24" id="daily-title-trailing"/>
+                                <constraint firstItem="daily-card-subtitle" firstAttribute="leading" secondItem="daily-card-icon" secondAttribute="trailing" constant="16" id="daily-subtitle-leading"/>
+                                <constraint firstItem="daily-card-subtitle" firstAttribute="top" secondItem="daily-card-title" secondAttribute="bottom" constant="8" id="daily-subtitle-top"/>
+                                <constraint firstItem="daily-card-blur" firstAttribute="trailing" secondItem="daily-card-subtitle" secondAttribute="trailing" constant="24" id="daily-subtitle-trailing"/>
+                                <constraint firstItem="daily-card-description" firstAttribute="leading" secondItem="daily-card-blur" secondAttribute="leading" constant="24" id="daily-description-leading"/>
+                                <constraint firstItem="daily-card-description" firstAttribute="top" secondItem="daily-card-icon" secondAttribute="bottom" constant="16" id="daily-description-top"/>
+                                <constraint firstItem="daily-card-blur" firstAttribute="trailing" secondItem="daily-card-description" secondAttribute="trailing" constant="24" id="daily-description-trailing"/>
+                                <constraint firstItem="daily-card-premium-badge" firstAttribute="leading" secondItem="daily-card-blur" secondAttribute="leading" constant="24" id="daily-premium-badge-leading"/>
+                                <constraint firstItem="daily-card-premium-badge" firstAttribute="top" secondItem="daily-card-description" secondAttribute="bottom" constant="16" id="daily-premium-badge-top"/>
+                                <constraint firstItem="daily-card-blur" firstAttribute="bottom" secondItem="daily-card-premium-badge" secondAttribute="bottom" constant="20" id="daily-card-blur-bottom"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="clearColor"/>
+                    <constraints>
+                        <constraint firstItem="daily-card-blur" firstAttribute="leading" secondItem="daily-card-container" secondAttribute="leading" id="daily-blur-leading"/>
+                        <constraint firstItem="daily-card-blur" firstAttribute="top" secondItem="daily-card-container" secondAttribute="top" id="daily-blur-top"/>
+                        <constraint firstItem="daily-card-container" firstAttribute="trailing" secondItem="daily-card-blur" secondAttribute="trailing" id="daily-blur-trailing"/>
+                        <constraint firstItem="daily-card-container" firstAttribute="bottom" secondItem="daily-card-blur" secondAttribute="bottom" id="daily-blur-bottom"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" systemColor="clearColor"/>
+            <constraints>
+                <constraint firstItem="zodiac-card-container" firstAttribute="leading" secondItem="meditation-safe-area" secondAttribute="leading" constant="20" id="zodiac-card-leading"/>
+                <constraint firstItem="zodiac-card-container" firstAttribute="top" secondItem="meditation-safe-area" secondAttribute="top" constant="20" id="zodiac-card-top"/>
+                <constraint firstItem="meditation-safe-area" firstAttribute="trailing" secondItem="zodiac-card-container" secondAttribute="trailing" constant="20" id="zodiac-card-trailing"/>
+                <constraint firstItem="daily-card-container" firstAttribute="leading" secondItem="meditation-safe-area" secondAttribute="leading" constant="20" id="daily-card-leading"/>
+                <constraint firstItem="daily-card-container" firstAttribute="top" secondItem="zodiac-card-container" secondAttribute="bottom" constant="20" id="daily-card-top"/>
+                <constraint firstItem="daily-card-container" firstAttribute="trailing" secondItem="meditation-safe-area" secondAttribute="trailing" constant="-20" id="daily-card-trailing"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="4"/>
+        </view>
+    </objects>
+</document>

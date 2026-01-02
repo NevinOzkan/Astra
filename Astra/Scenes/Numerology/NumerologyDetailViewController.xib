@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NumerologyDetailViewController" customModule="Astra" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="detail-main-view" id="root-view-outlet"/>
+                <outlet property="titleLabel" destination="title-label" id="title-label-outlet"/>
+                <outlet property="numberLabel" destination="number-label" id="number-label-outlet"/>
+                <outlet property="descriptionLabel" destination="description-label" id="description-label-outlet"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
+        <view contentMode="scaleToFill" id="detail-main-view">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <color key="backgroundColor" systemColor="clearColor"/>
+            <viewLayoutGuide key="safeArea" id="detail-safe-area"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yaşam Yolu Sayın" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="title-label">
+                    <rect key="frame" x="40" y="200" width="295" height="34"/>
+                    <fontDescription key="fontDescription" type="system" weight="bold" pointSize="28"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="number-label">
+                    <rect key="frame" x="40" y="300" width="295" height="144"/>
+                    <fontDescription key="fontDescription" type="system" weight="bold" pointSize="120"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Özgür ruhlu, maceracı ve değişken" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="description-label">
+                    <rect key="frame" x="40" y="480" width="295" height="43.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" systemColor="clearColor"/>
+            <constraints>
+                <constraint firstItem="title-label" firstAttribute="leading" secondItem="detail-safe-area" secondAttribute="leading" constant="40" id="title-leading"/>
+                <constraint firstItem="detail-safe-area" firstAttribute="trailing" secondItem="title-label" secondAttribute="trailing" constant="40" id="title-trailing"/>
+                <constraint firstItem="title-label" firstAttribute="top" secondItem="detail-safe-area" secondAttribute="top" constant="160" id="title-top"/>
+                <constraint firstItem="number-label" firstAttribute="leading" secondItem="detail-safe-area" secondAttribute="leading" constant="40" id="number-leading"/>
+                <constraint firstItem="detail-safe-area" firstAttribute="trailing" secondItem="number-label" secondAttribute="trailing" constant="40" id="number-trailing"/>
+                <constraint firstItem="number-label" firstAttribute="top" secondItem="title-label" secondAttribute="bottom" constant="66" id="number-top"/>
+                <constraint firstItem="description-label" firstAttribute="leading" secondItem="detail-safe-area" secondAttribute="leading" constant="40" id="description-leading"/>
+                <constraint firstItem="detail-safe-area" firstAttribute="trailing" secondItem="description-label" secondAttribute="trailing" constant="40" id="description-trailing"/>
+                <constraint firstItem="description-label" firstAttribute="top" secondItem="number-label" secondAttribute="bottom" constant="36" id="description-top"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="4"/>
+        </view>
+    </objects>
+</document>
+
