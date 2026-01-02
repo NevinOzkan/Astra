@@ -10,7 +10,6 @@ import Foundation
 enum YesNoCard: String, CaseIterable {
     case yes = "Evet"
     case no = "Hayır"
-    case maybe = "Belki"
     
     var title: String {
         return self.rawValue
@@ -20,27 +19,27 @@ enum YesNoCard: String, CaseIterable {
         switch self {
         case .yes:
             return [
-                "Evet, bu senin için doğru seçim. Yüreğinin sesini dinle ve ilerle.",
-                "Evet, yıldızlar seninle. Bu yol senin için açık ve net.",
-                "Evet, içgüdülerin doğru yönlendiriyor. Güven ve adım at.",
-                "Evet, bu fırsat senin için hazırlanmış. Cesaretle ilerle.",
-                "Evet, enerjiler senin lehine. Bu seçim seni mutluluğa götürecek."
+                "Evet.\nBu isteği aklına getiren şey rastlantı değil.\nBir süredir içinden yükselen o dürtüyü bastırmaya çalışıyorsun ama farkındasın: erteledikçe rahatlamıyorsun.\nŞu an önünde duran kapı, cesaretle açılmayı bekliyor.\nAdım attığında yol kendini gösterecek.",
+                
+                "Evet.\nBu konuda kararsız hissetmen yanlış yolda olduğun anlamına gelmiyor.\nTam tersine, bu karar senin için önemli olduğu için durup düşünüyorsun.\nKorku, riskin değil değerin göstergesi.\nKendine güven ve ilerle.",
+                
+                "Evet.\nZamanlama sandığından daha uygun.\nHazır hissetmemek, hazır olmadığın anlamına gelmez.\nBu deneyim seni büyütecek,\ngeri çekilmek ise aynı yerde kalmana neden olacak.",
+                
+                "Evet.\nBu soruyu sormana sebep olan şey,\nzaten çoktan yola çıkmak istediğini gösteriyor.\nOnay arıyorsun ama ihtiyacın olan tek şey\nkendi kararına sahip çıkmak.",
+                
+                "Evet.\nBu seçim seni konfor alanının dışına çıkaracak,\nama tam da orada dönüşüm başlar.\nKontrol etmeye çalışmayı bırak\nve sürecin seni taşımasına izin ver."
             ]
         case .no:
             return [
-                "Hayır, şu an için bu yol senin için değil. Zamanı geldiğinde doğru fırsat çıkacak.",
-                "Hayır, şimdi değil. Evren sana daha iyi bir zaman hazırlıyor.",
-                "Hayır, bu seçim şu an için senin enerjine uygun değil. Sabırlı ol.",
-                "Hayır, yıldızlar farklı bir yön gösteriyor. Başka bir fırsatı bekle.",
-                "Hayır, bu yol şu an kapalı. Doğru zaman geldiğinde kapılar açılacak."
-            ]
-        case .maybe:
-            return [
-                "Belki, henüz net değil. Biraz daha düşün ve iç sesini dinle.",
-                "Belki, zaman henüz olgunlaşmadı. Biraz daha beklemek gerekebilir.",
-                "Belki, koşullar değişiyor. Bir süre daha gözlemle ve karar ver.",
-                "Belki, şu an için belirsizlik var. İç sesinle daha fazla bağlantı kur.",
-                "Belki, evren sana daha fazla bilgi vermek için bekliyor. Sabırlı ol."
+                "Hayır.\nBu yolda ilerlemek seni güçlendirmiyor,\nsadece daha fazla yoruyor.\nBir şeyleri zorlamak yerine\nneden bu kadar zorlandığını fark etmenin zamanı.",
+                
+                "Hayır.\nŞu an aldığın sinyaller net.\nİçindeki huzursuzluk tesadüf değil.\nKendini ikna ederek devam etmek,\nsorunu çözmez, sadece erteler.",
+                
+                "Hayır.\nBu karar sana ait değilmiş gibi hissediyorsun\nçünkü gerçekten de öyle.\nBaşkalarının beklentileriyle şekillenen bir yol\nseni uzun vadede tatmin etmeyecek.",
+                
+                "Hayır.\nDurmak başarısızlık değil.\nBazen en cesur hamle,\nyanlış bir yoldan geri dönebilmektir.\nŞu an buna ihtiyacın var.",
+                
+                "Hayır.\nHenüz doğru şartlar oluşmadı.\nZamanı gelmeden atılan adımlar\ngereksiz kayıplara yol açar.\nBiraz geri çekil ve bekle."
             ]
         }
     }

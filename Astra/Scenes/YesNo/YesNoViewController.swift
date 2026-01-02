@@ -169,21 +169,22 @@ class YesNoViewController: UIViewController {
         let backLabel = UILabel()
         backLabel.text = "" // Başlangıçta boş, seçildiğinde mesaj gösterilecek
         backLabel.textColor = .white
-        backLabel.font = .systemFont(ofSize: 13, weight: .medium)
+        backLabel.font = .systemFont(ofSize: 12, weight: .regular)
         backLabel.textAlignment = .center
         backLabel.numberOfLines = 0
+        backLabel.lineBreakMode = .byWordWrapping
         backLabel.translatesAutoresizingMaskIntoConstraints = false
         backView.addSubview(backLabel)
         
         // Hafif eğik duruş için transform
-        let rotationAngle: CGFloat = card == .yes ? -0.05 : (card == .no ? 0.05 : 0)
+        let rotationAngle: CGFloat = card == .yes ? -0.05 : 0.05
         cardContainerView.transform = CGAffineTransform(rotationAngle: rotationAngle)
         
         // Constraints
         NSLayoutConstraint.activate([
-            // Container - mesaj için daha geniş
-            containerView.widthAnchor.constraint(equalToConstant: 120),
-            containerView.heightAnchor.constraint(equalToConstant: 160),
+            // Container - uzun mesajlar için daha geniş ve yüksek
+            containerView.widthAnchor.constraint(equalToConstant: 140),
+            containerView.heightAnchor.constraint(equalToConstant: 200),
             
             // Card container
             cardContainerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
@@ -207,9 +208,11 @@ class YesNoViewController: UIViewController {
             backView.topAnchor.constraint(equalTo: cardContainerView.topAnchor),
             backView.bottomAnchor.constraint(equalTo: cardContainerView.bottomAnchor),
             
-            // Back label
-            backLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 12),
-            backLabel.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -12),
+            // Back label - padding ve top/bottom constraints
+            backLabel.leadingAnchor.constraint(equalTo: backView.leadingAnchor, constant: 10),
+            backLabel.trailingAnchor.constraint(equalTo: backView.trailingAnchor, constant: -10),
+            backLabel.topAnchor.constraint(greaterThanOrEqualTo: backView.topAnchor, constant: 12),
+            backLabel.bottomAnchor.constraint(lessThanOrEqualTo: backView.bottomAnchor, constant: -12),
             backLabel.centerYAnchor.constraint(equalTo: backView.centerYAnchor)
         ])
         
@@ -235,8 +238,6 @@ class YesNoViewController: UIViewController {
             card = .yes
         case YesNoCard.no.rawValue.hashValue:
             card = .no
-        case YesNoCard.maybe.rawValue.hashValue:
-            card = .maybe
         default:
             card = nil
         }
