@@ -17,6 +17,7 @@ class NumerologyViewController: UIViewController {
     @IBOutlet weak var contentStackView: UIStackView!
     
     private var cardViews: [UIView] = []
+    private var buttonGradients: [UIButton: CAGradientLayer] = [:]
     
     init(viewModel: NumerologyViewModel, nibName nibNameOrNil: String? = nil, bundle nibBundleOrNil: Bundle? = nil) {
         self.viewModel = viewModel
@@ -102,6 +103,7 @@ class NumerologyViewController: UIViewController {
         // Mevcut kartları temizle
         cardViews.forEach { $0.removeFromSuperview() }
         cardViews.removeAll()
+        buttonGradients.removeAll()
         
         let cards = viewModel.availableCards
         
@@ -113,34 +115,73 @@ class NumerologyViewController: UIViewController {
             contentStackView.addArrangedSubview(cardView)
             cardViews.append(cardView)
         }
+
     }
     
     private func createCardView(for card: NumerologyCard) -> UIView {
         let containerView = UIView()
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.layer.cornerRadius = 28
+        containerView.layer.cornerRadius = 32
         containerView.clipsToBounds = false
         containerView.backgroundColor = .clear
         
-        // Shadow
-        containerView.layer.shadowColor = UIColor(red: 0.5, green: 0.3, blue: 0.8, alpha: 0.3).cgColor
-        containerView.layer.shadowOffset = CGSize(width: 0, height: 8)
-        containerView.layer.shadowRadius = 20
+        // Premium shadow ve glow
+        containerView.layer.shadowColor = UIColor(red: 0.6, green: 0.4, blue: 0.9, alpha: 0.4).cgColor
+        containerView.layer.shadowOffset = CGSize(width: 0, height: 12)
+        containerView.layer.shadowRadius = 24
         containerView.layer.shadowOpacity = 1.0
         
-        // Blur view
+        // Gradient arka plan
+        let gradientView = UIView()
+        gradientView.translatesAutoresizingMaskIntoConstraints = false
+        gradientView.layer.cornerRadius = 32
+        gradientView.clipsToBounds = true
+        containerView.addSubview(gradientView)
+        
+        // Kart tipine göre gradient renkleri
+        let gradientColors: [CGColor]
+        if card.id == "lifePath" {
+            gradientColors = [
+                UIColor(red: 0.3, green: 0.2, blue: 0.6, alpha: 0.8).cgColor,
+                UIColor(red: 0.4, green: 0.3, blue: 0.7, alpha: 0.6).cgColor
+            ]
+        } else if card.id == "daily" {
+            gradientColors = [
+                UIColor(red: 0.2, green: 0.4, blue: 0.6, alpha: 0.8).cgColor,
+                UIColor(red: 0.3, green: 0.5, blue: 0.7, alpha: 0.6).cgColor
+            ]
+        } else if card.id == "evolution" {
+            gradientColors = [
+                UIColor(red: 0.5, green: 0.2, blue: 0.5, alpha: 0.8).cgColor,
+                UIColor(red: 0.6, green: 0.3, blue: 0.6, alpha: 0.6).cgColor
+            ]
+        } else {
+            gradientColors = [
+                UIColor(red: 0.4, green: 0.2, blue: 0.5, alpha: 0.8).cgColor,
+                UIColor(red: 0.5, green: 0.3, blue: 0.6, alpha: 0.6).cgColor
+            ]
+        }
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = gradientColors
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        gradientLayer.cornerRadius = 32
+        gradientView.layer.insertSublayer(gradientLayer, at: 0)
+        
+        // Blur overlay
         let blurView = UIView()
         blurView.translatesAutoresizingMaskIntoConstraints = false
-        blurView.backgroundColor = UIColor.white.withAlphaComponent(0.1)
-        blurView.layer.cornerRadius = 28
+        blurView.backgroundColor = UIColor.white.withAlphaComponent(0.05)
+        blurView.layer.cornerRadius = 32
         blurView.clipsToBounds = true
-        containerView.addSubview(blurView)
+        gradientView.addSubview(blurView)
         
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterialDark)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = blurView.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        blurEffectView.layer.cornerRadius = 28
+        blurEffectView.layer.cornerRadius = 32
         blurEffectView.clipsToBounds = true
         blurView.insertSubview(blurEffectView, at: 0)
         
@@ -173,76 +214,207 @@ class NumerologyViewController: UIViewController {
         let contentStack = UIStackView()
         contentStack.axis = .vertical
         contentStack.alignment = .center
-        contentStack.spacing = 12
+        contentStack.spacing = 16
         contentStack.translatesAutoresizingMaskIntoConstraints = false
         blurView.addSubview(contentStack)
+        
+        // Icon container (üstte küçük ikon)
+        let iconContainer = UIView()
+        iconContainer.translatesAutoresizingMaskIntoConstraints = false
+        iconContainer.widthAnchor.constraint(equalToConstant: 48).isActive = true
+        iconContainer.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        iconContainer.layer.cornerRadius = 24
+        iconContainer.backgroundColor = UIColor.white.withAlphaComponent(0.15)
+        contentStack.addArrangedSubview(iconContainer)
+        
+        let iconLabel = UILabel()
+        iconLabel.translatesAutoresizingMaskIntoConstraints = false
+        iconLabel.font = .systemFont(ofSize: 24)
+        iconLabel.textAlignment = .center
+        
+        // Kart tipine göre ikon
+        if card.id == "lifePath" {
+            iconLabel.text = "🌟"
+        } else if card.id == "daily" {
+            iconLabel.text = "📅"
+        } else if card.id == "destiny" {
+            iconLabel.text = "✨"
+        } else if card.id == "soulUrge" {
+            iconLabel.text = "❤️"
+        } else if card.id == "personality" {
+            iconLabel.text = "🎭"
+        } else if card.id == "evolution" {
+            iconLabel.text = "🔮"
+        } else {
+            iconLabel.text = "⭐"
+        }
+        
+        iconContainer.addSubview(iconLabel)
+        NSLayoutConstraint.activate([
+            iconLabel.centerXAnchor.constraint(equalTo: iconContainer.centerXAnchor),
+            iconLabel.centerYAnchor.constraint(equalTo: iconContainer.centerYAnchor)
+        ])
         
         // Title label
         let titleLabel = UILabel()
         titleLabel.text = card.title
         titleLabel.textColor = .white
-        titleLabel.font = .systemFont(ofSize: 20, weight: .semibold)
+        titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
         titleLabel.textAlignment = .center
-        titleLabel.numberOfLines = 0
+        titleLabel.numberOfLines = 2
         contentStack.addArrangedSubview(titleLabel)
         
-        // Number label (büyük) - Günün Sayısı her zaman gösterilmeli
-        if let number = card.number {
+        // Number/Content area
+        if card.isPremium && card.isLocked {
+            // Premium kartlar için kilit ikonu ve teaser metin
+            let lockIcon = UILabel()
+            lockIcon.text = "🔒"
+            lockIcon.font = .systemFont(ofSize: 56)
+            lockIcon.textAlignment = .center
+            contentStack.addArrangedSubview(lockIcon)
+            
+            // Teaser metin
+            let teaserLabel = UILabel()
+            teaserLabel.text = viewModel.getTeaserText(for: card.id)
+            teaserLabel.textColor = UIColor.white.withAlphaComponent(0.7)
+            teaserLabel.font = .systemFont(ofSize: 14, weight: .medium)
+            teaserLabel.textAlignment = .center
+            teaserLabel.numberOfLines = 2
+            teaserLabel.lineBreakMode = .byWordWrapping
+            contentStack.addArrangedSubview(teaserLabel)
+        } else if card.id == "evolution" {
+            // Tekâmül Sayısı için özel görünüm
+            if let evolutionNumbers = card.evolutionNumbers, !evolutionNumbers.isEmpty {
+                let numbersStack = UIStackView()
+                numbersStack.axis = .horizontal
+                numbersStack.distribution = .fillEqually
+                numbersStack.spacing = 8
+                numbersStack.translatesAutoresizingMaskIntoConstraints = false
+                
+                for number in evolutionNumbers.prefix(6) { // Maksimum 6 sayı göster
+                    let numberView = UIView()
+                    numberView.translatesAutoresizingMaskIntoConstraints = false
+                    numberView.widthAnchor.constraint(equalToConstant: 40).isActive = true
+                    numberView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+                    numberView.layer.cornerRadius = 20
+                    numberView.backgroundColor = UIColor.white.withAlphaComponent(0.2)
+                    
+                    let numLabel = UILabel()
+                    numLabel.text = "\(number)"
+                    numLabel.textColor = .white
+                    numLabel.font = .systemFont(ofSize: 20, weight: .bold)
+                    numLabel.textAlignment = .center
+                    numLabel.translatesAutoresizingMaskIntoConstraints = false
+                    numberView.addSubview(numLabel)
+                    
+                    NSLayoutConstraint.activate([
+                        numLabel.centerXAnchor.constraint(equalTo: numberView.centerXAnchor),
+                        numLabel.centerYAnchor.constraint(equalTo: numberView.centerYAnchor)
+                    ])
+                    
+                    numbersStack.addArrangedSubview(numberView)
+                }
+                
+                contentStack.addArrangedSubview(numbersStack)
+            } else if card.evolutionNumbers?.isEmpty == true {
+                let checkmarkLabel = UILabel()
+                checkmarkLabel.text = "✓"
+                checkmarkLabel.textColor = .systemGreen
+                checkmarkLabel.font = .systemFont(ofSize: 64, weight: .bold)
+                checkmarkLabel.textAlignment = .center
+                contentStack.addArrangedSubview(checkmarkLabel)
+            }
+        } else if let number = card.number {
+            // Normal sayı gösterimi
             let numberLabel = UILabel()
             numberLabel.text = "\(number)"
             numberLabel.textColor = .white
-            numberLabel.font = .systemFont(ofSize: 64, weight: .bold)
+            numberLabel.font = .systemFont(ofSize: 72, weight: .bold)
             numberLabel.textAlignment = .center
+            
+            // Glow efekti
+            numberLabel.layer.shadowColor = UIColor.white.cgColor
+            numberLabel.layer.shadowOffset = .zero
+            numberLabel.layer.shadowRadius = 10
+            numberLabel.layer.shadowOpacity = 0.5
+            
             contentStack.addArrangedSubview(numberLabel)
-        } else if card.isPremium && card.isLocked {
-            // Premium kartlar için kilit ikonu (sadece sayı yoksa)
-            let lockIcon = UILabel()
-            lockIcon.text = "🔒"
-            lockIcon.font = .systemFont(ofSize: 48)
-            lockIcon.textAlignment = .center
-            contentStack.addArrangedSubview(lockIcon)
         }
         
-        // Description label
-        let descLabel = UILabel()
-        descLabel.text = card.description
-        descLabel.textColor = UIColor.white.withAlphaComponent(0.8)
-        descLabel.font = .systemFont(ofSize: 14)
-        descLabel.textAlignment = .center
-        descLabel.numberOfLines = 0
-        contentStack.addArrangedSubview(descLabel)
+        // Description label (premium locked kartlarda gösterilmez)
+        if !(card.isPremium && card.isLocked) {
+            let descLabel = UILabel()
+            descLabel.text = card.description
+            descLabel.textColor = UIColor.white.withAlphaComponent(0.85)
+            descLabel.font = .systemFont(ofSize: 13, weight: .medium)
+            descLabel.textAlignment = .center
+            descLabel.numberOfLines = 0
+            descLabel.lineBreakMode = .byWordWrapping
+            contentStack.addArrangedSubview(descLabel)
+        }
         
         // Premium button (if locked)
         var premiumButton: UIButton?
         if card.isPremium && card.isLocked {
             let button = UIButton(type: .system)
-            button.setTitle("Premium ile aç", for: .normal)
+            button.setTitle("✨ Premium ile aç", for: .normal)
             button.setTitleColor(.white, for: .normal)
-            button.titleLabel?.font = .systemFont(ofSize: 14, weight: .semibold)
-            button.backgroundColor = UIColor.systemYellow.withAlphaComponent(0.3)
-            button.layer.cornerRadius = 12
-            button.layer.borderWidth = 1.0
-            button.layer.borderColor = UIColor.systemYellow.cgColor
+            button.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+            
+            // Gradient background
+            let buttonGradient = CAGradientLayer()
+            buttonGradient.colors = [
+                UIColor.systemYellow.withAlphaComponent(0.4).cgColor,
+                UIColor.systemOrange.withAlphaComponent(0.3).cgColor
+            ]
+            buttonGradient.startPoint = CGPoint(x: 0, y: 0)
+            buttonGradient.endPoint = CGPoint(x: 1, y: 1)
+            buttonGradient.cornerRadius = 14
+            button.layer.insertSublayer(buttonGradient, at: 0)
+            
+            button.layer.cornerRadius = 14
+            button.layer.borderWidth = 1.5
+            button.layer.borderColor = UIColor.systemYellow.withAlphaComponent(0.6).cgColor
+            
+            // Shadow
+            button.layer.shadowColor = UIColor.systemYellow.cgColor
+            button.layer.shadowOffset = CGSize(width: 0, height: 4)
+            button.layer.shadowRadius = 8
+            button.layer.shadowOpacity = 0.4
+            
             button.translatesAutoresizingMaskIntoConstraints = false
             button.addTarget(self, action: #selector(premiumButtonTapped(_:)), for: .touchUpInside)
             blurView.addSubview(button)
             premiumButton = button
+            
+            // Gradient'ı sakla
+            buttonGradients[button] = buttonGradient
         }
         
         // Constraints
         var constraints: [NSLayoutConstraint] = [
-            containerView.widthAnchor.constraint(equalToConstant: 300),
-            containerView.heightAnchor.constraint(equalToConstant: 320),
+            containerView.widthAnchor.constraint(equalToConstant: 320),
+            containerView.heightAnchor.constraint(equalToConstant: 380),
             
-            blurView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            blurView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            blurView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            blurView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            gradientView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            gradientView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            gradientView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            gradientView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
             
-            contentStack.leadingAnchor.constraint(equalTo: blurView.leadingAnchor, constant: 24),
-            contentStack.trailingAnchor.constraint(equalTo: blurView.trailingAnchor, constant: -24),
-            contentStack.topAnchor.constraint(equalTo: blurView.topAnchor, constant: 32)
+            blurView.leadingAnchor.constraint(equalTo: gradientView.leadingAnchor),
+            blurView.trailingAnchor.constraint(equalTo: gradientView.trailingAnchor),
+            blurView.topAnchor.constraint(equalTo: gradientView.topAnchor),
+            blurView.bottomAnchor.constraint(equalTo: gradientView.bottomAnchor),
+            
+            contentStack.leadingAnchor.constraint(equalTo: blurView.leadingAnchor, constant: 20),
+            contentStack.trailingAnchor.constraint(equalTo: blurView.trailingAnchor, constant: -20),
+            contentStack.topAnchor.constraint(equalTo: blurView.topAnchor, constant: 28)
         ]
+        
+        // Gradient layer frame update
+        DispatchQueue.main.async {
+            gradientLayer.frame = gradientView.bounds
+        }
         
         // Premium blur overlay constraints
         if let overlay = premiumBlurOverlay {
@@ -257,15 +429,15 @@ class NumerologyViewController: UIViewController {
         // Premium button constraints
         if let button = premiumButton {
             constraints.append(contentsOf: [
-                button.heightAnchor.constraint(equalToConstant: 40),
-                button.leadingAnchor.constraint(equalTo: blurView.leadingAnchor, constant: 24),
-                button.trailingAnchor.constraint(equalTo: blurView.trailingAnchor, constant: -24),
-                button.topAnchor.constraint(equalTo: contentStack.bottomAnchor, constant: 16),
+                button.heightAnchor.constraint(equalToConstant: 44),
+                button.leadingAnchor.constraint(equalTo: blurView.leadingAnchor, constant: 20),
+                button.trailingAnchor.constraint(equalTo: blurView.trailingAnchor, constant: -20),
+                button.topAnchor.constraint(equalTo: contentStack.bottomAnchor, constant: 20),
                 button.bottomAnchor.constraint(lessThanOrEqualTo: blurView.bottomAnchor, constant: -24)
             ])
         } else {
             constraints.append(
-                contentStack.bottomAnchor.constraint(lessThanOrEqualTo: blurView.bottomAnchor, constant: -32)
+                contentStack.bottomAnchor.constraint(lessThanOrEqualTo: blurView.bottomAnchor, constant: -28)
             )
         }
         
@@ -406,8 +578,25 @@ class NumerologyViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        // Background gradient
         if let gradientLayer = view.layer.sublayers?.first as? CAGradientLayer {
             gradientLayer.frame = view.bounds
+        }
+        
+        // Card gradients - her kartın gradient'ını güncelle
+        for cardView in cardViews {
+            // Gradient view'ı bul (containerView'ın ilk subview'ı)
+            if let gradientView = cardView.subviews.first {
+                // Gradient layer'ı bul ve güncelle
+                if let gradientLayer = gradientView.layer.sublayers?.first as? CAGradientLayer {
+                    gradientLayer.frame = gradientView.bounds
+                }
+            }
+        }
+        
+        // Button gradients güncelle
+        for (button, gradientLayer) in buttonGradients {
+            gradientLayer.frame = button.bounds
         }
     }
     
@@ -416,4 +605,5 @@ class NumerologyViewController: UIViewController {
         viewModel.load()
     }
 }
+
 

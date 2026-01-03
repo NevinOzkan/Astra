@@ -14,6 +14,67 @@ struct NumerologyCard {
     let description: String
     let isPremium: Bool
     let isLocked: Bool
+    let evolutionNumbers: [Int]? // Tekâmül Sayıları için (birden fazla sayı olabilir)
+}
+
+struct LifePathDescription: Codable {
+    let number: Int
+    let title: String
+    let description: String
+}
+
+struct LifePathDescriptionsResponse: Codable {
+    let descriptions: [LifePathDescription]
+}
+
+struct DailyNumberDescription: Codable {
+    let number: Int
+    let title: String
+    let description: String
+}
+
+struct DailyNumberDescriptionsResponse: Codable {
+    let descriptions: [DailyNumberDescription]
+}
+
+struct DestinyNumberDescription: Codable {
+    let number: Int
+    let title: String
+    let description: String
+}
+
+struct DestinyNumberDescriptionsResponse: Codable {
+    let descriptions: [DestinyNumberDescription]
+}
+
+struct SoulUrgeNumberDescription: Codable {
+    let number: Int
+    let title: String
+    let description: String
+}
+
+struct SoulUrgeNumberDescriptionsResponse: Codable {
+    let descriptions: [SoulUrgeNumberDescription]
+}
+
+struct PersonalityNumberDescription: Codable {
+    let number: Int
+    let title: String
+    let description: String
+}
+
+struct PersonalityNumberDescriptionsResponse: Codable {
+    let descriptions: [PersonalityNumberDescription]
+}
+
+struct EvolutionNumberDescription: Codable {
+    let number: Int
+    let title: String
+    let description: String
+}
+
+struct EvolutionNumberDescriptionsResponse: Codable {
+    let descriptions: [EvolutionNumberDescription]
 }
 
 class NumerologyViewModel {
@@ -23,6 +84,24 @@ class NumerologyViewModel {
     // UserDefaults keys
     private let userNameKey = "numerologyUserName"
     private let userBirthDateKey = "selectedBirthDate" // Settings'ten alınacak
+    
+    // Life Path descriptions cache
+    private var lifePathDescriptionsCache: [Int: LifePathDescription] = [:]
+    
+    // Daily Number descriptions cache
+    private var dailyNumberDescriptionsCache: [Int: DailyNumberDescription] = [:]
+    
+    // Destiny Number descriptions cache
+    private var destinyNumberDescriptionsCache: [Int: DestinyNumberDescription] = [:]
+    
+    // Soul Urge Number descriptions cache
+    private var soulUrgeNumberDescriptionsCache: [Int: SoulUrgeNumberDescription] = [:]
+    
+    // Personality Number descriptions cache
+    private var personalityNumberDescriptionsCache: [Int: PersonalityNumberDescription] = [:]
+    
+    // Evolution Number descriptions cache
+    private var evolutionNumberDescriptionsCache: [Int: EvolutionNumberDescription] = [:]
     
     var onDataUpdate: (() -> Void)?
     var onError: ((String) -> Void)?
@@ -75,9 +154,10 @@ class NumerologyViewModel {
                 id: "lifePath",
                 title: "Yaşam Yolu Sayın",
                 number: lifePathNumber > 0 ? lifePathNumber : nil,
-                description: lifePathNumber > 0 ? getLifePathDescription(for: lifePathNumber) : "Hesaplanıyor...",
+                description: getGeneralDescription(for: "lifePath"),
                 isPremium: false,
-                isLocked: false
+                isLocked: false,
+                evolutionNumbers: nil
             ))
         } else {
             cards.append(NumerologyCard(
@@ -86,33 +166,22 @@ class NumerologyViewModel {
                 number: nil,
                 description: "Doğum tarihi gerekli",
                 isPremium: false,
-                isLocked: false
+                isLocked: false,
+                evolutionNumbers: nil
             ))
         }
         
         // 2. Günün Sayısı (ÜCRETSİZ - KISITLI) - Her zaman hesaplanabilir
         let dailyNumber = calculateDailyNumber()
-        if isPremiumUser {
-            // Premium kullanıcı: Tam açıklama
-            cards.append(NumerologyCard(
-                id: "daily",
-                title: "Günün Sayısı",
-                number: dailyNumber,
-                description: getDailyNumberFullDescription(for: dailyNumber),
-                isPremium: false,
-                isLocked: false
-            ))
-        } else {
-            // Ücretsiz kullanıcı: Sayı + kısa açıklama
-            cards.append(NumerologyCard(
-                id: "daily",
-                title: "Günün Sayısı",
-                number: dailyNumber,
-                description: getDailyNumberShortDescription(for: dailyNumber),
-                isPremium: false,
-                isLocked: false
-            ))
-        }
+        cards.append(NumerologyCard(
+            id: "daily",
+            title: "Günün Sayısı",
+            number: dailyNumber,
+            description: getGeneralDescription(for: "daily"),
+            isPremium: false,
+            isLocked: false,
+            evolutionNumbers: nil
+        ))
         
         // 3. Kader Sayısı (PREMIUM) - İsim gerekli
         if let name = userName, !name.isEmpty {
@@ -123,9 +192,10 @@ class NumerologyViewModel {
                 id: "destiny",
                 title: "Kader Sayın",
                 number: (isPremiumUser && destinyNumber > 0) ? destinyNumber : nil,
-                description: isPremiumUser ? (destinyNumber > 0 ? getDestinyDescription(for: destinyNumber) : "Hesaplanıyor...") : "Premium ile aç",
+                description: isPremiumUser ? getGeneralDescription(for: "destiny") : "Premium ile aç",
                 isPremium: true,
-                isLocked: isLocked
+                isLocked: isLocked,
+                evolutionNumbers: nil
             ))
         } else {
             cards.append(NumerologyCard(
@@ -134,7 +204,8 @@ class NumerologyViewModel {
                 number: nil,
                 description: isPremiumUser ? "İsim gerekli" : "Premium ile aç",
                 isPremium: true,
-                isLocked: !isPremiumUser
+                isLocked: !isPremiumUser,
+                evolutionNumbers: nil
             ))
         }
         
@@ -145,9 +216,10 @@ class NumerologyViewModel {
                 id: "soulUrge",
                 title: "Kalp Sayın",
                 number: (isPremiumUser && soulUrgeNumber > 0) ? soulUrgeNumber : nil,
-                description: isPremiumUser ? (soulUrgeNumber > 0 ? getSoulUrgeDescription(for: soulUrgeNumber) : "Hesaplanıyor...") : "Premium ile aç",
+                description: isPremiumUser ? getGeneralDescription(for: "soulUrge") : "Premium ile aç",
                 isPremium: true,
-                isLocked: !isPremiumUser
+                isLocked: !isPremiumUser,
+                evolutionNumbers: nil
             ))
         } else {
             cards.append(NumerologyCard(
@@ -156,7 +228,8 @@ class NumerologyViewModel {
                 number: nil,
                 description: isPremiumUser ? "İsim gerekli" : "Premium ile aç",
                 isPremium: true,
-                isLocked: !isPremiumUser
+                isLocked: !isPremiumUser,
+                evolutionNumbers: nil
             ))
         }
         
@@ -167,18 +240,58 @@ class NumerologyViewModel {
                 id: "personality",
                 title: "Kişilik Sayın",
                 number: (isPremiumUser && personalityNumber > 0) ? personalityNumber : nil,
-                description: isPremiumUser ? (personalityNumber > 0 ? getPersonalityDescription(for: personalityNumber) : "Hesaplanıyor...") : "Premium ile aç",
+                description: isPremiumUser ? getGeneralDescription(for: "personality") : "Premium ile aç",
                 isPremium: true,
-                isLocked: !isPremiumUser
+                isLocked: !isPremiumUser,
+                evolutionNumbers: nil
             ))
         } else {
             cards.append(NumerologyCard(
                 id: "personality",
                 title: "Kişilik Sayın",
                 number: nil,
-                description: isPremiumUser ? "İsim gerekli" : "Premium ile aç",
+                description: isPremiumUser ? getGeneralDescription(for: "personality") : "Premium ile aç",
                 isPremium: true,
-                isLocked: !isPremiumUser
+                isLocked: !isPremiumUser,
+                evolutionNumbers: nil
+            ))
+        }
+        
+        // 6. Tekâmül Sayısı (PREMIUM) - Doğum tarihi gerekli
+        if let birthDate = birthDate {
+            let evolutionNumbers = calculateEvolutionNumbers()
+            if isPremiumUser {
+                // Premium kullanıcı: Tekâmül sayılarını göster
+                cards.append(NumerologyCard(
+                    id: "evolution",
+                    title: "Tekâmül Sayın",
+                    number: nil,
+                    description: getGeneralDescription(for: "evolution"),
+                    isPremium: true,
+                    isLocked: false,
+                    evolutionNumbers: evolutionNumbers.isEmpty ? [] : evolutionNumbers
+                ))
+            } else {
+                // Ücretsiz kullanıcı: Premium ile aç mesajı
+                cards.append(NumerologyCard(
+                    id: "evolution",
+                    title: "Tekâmül Sayın",
+                    number: nil,
+                    description: "Premium ile aç",
+                    isPremium: true,
+                    isLocked: true,
+                    evolutionNumbers: nil
+                ))
+            }
+        } else {
+            cards.append(NumerologyCard(
+                id: "evolution",
+                title: "Tekâmül Sayın",
+                number: nil,
+                description: isPremiumUser ? "Doğum tarihi gerekli" : "Premium ile aç",
+                isPremium: true,
+                isLocked: !isPremiumUser,
+                evolutionNumbers: nil
             ))
         }
         
@@ -317,6 +430,34 @@ class NumerologyViewModel {
         return reduceToSingleDigit(sum)
     }
     
+    func calculateEvolutionNumbers() -> [Int] {
+        guard let birthDate = birthDate else { return [] }
+        
+        // Doğum tarihini string olarak formatla
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        let dateString = dateFormatter.string(from: birthDate)
+        
+        // Doğum tarihindeki mevcut rakamları bul (0 hariç, 1-9 arası)
+        var existingNumbers: Set<Int> = []
+        for char in dateString {
+            if let digit = Int(String(char)), digit >= 1 && digit <= 9 {
+                existingNumbers.insert(digit)
+            }
+        }
+        
+        // Eksik rakamları bul (1-9 arası ama mevcut olmayanlar)
+        var missingNumbers: [Int] = []
+        for i in 1...9 {
+            if !existingNumbers.contains(i) {
+                missingNumbers.append(i)
+            }
+        }
+        
+        // Sıralı döndür
+        return missingNumbers.sorted()
+    }
+    
     // MARK: - Helper Methods
     
     private func sumOfDigits(_ number: Int) -> Int {
@@ -373,8 +514,40 @@ class NumerologyViewModel {
     
     // MARK: - Descriptions
     
+    private func loadLifePathDescriptions() {
+        // Cache'de varsa yükleme
+        guard lifePathDescriptionsCache.isEmpty else { return }
+        
+        // JSON dosyasını yükle
+        guard let path = Bundle.main.path(forResource: "lifePathDescriptions", ofType: "json", inDirectory: "JSON") else {
+            print("⚠️ Life Path descriptions JSON yüklenemedi, fallback kullanılıyor")
+            return
+        }
+        let url = URL(fileURLWithPath: path)
+        guard
+              let data = try? Data(contentsOf: url),
+              let response = try? JSONDecoder().decode(LifePathDescriptionsResponse.self, from: data) else {
+            print("⚠️ Life Path descriptions JSON yüklenemedi, fallback kullanılıyor")
+            return
+        }
+        
+        // Cache'e ekle
+        for desc in response.descriptions {
+            lifePathDescriptionsCache[desc.number] = desc
+        }
+    }
+    
     private func getLifePathDescription(for number: Int) -> String {
-        let descriptions = [
+        // JSON'dan yükle
+        loadLifePathDescriptions()
+        
+        // JSON'dan bul
+        if let description = lifePathDescriptionsCache[number] {
+            return description.description
+        }
+        
+        // Fallback: Kısa açıklama
+        let fallbackDescriptions = [
             1: "Doğal lider, bağımsız ve yaratıcı",
             2: "Dengeli, diplomatik ve işbirlikçi",
             3: "Yaratıcı, iletişimci ve neşeli",
@@ -385,11 +558,69 @@ class NumerologyViewModel {
             8: "Güçlü, başarı odaklı ve materyalist",
             9: "İnsancıl, cömert ve idealist"
         ]
-        return descriptions[number] ?? "Bilinmeyen sayı"
+        return fallbackDescriptions[number] ?? "Bilinmeyen sayı"
+    }
+    
+    func getLifePathFullDescription(for number: Int) -> String {
+        // JSON'dan yükle
+        loadLifePathDescriptions()
+        
+        // JSON'dan tam açıklamayı döndür
+        if let description = lifePathDescriptionsCache[number] {
+            return description.description
+        }
+        
+        // Fallback
+        return getLifePathDescription(for: number)
+    }
+    
+    func getLifePathTitle(for number: Int) -> String {
+        // JSON'dan yükle
+        loadLifePathDescriptions()
+        
+        // JSON'dan title'ı döndür
+        if let description = lifePathDescriptionsCache[number] {
+            return description.title
+        }
+        
+        // Fallback
+        return "Yaşam Yolu \(number)"
+    }
+    
+    private func loadDestinyNumberDescriptions() {
+        // Cache'de varsa yükleme
+        guard destinyNumberDescriptionsCache.isEmpty else { return }
+        
+        // JSON dosyasını yükle
+        guard let path = Bundle.main.path(forResource: "destinyNumberDescriptions", ofType: "json", inDirectory: "JSON") else {
+            print("⚠️ Destiny Number descriptions JSON yüklenemedi, fallback kullanılıyor")
+            return
+        }
+        let url = URL(fileURLWithPath: path)
+        guard
+              let data = try? Data(contentsOf: url),
+              let response = try? JSONDecoder().decode(DestinyNumberDescriptionsResponse.self, from: data) else {
+            print("⚠️ Destiny Number descriptions JSON yüklenemedi, fallback kullanılıyor")
+            return
+        }
+        
+        // Cache'e ekle
+        for desc in response.descriptions {
+            destinyNumberDescriptionsCache[desc.number] = desc
+        }
     }
     
     private func getDestinyDescription(for number: Int) -> String {
-        let descriptions = [
+        // JSON'dan yükle
+        loadDestinyNumberDescriptions()
+        
+        // JSON'dan bul
+        if let description = destinyNumberDescriptionsCache[number] {
+            return description.description
+        }
+        
+        // Fallback: Kısa açıklama
+        let fallbackDescriptions = [
             1: "Liderlik ve bağımsızlık senin kaderin",
             2: "Uyum ve işbirliği senin yolun",
             3: "Yaratıcılık ve ifade senin gücün",
@@ -400,7 +631,33 @@ class NumerologyViewModel {
             8: "Başarı ve güç senin hedefin",
             9: "Hizmet ve tamamlanma senin misyonun"
         ]
-        return descriptions[number] ?? "Bilinmeyen sayı"
+        return fallbackDescriptions[number] ?? "Bilinmeyen sayı"
+    }
+    
+    func getDestinyFullDescription(for number: Int) -> String {
+        // JSON'dan yükle
+        loadDestinyNumberDescriptions()
+        
+        // JSON'dan tam açıklamayı döndür
+        if let description = destinyNumberDescriptionsCache[number] {
+            return description.description
+        }
+        
+        // Fallback
+        return getDestinyDescription(for: number)
+    }
+    
+    func getDestinyTitle(for number: Int) -> String {
+        // JSON'dan yükle
+        loadDestinyNumberDescriptions()
+        
+        // JSON'dan title'ı döndür
+        if let description = destinyNumberDescriptionsCache[number] {
+            return description.title
+        }
+        
+        // Fallback
+        return "Kader Sayısı \(number)"
     }
     
     func getDailyNumberShortDescription(for number: Int) -> String {
@@ -419,9 +676,40 @@ class NumerologyViewModel {
         return shortDescriptions[number] ?? "Bilinmeyen sayı"
     }
     
+    private func loadDailyNumberDescriptions() {
+        // Cache'de varsa yükleme
+        guard dailyNumberDescriptionsCache.isEmpty else { return }
+        
+        // JSON dosyasını yükle
+        guard let path = Bundle.main.path(forResource: "dailyNumberDescriptions", ofType: "json", inDirectory: "JSON") else {
+            print("⚠️ Daily Number descriptions JSON yüklenemedi, fallback kullanılıyor")
+            return
+        }
+        let url = URL(fileURLWithPath: path)
+        guard
+              let data = try? Data(contentsOf: url),
+              let response = try? JSONDecoder().decode(DailyNumberDescriptionsResponse.self, from: data) else {
+            print("⚠️ Daily Number descriptions JSON yüklenemedi, fallback kullanılıyor")
+            return
+        }
+        
+        // Cache'e ekle
+        for desc in response.descriptions {
+            dailyNumberDescriptionsCache[desc.number] = desc
+        }
+    }
+    
     func getDailyNumberFullDescription(for number: Int) -> String {
-        // Premium kullanıcılar için detaylı açıklama
-        let fullDescriptions = [
+        // JSON'dan yükle
+        loadDailyNumberDescriptions()
+        
+        // JSON'dan tam açıklamayı döndür
+        if let description = dailyNumberDescriptionsCache[number] {
+            return description.description
+        }
+        
+        // Fallback: Eski açıklamalar
+        let fallbackDescriptions = [
             1: "Bugün yeni başlangıçlar için mükemmel. Yıldızlar senin için yeni bir sayfa açıyor. Cesaretle ilerle ve kalbinin sesini dinle. Bu gün aldığın kararlar geleceğini şekillendirecek.",
             2: "Bugün işbirliği ve denge zamanı. İlişkilerinde uyum ve anlayış ön planda. Birlikte çalışmak ve paylaşmak seni mutluluğa götürecek. Sabırlı ol ve dinlemeyi unutma.",
             3: "Bugün yaratıcılık ve iletişim ön planda. İfade gücün zirvede, fikirlerin parlak. Yaratıcı projeler için mükemmel bir gün. Neşeni paylaş ve içindeki sanatçıyı ortaya çıkar.",
@@ -432,11 +720,56 @@ class NumerologyViewModel {
             8: "Bugün başarı ve güç seninle. Kariyer ve maddi konularda ilerleme zamanı. Hedeflerine odaklan ve güçlü adımlar at. Liderlik enerjin yüksek.",
             9: "Bugün tamamlanma ve paylaşım günü. Cömertlik ve hizmet ruhu ön planda. Başkalarına yardım etmek seni mutlu edecek. Bir döngü tamamlanıyor, yeni başlangıçlar yakın."
         ]
-        return fullDescriptions[number] ?? "Bilinmeyen sayı"
+        return fallbackDescriptions[number] ?? "Bilinmeyen sayı"
+    }
+    
+    func getDailyNumberTitle(for number: Int) -> String {
+        // JSON'dan yükle
+        loadDailyNumberDescriptions()
+        
+        // JSON'dan title'ı döndür
+        if let description = dailyNumberDescriptionsCache[number] {
+            return description.title
+        }
+        
+        // Fallback
+        return "Günün Sayısı \(number)"
+    }
+    
+    private func loadSoulUrgeNumberDescriptions() {
+        // Cache'de varsa yükleme
+        guard soulUrgeNumberDescriptionsCache.isEmpty else { return }
+        
+        // JSON dosyasını yükle
+        guard let path = Bundle.main.path(forResource: "soulUrgeNumberDescriptions", ofType: "json", inDirectory: "JSON") else {
+            print("⚠️ Soul Urge Number descriptions JSON yüklenemedi, fallback kullanılıyor")
+            return
+        }
+        let url = URL(fileURLWithPath: path)
+        guard
+              let data = try? Data(contentsOf: url),
+              let response = try? JSONDecoder().decode(SoulUrgeNumberDescriptionsResponse.self, from: data) else {
+            print("⚠️ Soul Urge Number descriptions JSON yüklenemedi, fallback kullanılıyor")
+            return
+        }
+        
+        // Cache'e ekle
+        for desc in response.descriptions {
+            soulUrgeNumberDescriptionsCache[desc.number] = desc
+        }
     }
     
     private func getSoulUrgeDescription(for number: Int) -> String {
-        let descriptions = [
+        // JSON'dan yükle
+        loadSoulUrgeNumberDescriptions()
+        
+        // JSON'dan bul
+        if let description = soulUrgeNumberDescriptionsCache[number] {
+            return description.description
+        }
+        
+        // Fallback: Kısa açıklama
+        let fallbackDescriptions = [
             1: "İçsel liderlik ve bağımsızlık arzusu",
             2: "İçsel uyum ve işbirliği ihtiyacı",
             3: "İçsel yaratıcılık ve ifade gücü",
@@ -447,11 +780,69 @@ class NumerologyViewModel {
             8: "İçsel güç ve başarı motivasyonu",
             9: "İçsel tamamlanma ve hizmet arzusu"
         ]
-        return descriptions[number] ?? "Bilinmeyen sayı"
+        return fallbackDescriptions[number] ?? "Bilinmeyen sayı"
+    }
+    
+    func getSoulUrgeFullDescription(for number: Int) -> String {
+        // JSON'dan yükle
+        loadSoulUrgeNumberDescriptions()
+        
+        // JSON'dan tam açıklamayı döndür
+        if let description = soulUrgeNumberDescriptionsCache[number] {
+            return description.description
+        }
+        
+        // Fallback
+        return getSoulUrgeDescription(for: number)
+    }
+    
+    func getSoulUrgeTitle(for number: Int) -> String {
+        // JSON'dan yükle
+        loadSoulUrgeNumberDescriptions()
+        
+        // JSON'dan title'ı döndür
+        if let description = soulUrgeNumberDescriptionsCache[number] {
+            return description.title
+        }
+        
+        // Fallback
+        return "Kalp Sayısı \(number)"
+    }
+    
+    private func loadPersonalityNumberDescriptions() {
+        // Cache'de varsa yükleme
+        guard personalityNumberDescriptionsCache.isEmpty else { return }
+        
+        // JSON dosyasını yükle
+        guard let path = Bundle.main.path(forResource: "personalityNumberDescriptions", ofType: "json", inDirectory: "JSON") else {
+            print("⚠️ Personality Number descriptions JSON yüklenemedi, fallback kullanılıyor")
+            return
+        }
+        let url = URL(fileURLWithPath: path)
+        guard
+              let data = try? Data(contentsOf: url),
+              let response = try? JSONDecoder().decode(PersonalityNumberDescriptionsResponse.self, from: data) else {
+            print("⚠️ Personality Number descriptions JSON yüklenemedi, fallback kullanılıyor")
+            return
+        }
+        
+        // Cache'e ekle
+        for desc in response.descriptions {
+            personalityNumberDescriptionsCache[desc.number] = desc
+        }
     }
     
     private func getPersonalityDescription(for number: Int) -> String {
-        let descriptions = [
+        // JSON'dan yükle
+        loadPersonalityNumberDescriptions()
+        
+        // JSON'dan bul
+        if let description = personalityNumberDescriptionsCache[number] {
+            return description.description
+        }
+        
+        // Fallback: Kısa açıklama
+        let fallbackDescriptions = [
             1: "Dışa dönük liderlik ve güçlü karakter",
             2: "Dışa dönük uyum ve diplomatik yaklaşım",
             3: "Dışa dönük yaratıcılık ve sosyal enerji",
@@ -462,7 +853,139 @@ class NumerologyViewModel {
             8: "Dışa dönük başarı odaklılık ve otorite",
             9: "Dışa dönük cömertlik ve idealizm"
         ]
+        return fallbackDescriptions[number] ?? "Bilinmeyen sayı"
+    }
+    
+    func getPersonalityFullDescription(for number: Int) -> String {
+        // JSON'dan yükle
+        loadPersonalityNumberDescriptions()
+        
+        // JSON'dan tam açıklamayı döndür
+        if let description = personalityNumberDescriptionsCache[number] {
+            return description.description
+        }
+        
+        // Fallback
+        return getPersonalityDescription(for: number)
+    }
+    
+    func getPersonalityTitle(for number: Int) -> String {
+        // JSON'dan yükle
+        loadPersonalityNumberDescriptions()
+        
+        // JSON'dan title'ı döndür
+        if let description = personalityNumberDescriptionsCache[number] {
+            return description.title
+        }
+        
+        // Fallback
+        return "Kişilik Sayısı \(number)"
+    }
+    
+    private func loadEvolutionNumberDescriptions() {
+        // Cache'de varsa yükleme
+        guard evolutionNumberDescriptionsCache.isEmpty else { return }
+        
+        // JSON dosyasını yükle
+        guard let path = Bundle.main.path(forResource: "evolutionNumberDescriptions", ofType: "json", inDirectory: "JSON") else {
+            print("⚠️ Evolution Number descriptions JSON yüklenemedi, fallback kullanılıyor")
+            return
+        }
+        let url = URL(fileURLWithPath: path)
+        guard
+              let data = try? Data(contentsOf: url),
+              let response = try? JSONDecoder().decode(EvolutionNumberDescriptionsResponse.self, from: data) else {
+            print("⚠️ Evolution Number descriptions JSON yüklenemedi, fallback kullanılıyor")
+            return
+        }
+        
+        // Cache'e ekle
+        for desc in response.descriptions {
+            evolutionNumberDescriptionsCache[desc.number] = desc
+        }
+    }
+    
+    func getEvolutionDescription(for numbers: [Int]) -> String {
+        guard !numbers.isEmpty else {
+            return "Tüm sayılar mevcut. Eksik sayı yok."
+        }
+        
+        // JSON'dan yükle
+        loadEvolutionNumberDescriptions()
+        
+        // Her sayı için JSON'dan açıklama al
+        var detailedDescriptions: [String] = []
+        
+        for num in numbers.sorted() {
+            if let description = evolutionNumberDescriptionsCache[num] {
+                // JSON'dan tam açıklama
+                detailedDescriptions.append("\(description.title)\n\(description.description)")
+            } else {
+                // Fallback: Kısa açıklama
+                let desc = getEvolutionNumberDescription(for: num)
+                detailedDescriptions.append("\(num) → \(desc)")
+            }
+        }
+        
+        // Açıklamaları birleştir (her biri yeni satırda, aralarında separator ile)
+        let separator = "\n\n⸻\n\n"
+        return detailedDescriptions.joined(separator: separator)
+    }
+    
+    private func getEvolutionNumberDescription(for number: Int) -> String {
+        // Fallback için kısa açıklamalar
+        let descriptions: [Int: String] = [
+            1: "Özgüven, liderlik, bireysellik",
+            2: "Duygusal denge, empati, ilişkiler",
+            3: "İfade, iletişim, yaratıcılık",
+            4: "Disiplin, düzen, sabır",
+            5: "Değişim, özgürlük, risk alma",
+            6: "Sevgi, aile, sorumluluk",
+            7: "İçsel arayış, sezgi, ruhsallık",
+            8: "Güç, para, maddi denge",
+            9: "Affetmek, tamamlamak, hizmet"
+        ]
         return descriptions[number] ?? "Bilinmeyen sayı"
+    }
+    
+    // MARK: - General Descriptions (for cards)
+    
+    func getTeaserText(for cardId: String) -> String {
+        switch cardId {
+        case "lifePath":
+            return "Bu hayatta öğrenmen gereken ana dersleri keşfet."
+        case "daily":
+            return "Bugünün enerjisini ve potansiyelini keşfet."
+        case "destiny":
+            return "Hayatının hangi temalarla şekilleneceğini öğren."
+        case "soulUrge":
+            return "İçsel motivasyonlarını ve gerçek isteklerini keşfet."
+        case "personality":
+            return "Başkalarının seni nasıl algıladığını öğren."
+        case "evolution":
+            return "Tekrar eden sınavlarının numerolojik anlamı."
+        default:
+            return ""
+        }
+    }
+    
+    func getGeneralDescription(for cardId: String) -> String {
+        switch cardId {
+        case "lifePath":
+            return "Yaşam yolu, numerolojide doğum tarihinden hesaplanan ve kişinin bu hayatta hangi temel deneyimler üzerinden ilerlediğini sembolik olarak anlatan bir sayıdır.\n\nEzoterik numerolojiye göre yaşam yolu, kişinin karşılaşacağı olayları değil; hayatın hangi temalar etrafında şekillendiğini gösterir.\n\nBu sayı, bireyin karakterini kesin olarak tanımlamaz. Daha çok, kişinin hayat boyunca tekrar eden konularını, güçlü yönlerini ve öğrenmesi gereken dersleri anlatan bir yol haritası gibi yorumlanır."
+        case "daily":
+            return "Günün sayısı, numerolojide kişinin bugünün enerjisini kendi doğum bilgileriyle birlikte yorumlamaya yarayan sembolik bir göstergedir.\n\nEzoterik numerolojiye göre bu sayı, günün hangi temalarla daha uyumlu ilerleyebileceğini anlatır.\n\nGünün sayısı, geleceği kesin olarak söylemez. Daha çok, o gün hangi konulara odaklanmanın daha kolay olabileceğini ve hangi alanlarda daha dikkatli olunması gerektiğini sembolik olarak ifade eder."
+        case "destiny":
+            return "Kader sayısı, numerolojide doğumda verilen isim ve soyisim üzerinden hesaplanan ve kişinin hayat boyunca karşılaşabileceği ana temaları ve yönelimleri sembolik olarak anlatan bir göstergedir.\n\nEzoterik numerolojiye göre kader sayısı, kişinin hangi alanlarda doğal eğilimler taşıdığını ve hayatın onu hangi deneyimlerle şekillendirebileceğini ifade eder. Bu sayı, kesin bir kaderi değil; potansiyel yönleri ve öğrenme alanlarını temsil eder."
+        case "soulUrge":
+            return "Kalp sayısı, numerolojide kişinin içsel motivasyonlarını, duygusal ihtiyaçlarını ve gizli isteklerini sembolik olarak anlatan bir sayıdır.\n\nİsim ve soyisimdeki sesli harfler üzerinden hesaplanır.\n\nEzoterik numerolojiye göre kalp sayısı, kişinin dış dünyaya gösterdiği kimlikten çok, iç dünyasında neyle tatmin olduğunu ve neyin eksikliğini hissettiğini anlatır."
+        case "personality":
+            return "Kişilik sayısı, numerolojide bireyin dış dünyaya nasıl göründüğünü, ilk izlenimi ve sosyal duruşunu sembolik olarak ifade eder.\n\nİsim ve soyisimdeki sessiz harfler üzerinden hesaplanır.\n\nBu sayı, kişinin gerçekte kim olduğunu değil; başkalarının onu nasıl algıladığını ve toplum içinde hangi yönlerinin öne çıktığını gösterir."
+        case "evolution":
+            return "Tekâmül sayısı, numerolojide kişinin bu yaşamda geliştirmesi ve dengelemesi gereken alanları sembolik olarak anlatan bir göstergedir.\n\nDoğum tarihindeki eksik rakamlar üzerinden hesaplanır.\n\nEzoterik numerolojiye göre bu sayı, bir eksiklikten çok, kişinin bu hayatta öğrenmesi gereken dersleri ve tekrar eden deneyimleri ifade eder."
+        default:
+            return ""
+        }
     }
     
     // MARK: - Access Control

@@ -147,8 +147,13 @@ class CompatibilityViewModel {
         }
         
         // JSON dosyasını yükle
-        guard let url = Bundle.main.url(forResource: "compatibility", withExtension: "json"),
-              let data = try? Data(contentsOf: url),
+        guard let path = Bundle.main.path(forResource: "compatibility", ofType: "json", inDirectory: "JSON") else {
+            print("⚠️ Compatibility JSON dosyası bulunamadı")
+            onError?("Compatibility verileri yüklenemedi")
+            return nil
+        }
+        let url = URL(fileURLWithPath: path)
+        guard let data = try? Data(contentsOf: url),
               let responses = try? JSONDecoder().decode([CompatibilityResponse].self, from: data) else {
             onError?("Compatibility verileri yüklenemedi")
             return nil

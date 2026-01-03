@@ -63,14 +63,53 @@ class NumerologyDetailViewController: UIViewController {
         
         titleLabel?.text = card.title
         titleLabel?.textColor = .white
-        titleLabel?.font = .systemFont(ofSize: 28, weight: .bold)
+        titleLabel?.font = .systemFont(ofSize: 32, weight: .bold)
         titleLabel?.textAlignment = .center
         
-        if let number = card.number {
+        // Tekâmül Sayısı için özel görünüm
+        if card.id == "evolution" {
+            if let evolutionNumbers = card.evolutionNumbers {
+                if evolutionNumbers.isEmpty {
+                    numberLabel?.text = "✓"
+                    numberLabel?.textColor = .systemGreen
+                    numberLabel?.font = .systemFont(ofSize: 100, weight: .bold)
+                    numberLabel?.textAlignment = .center
+                    
+                    // Glow efekti
+                    numberLabel?.layer.shadowColor = UIColor.systemGreen.cgColor
+                    numberLabel?.layer.shadowOffset = .zero
+                    numberLabel?.layer.shadowRadius = 15
+                    numberLabel?.layer.shadowOpacity = 0.8
+                } else {
+                    // Tekâmül sayılarını grid olarak göster
+                    numberLabel?.text = evolutionNumbers.map { String($0) }.joined(separator: "  ")
+                    numberLabel?.textColor = .white
+                    numberLabel?.font = .systemFont(ofSize: 56, weight: .bold)
+                    numberLabel?.textAlignment = .center
+                    numberLabel?.numberOfLines = 0
+                    
+                    // Glow efekti
+                    numberLabel?.layer.shadowColor = UIColor.white.cgColor
+                    numberLabel?.layer.shadowOffset = .zero
+                    numberLabel?.layer.shadowRadius = 12
+                    numberLabel?.layer.shadowOpacity = 0.6
+                }
+            } else {
+                numberLabel?.text = "🔒"
+                numberLabel?.font = .systemFont(ofSize: 80)
+                numberLabel?.textAlignment = .center
+            }
+        } else if let number = card.number {
             numberLabel?.text = "\(number)"
             numberLabel?.textColor = .white
-            numberLabel?.font = .systemFont(ofSize: 120, weight: .bold)
+            numberLabel?.font = .systemFont(ofSize: 140, weight: .bold)
             numberLabel?.textAlignment = .center
+            
+            // Glow efekti
+            numberLabel?.layer.shadowColor = UIColor.white.cgColor
+            numberLabel?.layer.shadowOffset = .zero
+            numberLabel?.layer.shadowRadius = 20
+            numberLabel?.layer.shadowOpacity = 0.7
         } else {
             numberLabel?.text = "🔒"
             numberLabel?.font = .systemFont(ofSize: 80)
@@ -79,7 +118,27 @@ class NumerologyDetailViewController: UIViewController {
         
         // Günün Sayısı için premium kontrolü
         var descriptionText = card.description
-        if card.id == "daily" {
+        if card.id == "lifePath" {
+            // Yaşam Yolu Sayısı için JSON'dan tam açıklama
+            if let number = card.number {
+                descriptionText = viewModel.getLifePathFullDescription(for: number)
+            }
+        } else if card.id == "destiny" {
+            // Kader Sayısı için JSON'dan tam açıklama
+            if let number = card.number {
+                descriptionText = viewModel.getDestinyFullDescription(for: number)
+            }
+        } else if card.id == "soulUrge" {
+            // Kalp Sayısı için JSON'dan tam açıklama
+            if let number = card.number {
+                descriptionText = viewModel.getSoulUrgeFullDescription(for: number)
+            }
+        } else if card.id == "personality" {
+            // Kişilik Sayısı için JSON'dan tam açıklama
+            if let number = card.number {
+                descriptionText = viewModel.getPersonalityFullDescription(for: number)
+            }
+        } else if card.id == "daily" {
             if viewModel.isPremiumUser {
                 // Premium kullanıcı: Tam açıklama
                 if let number = card.number {
@@ -91,12 +150,26 @@ class NumerologyDetailViewController: UIViewController {
                     descriptionText = viewModel.getDailyNumberShortDescription(for: number)
                 }
             }
+        } else if card.id == "evolution" {
+            // Tekâmül Sayısı için detaylı açıklama
+            if let evolutionNumbers = card.evolutionNumbers, !evolutionNumbers.isEmpty {
+                descriptionText = viewModel.getEvolutionDescription(for: evolutionNumbers)
+            }
         }
         
-        descriptionLabel?.text = descriptionText
-        descriptionLabel?.textColor = UIColor.white.withAlphaComponent(0.9)
-        descriptionLabel?.font = .systemFont(ofSize: 18)
-        descriptionLabel?.textAlignment = .center
+        // Line spacing için attributed string
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 6
+        paragraphStyle.alignment = .center
+        let attributedString = NSAttributedString(
+            string: descriptionText,
+            attributes: [
+                .font: UIFont.systemFont(ofSize: 17, weight: .medium),
+                .foregroundColor: UIColor.white.withAlphaComponent(0.9),
+                .paragraphStyle: paragraphStyle
+            ]
+        )
+        descriptionLabel?.attributedText = attributedString
         descriptionLabel?.numberOfLines = 0
     }
     
