@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MoonStatusViewController" customModule="Astra" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="moon-status-main-view" id="root-view-outlet"/>
+                <outlet property="scrollView" destination="main-scroll-view" id="scroll-view-outlet"/>
+                <outlet property="contentView" destination="content-view" id="content-view-outlet"/>
+                <outlet property="moonIconLabel" destination="moon-icon-label" id="moon-icon-label-outlet"/>
+                <outlet property="phaseNameLabel" destination="phase-name-label" id="phase-name-label-outlet"/>
+                <outlet property="effectDurationLabel" destination="effect-duration-label" id="effect-duration-label-outlet"/>
+                <outlet property="descriptionContainerView" destination="description-container" id="description-container-outlet"/>
+                <outlet property="freeDescriptionLabel" destination="free-description-label" id="free-description-label-outlet"/>
+                <outlet property="descriptionLabel" destination="description-label" id="description-label-outlet"/>
+                <outlet property="premiumBlurView" destination="premium-blur-view" id="premium-blur-view-outlet"/>
+                <outlet property="premiumLabel" destination="premium-label" id="premium-label-outlet"/>
+                <outlet property="premiumButton" destination="premium-button" id="premium-button-outlet"/>
+                <outlet property="impactAreasContainerView" destination="impact-areas-container" id="impact-areas-container-outlet"/>
+                <outlet property="impactAreasTitleLabel" destination="impact-areas-title-label" id="impact-areas-title-label-outlet"/>
+                <outlet property="impactAreasStackView" destination="impact-areas-stack-view" id="impact-areas-stack-view-outlet"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" userLabel="First Responder"/>
+        <view contentMode="scaleToFill" id="moon-status-main-view">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <color key="backgroundColor" systemColor="clearColor"/>
+            <viewLayoutGuide key="safeArea" id="moon-status-safe-area"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="main-scroll-view">
+                    <rect key="frame" x="0.0" y="88" width="375" height="724"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="content-view">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="600"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🌕" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="moon-icon-label">
+                                    <rect key="frame" x="147.5" y="40" width="80" height="80"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="80" id="moon-icon-width"/>
+                                        <constraint firstAttribute="height" constant="80" id="moon-icon-height"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="80"/>
+                                    <nil key="textColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dolunay" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="phase-name-label">
+                                    <rect key="frame" x="20" y="140" width="335" height="34"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="34" id="phase-name-height"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="bold" pointSize="28"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Etki süresi:&#10;🕒 Yaklaşık 2–3 gün." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="effect-duration-label">
+                                    <rect key="frame" x="20" y="184" width="335" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" white="1" alpha="0.69999999999999996" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="description-container">
+                                    <rect key="frame" x="20" y="194" width="335" height="500"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dolunay, tamamlanma ve farkındalık enerjisinin ön planda olduğu bir dönemdir." textAlignment="left" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="free-description-label">
+                                            <rect key="frame" x="20" y="20" width="295" height="50"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dolunay, görünmeyen duyguların ve yarım kalan konuların daha belirgin hale geldiği bir süreçtir. Bu dönemde içsel farkındalık artabilir ve bazı konular netlik kazanabilir. Duygusal hassasiyet yükselirken, geçmişte ertelenen kararlar yeniden gündeme gelebilir. Dolunay enerjisi, bitmesi gerekenleri fark etmek ve içsel dengeyi yeniden kurmak için güçlü bir zaman sunar." textAlignment="left" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="description-label">
+                                            <rect key="frame" x="20" y="90" width="295" height="240"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" white="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="premium-blur-view">
+                                            <rect key="frame" x="0.0" y="90" width="335" height="240"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Premium içerik" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="premium-label">
+                                                    <rect key="frame" x="0.0" y="150" width="335" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="premium-label-height"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="premium-button">
+                                                    <rect key="frame" x="67.5" y="187" width="200" height="44"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="200" id="premium-button-width"/>
+                                                        <constraint firstAttribute="height" constant="44" id="premium-button-height"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Premium ile Aç"/>
+                                                    <buttonConfiguration key="configuration" style="filled" title="Premium ile Aç">
+                                                        <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                    </buttonConfiguration>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" systemColor="clearColor"/>
+                                            <constraints>
+                                                <constraint firstItem="premium-label" firstAttribute="centerX" secondItem="premium-blur-view" secondAttribute="centerX" id="premium-label-center-x"/>
+                                                <constraint firstItem="premium-label" firstAttribute="centerY" secondItem="premium-blur-view" secondAttribute="centerY" constant="-20" id="premium-label-center-y"/>
+                                                <constraint firstItem="premium-button" firstAttribute="centerX" secondItem="premium-blur-view" secondAttribute="centerX" id="premium-button-center-x"/>
+                                                <constraint firstItem="premium-button" firstAttribute="top" secondItem="premium-label" secondAttribute="bottom" constant="20" id="premium-button-top"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="clearColor"/>
+                                    <constraints>
+                                        <constraint firstItem="free-description-label" firstAttribute="leading" secondItem="description-container" secondAttribute="leading" constant="20" id="free-description-leading"/>
+                                        <constraint firstItem="free-description-label" firstAttribute="top" secondItem="description-container" secondAttribute="top" constant="20" id="free-description-top"/>
+                                        <constraint firstItem="description-container" firstAttribute="trailing" secondItem="free-description-label" secondAttribute="trailing" constant="20" id="free-description-trailing"/>
+                                        <constraint firstItem="description-label" firstAttribute="leading" secondItem="description-container" secondAttribute="leading" constant="20" id="description-label-leading"/>
+                                        <constraint firstItem="description-label" firstAttribute="top" secondItem="free-description-label" secondAttribute="bottom" constant="20" id="description-label-top" priority="999"/>
+                                        <constraint firstItem="description-container" firstAttribute="trailing" secondItem="description-label" secondAttribute="trailing" constant="20" id="description-label-trailing"/>
+                                        <constraint firstItem="description-label" firstAttribute="bottom" secondItem="description-container" secondAttribute="bottom" constant="20" id="description-label-bottom"/>
+                                        <constraint firstItem="premium-blur-view" firstAttribute="leading" secondItem="description-container" secondAttribute="leading" id="premium-blur-leading"/>
+                                        <constraint firstItem="premium-blur-view" firstAttribute="trailing" secondItem="description-container" secondAttribute="trailing" id="premium-blur-trailing"/>
+                                        <constraint firstItem="premium-blur-view" firstAttribute="top" secondItem="description-label" secondAttribute="top" id="premium-blur-top"/>
+                                        <constraint firstItem="premium-blur-view" firstAttribute="bottom" secondItem="description-label" secondAttribute="bottom" id="premium-blur-bottom"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="impact-areas-container">
+                                    <rect key="frame" x="20" y="644" width="335" height="200"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bu Ay Evresinin Etki Alanları" textAlignment="left" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="impact-areas-title-label">
+                                            <rect key="frame" x="20" y="20" width="295" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="fill" distribution="fill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="impact-areas-stack-view">
+                                            <rect key="frame" x="20" y="56" width="295" height="124"/>
+                                        </stackView>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="clearColor"/>
+                                    <constraints>
+                                        <constraint firstItem="impact-areas-title-label" firstAttribute="leading" secondItem="impact-areas-container" secondAttribute="leading" constant="20" id="impact-title-leading"/>
+                                        <constraint firstItem="impact-areas-title-label" firstAttribute="top" secondItem="impact-areas-container" secondAttribute="top" constant="20" id="impact-title-top"/>
+                                        <constraint firstItem="impact-areas-container" firstAttribute="trailing" secondItem="impact-areas-title-label" secondAttribute="trailing" constant="20" id="impact-title-trailing"/>
+                                        <constraint firstItem="impact-areas-stack-view" firstAttribute="leading" secondItem="impact-areas-container" secondAttribute="leading" constant="20" id="impact-stack-leading"/>
+                                        <constraint firstItem="impact-areas-stack-view" firstAttribute="top" secondItem="impact-areas-title-label" secondAttribute="bottom" constant="12" id="impact-stack-top"/>
+                                        <constraint firstItem="impact-areas-container" firstAttribute="trailing" secondItem="impact-areas-stack-view" secondAttribute="trailing" constant="20" id="impact-stack-trailing"/>
+                                        <constraint firstItem="impact-areas-container" firstAttribute="bottom" secondItem="impact-areas-stack-view" secondAttribute="bottom" constant="20" id="impact-stack-bottom"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="clearColor"/>
+                            <constraints>
+                                <constraint firstItem="moon-icon-label" firstAttribute="centerX" secondItem="content-view" secondAttribute="centerX" id="moon-icon-center-x"/>
+                                <constraint firstItem="moon-icon-label" firstAttribute="top" secondItem="content-view" secondAttribute="top" constant="40" id="moon-icon-top"/>
+                                <constraint firstItem="phase-name-label" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" constant="20" id="phase-name-leading"/>
+                                <constraint firstItem="phase-name-label" firstAttribute="top" secondItem="moon-icon-label" secondAttribute="bottom" constant="20" id="phase-name-top"/>
+                                <constraint firstItem="content-view" firstAttribute="trailing" secondItem="phase-name-label" secondAttribute="trailing" constant="20" id="phase-name-trailing"/>
+                                <constraint firstItem="effect-duration-label" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" constant="20" id="effect-duration-leading"/>
+                                <constraint firstItem="effect-duration-label" firstAttribute="top" secondItem="phase-name-label" secondAttribute="bottom" constant="10" id="effect-duration-top"/>
+                                <constraint firstItem="content-view" firstAttribute="trailing" secondItem="effect-duration-label" secondAttribute="trailing" constant="20" id="effect-duration-trailing"/>
+                                <constraint firstItem="description-container" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" constant="20" id="description-container-leading"/>
+                                <constraint firstItem="description-container" firstAttribute="top" secondItem="effect-duration-label" secondAttribute="bottom" constant="20" id="description-container-top"/>
+                                <constraint firstItem="content-view" firstAttribute="trailing" secondItem="description-container" secondAttribute="trailing" constant="20" id="description-container-trailing"/>
+                                <constraint firstItem="impact-areas-container" firstAttribute="leading" secondItem="content-view" secondAttribute="leading" constant="20" id="impact-container-leading"/>
+                                <constraint firstItem="impact-areas-container" firstAttribute="top" secondItem="description-container" secondAttribute="bottom" constant="20" id="impact-container-top"/>
+                                <constraint firstItem="content-view" firstAttribute="trailing" secondItem="impact-areas-container" secondAttribute="trailing" constant="20" id="impact-container-trailing"/>
+                                <constraint firstItem="content-view" firstAttribute="bottom" secondItem="impact-areas-container" secondAttribute="bottom" constant="36" id="content-view-bottom"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="450" id="description-container-height"/>
+                                <constraint firstAttribute="width" secondItem="content-view" secondAttribute="width" id="content-view-width"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="content-view" firstAttribute="leading" secondItem="main-scroll-view" secondAttribute="leading" id="content-view-leading"/>
+                        <constraint firstItem="content-view" firstAttribute="top" secondItem="main-scroll-view" secondAttribute="top" id="content-view-top"/>
+                        <constraint firstItem="content-view" firstAttribute="trailing" secondItem="main-scroll-view" secondAttribute="trailing" id="content-view-trailing"/>
+                        <constraint firstItem="content-view" firstAttribute="bottom" secondItem="main-scroll-view" secondAttribute="bottom" id="content-view-scroll-bottom"/>
+                        <constraint firstItem="content-view" firstAttribute="width" secondItem="main-scroll-view" secondAttribute="width" id="content-view-width-constraint"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="main-scroll-view" firstAttribute="leading" secondItem="moon-status-safe-area" secondAttribute="leading" id="scroll-leading"/>
+                <constraint firstItem="main-scroll-view" firstAttribute="top" secondItem="moon-status-safe-area" secondAttribute="top" id="scroll-top"/>
+                <constraint firstItem="moon-status-safe-area" firstAttribute="trailing" secondItem="main-scroll-view" secondAttribute="trailing" id="scroll-trailing"/>
+                <constraint firstItem="moon-status-safe-area" firstAttribute="bottom" secondItem="main-scroll-view" secondAttribute="bottom" id="scroll-bottom"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="4"/>
+        </view>
+    </objects>
+</document>
+

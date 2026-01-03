@@ -26,16 +26,9 @@ class HomeViewController: UIViewController {
     private var loveScoreView: AstroScoreView?
     private var careerScoreView: AstroScoreView?
     private var healthScoreView: AstroScoreView?
-    private var moonStatusCardView: AstroModuleStackCardView?
     private var energyCardView: AstroModuleStackCardView?
     private var luckyHourCardView: AstroModuleStackCardView?
     
-    // Astro Modules Data
-    private let astroModules: [(icon: String, title: String, value: String)] = [
-        ("🌙", "Ayın durumu", "Dolunay"),
-        ("⚡", "Bugünün enerjisi", "Yüksek"),
-        ("🕐", "Şanslı saat", "14:30")
-    ]
     
     init(viewModel: HomeViewModel, nibName nibNameOrNil: String? = nil, bundle nibBundleOrNil: Bundle? = nil) {
         self.viewModel = viewModel
@@ -156,6 +149,66 @@ class HomeViewController: UIViewController {
         }
     }
     
+    private func setupMoonStatusButton() {
+        // Ayın durumu butonu oluştur
+        let moonStatusButton = UIButton(type: .system)
+        moonStatusButton.translatesAutoresizingMaskIntoConstraints = false
+        moonStatusButton.layer.cornerRadius = 44
+        moonStatusButton.backgroundColor = UIColor.white.withAlphaComponent(0.1)
+        moonStatusButton.layer.borderWidth = 1.0
+        moonStatusButton.layer.borderColor = UIColor.white.withAlphaComponent(0.3).cgColor
+        moonStatusButton.setTitle("🌕", for: .normal)
+        moonStatusButton.titleLabel?.font = .systemFont(ofSize: 32)
+        moonStatusButton.clipsToBounds = true
+        moonStatusButton.isUserInteractionEnabled = true
+        moonStatusButton.addTarget(self, action: #selector(moonStatusButtonTapped), for: .touchUpInside)
+        
+        // Ayın durumu label
+        let moonStatusLabel = UILabel()
+        moonStatusLabel.text = "Ayın durumu"
+        moonStatusLabel.textColor = UIColor.white.withAlphaComponent(0.8)
+        moonStatusLabel.font = .systemFont(ofSize: 11, weight: .medium)
+        moonStatusLabel.textAlignment = .center
+        moonStatusLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        // Container view
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(moonStatusButton)
+        containerView.addSubview(moonStatusLabel)
+        
+        NSLayoutConstraint.activate([
+            moonStatusButton.widthAnchor.constraint(equalToConstant: 88),
+            moonStatusButton.heightAnchor.constraint(equalToConstant: 88),
+            moonStatusButton.topAnchor.constraint(equalTo: containerView.topAnchor),
+            moonStatusButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            
+            moonStatusLabel.topAnchor.constraint(equalTo: moonStatusButton.bottomAnchor, constant: 4),
+            moonStatusLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            moonStatusLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            moonStatusLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            
+            containerView.widthAnchor.constraint(equalToConstant: 88),
+            containerView.heightAnchor.constraint(equalToConstant: 110)
+        ])
+        
+        astroModulesStackView.addArrangedSubview(containerView)
+    }
+    
+    @objc private func moonStatusButtonTapped() {
+        print("🌕 Ayın durumu butonuna tıklandı")
+        let viewModel = MoonStatusViewModel()
+        let moonStatusVC = MoonStatusViewController(viewModel: viewModel)
+        
+        if let navController = navigationController {
+            navController.pushViewController(moonStatusVC, animated: true)
+        } else {
+            print("⚠️ Navigation controller bulunamadı!")
+            let navController = UINavigationController(rootViewController: moonStatusVC)
+            present(navController, animated: true)
+        }
+    }
+    
     private func setupCustomViews() {
         // Zodiac Header View
         zodiacHeaderView = ZodiacHeaderView()
@@ -171,12 +224,10 @@ class HomeViewController: UIViewController {
         zodiacHeader.configure(zodiacName: "Balık", zodiacSymbol: "♓")
         
         // Astro Modules Stack Cards - Burç başlığının hemen altında
-        moonStatusCardView = AstroModuleStackCardView()
         energyCardView = AstroModuleStackCardView()
         luckyHourCardView = AstroModuleStackCardView()
         
-        guard let moonCard = moonStatusCardView,
-              let energyCard = energyCardView,
+        guard let energyCard = energyCardView,
               let luckyCard = luckyHourCardView else { return }
         
         // Meditasyon butonunu en başa ekle (zaten XIB'de stack içinde)
@@ -185,15 +236,17 @@ class HomeViewController: UIViewController {
         // Numeroloji butonunu ekle
         setupNumerologyButton()
         
+        // Ayın durumu butonunu ekle
+        setupMoonStatusButton()
+        
         // Diğer kartları ekle
-        [moonCard, energyCard, luckyCard].forEach { cardView in
+        [energyCard, luckyCard].forEach { cardView in
             cardView.translatesAutoresizingMaskIntoConstraints = false
             astroModulesStackView.addArrangedSubview(cardView)
             cardView.widthAnchor.constraint(equalToConstant: 88).isActive = true
             cardView.heightAnchor.constraint(equalToConstant: 88).isActive = true
         }
         
-        moonCard.configure(icon: "🌙", title: "Ayın durumu", value: "Dolunay")
         energyCard.configure(icon: "⚡", title: "Bugünün enerjisi", value: "Yüksek")
         luckyCard.configure(icon: "🕐", title: "Şanslı saat", value: "14:30")
         
